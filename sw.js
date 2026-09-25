@@ -1,5 +1,5 @@
-const CACHE = 'machitalk-v1.5.0';
-const SHELL = ['./', './index.html', './css/app.css?v=1.5.0', './js/app.js?v=1.5.0', './js/scene-engine.js', './js/speech.js', './js/evaluator.js', './js/attempts.js', './js/effects.js', './js/avatar.js', './js/storage.js', './data/scene-registry.json', './data/avatar-registry.json', './assets/avatar/aiko/neutral.webp', './assets/avatar/aiko/speaking.webp', './assets/avatar/aiko/listening.webp', './assets/avatar/aiko/encouraging.webp', './assets/avatar/aiko/pleased.webp', './assets/avatar/aiko/delighted.webp', './assets/avatar/aiko/celebrating.webp', './assets/avatar/aiko/thrilled.webp', './manifest.json', './assets/icons/icon-192.png', './assets/icons/icon-512.png'];
+const CACHE = 'machitalk-v1.6.0';
+const SHELL = ['./', './index.html', './css/app.css?v=1.6.0', './js/app.js?v=1.6.0', './js/scene-engine.js', './js/speech.js', './js/evaluator.js', './js/attempts.js', './js/effects.js', './js/avatar.js', './js/storage.js', './data/scene-registry.json', './data/avatar-registry.json', './assets/avatar/aiko/neutral.webp', './assets/avatar/aiko/speaking.webp', './assets/avatar/aiko/listening.webp', './assets/avatar/aiko/encouraging.webp', './assets/avatar/aiko/pleased.webp', './assets/avatar/aiko/delighted.webp', './assets/avatar/aiko/celebrating.webp', './assets/avatar/aiko/thrilled.webp', './manifest.json', './assets/icons/icon-192.png', './assets/icons/icon-512.png'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(SHELL)).then(() => self.skipWaiting()));
 });

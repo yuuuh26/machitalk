@@ -25,7 +25,7 @@ test('conversation offers a hint, reveals a clear wrong answer, and celebrates a
   assert.doesNotMatch(app.innerHTML, /答え合わせ · 言い方の例/);
   globalThis.FormData.value = 'Take the bus to Tokyo.';
   handlers.submit({ target: { id: 'type-form' }, preventDefault() {} });
-  assert.match(app.innerHTML, /入力した英語/);
+  assert.match(app.innerHTML, /class="speech-card"[\s\S]*入力した英語[\s\S]*Take the bus to Tokyo\.[\s\S]*<\/section><section class="reply">/);
   assert.match(app.innerHTML, /答え合わせ · 言い方の例/);
   assert.match(app.innerHTML, /Take this train to Osaka Station/);
   globalThis.FormData.value = 'This train goes to Osaka.';

@@ -7,6 +7,7 @@ test('the first recording waits for playback, later attempts are manual, and exa
   const classList = { toggle() {}, add() {}, remove() {} };
   const app = { innerHTML: '', classList, addEventListener(type, handler) { handlers[type] = handler; } };
   const toast = { textContent: '', classList };
+  const liveText = { textContent: '' };
   const avatar = { style: {}, dataset: {}, classList, setAttribute() {}, offsetWidth: 100 };
   const voices = [
     { name: 'Samantha', lang: 'en-US', voiceURI: 'Samantha' },
@@ -20,7 +21,7 @@ test('the first recording waits for playback, later attempts are manual, and exa
   globalThis.window = { speechSynthesis: synthesis, SpeechRecognition: Recognition };
   globalThis.speechSynthesis = synthesis;
   globalThis.SpeechSynthesisUtterance = class { constructor(text) { this.text = text; } };
-  globalThis.document = { querySelector(selector) { return selector === '#app' ? app : selector === '#avatar' ? avatar : toast; } };
+  globalThis.document = { querySelector(selector) { return selector === '#app' ? app : selector === '#avatar' ? avatar : selector === '#speech-live' ? liveText : toast; } };
   globalThis.fetch = async path => ({ ok: true, json: async () => JSON.parse(await readFile(new URL(`../${path.replace(/^\.\//, '')}`, import.meta.url))) });
   await import('../js/app.js');
   for (let i = 0; i < 10 && !app.innerHTML.includes('QUICK START'); i++) await new Promise(resolve => setTimeout(resolve, 0));
@@ -53,7 +54,11 @@ test('the first recording waits for playback, later attempts are manual, and exa
     assert.equal(recordings.length, 1);
     assert.match(app.innerHTML, /録音中…/);
     assert.match(app.innerHTML, /aria-label="録音を終了"/);
+    assert.match(app.innerHTML, /class="speech-card"[\s\S]*id="speech-live"[\s\S]*<\/section><section class="reply">/);
+    recordings[0].onresult({ results: [Object.assign([{ transcript: 'Take this train to Osaka' }], { isFinal: false })] });
+    assert.equal(liveText.textContent, 'Take this train to Osaka');
     recordings[0].onend();
+    assert.match(app.innerHTML, /class="speech-card"[\s\S]*聞き取った英語[\s\S]*Take this train to Osaka[\s\S]*<\/section><section class="reply">/);
     assert.match(app.innerHTML, /再録音を開始/);
     tick(3000);
     assert.equal(recordings.length, 1, 'a failed first attempt must not restart automatically');
