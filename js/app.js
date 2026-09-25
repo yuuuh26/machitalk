@@ -10,7 +10,7 @@ const toastElement = document.querySelector('#toast');
 const URLS = { app: 'https://yuuuh26.github.io/machitalk/', repo: 'https://github.com/yuuuh26/machitalk' };
 const state = { screen: 'home', registry: null, settings: { ...DEFAULT_SETTINGS }, storage: '確認中', persistent: '確認中', filter: 'all', scene: null, meta: null, avatar: null, nodeId: null, turn: 0, feedback: null, transcript: '', status: 'ready', hintShown: false, session: null, streak: 0, timer: null, epoch: 0 };
 const escapeHTML = value => String(value ?? '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
-const avatar = () => state.registry.avatars.find(item => item.id === (state.scene?.avatar || state.settings.selectedAvatar)) || state.registry.avatars.find(item => item.default) || state.registry.avatars[0];
+const avatar = () => state.registry.avatars.find(item => item.id === state.settings.selectedAvatar) || state.registry.avatars.find(item => item.id === state.scene?.avatar) || state.registry.avatars.find(item => item.default) || state.registry.avatars[0];
 const currentNode = () => state.scene?.nodes[state.nodeId];
 
 function toast(message) {
