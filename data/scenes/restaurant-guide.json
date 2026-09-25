@@ -1,0 +1,175 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": 1,
+  "sceneId": "restaurant-guide",
+  "title": "お客さんを案内",
+  "mode": "guide",
+  "category": "food",
+  "difficulty": "A2–B1",
+  "avatar": "aiko",
+  "startNode": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "prompt": "Hello. Is there a table for two?",
+      "task": "2名を席へ案内する",
+      "acceptedIntents": [
+        {
+          "id": "seat",
+          "required": true,
+          "expressions": [
+            "this way",
+            "follow me",
+            "take a seat",
+            "have a seat",
+            "table for two"
+          ]
+        }
+      ],
+      "examples": [
+        "Yes, this way, please.",
+        "Of course. Please follow me."
+      ],
+      "reaction": "grade",
+      "next": "n2"
+    },
+    "n2": {
+      "id": "n2",
+      "prompt": "Could I see the menu?",
+      "task": "メニューを渡す",
+      "acceptedIntents": [
+        {
+          "id": "menu",
+          "required": true,
+          "expressions": [
+            "here is the menu",
+            "heres the menu",
+            "your menu",
+            "this menu"
+          ]
+        }
+      ],
+      "examples": [
+        "Here is the menu.",
+        "Of course, here is your menu."
+      ],
+      "reaction": "grade",
+      "next": "n3"
+    },
+    "n3": {
+      "id": "n3",
+      "prompt": "What do you recommend?",
+      "task": "カレーをすすめる",
+      "acceptedIntents": [
+        {
+          "id": "dish",
+          "required": true,
+          "expressions": [
+            "curry",
+            "chicken curry"
+          ]
+        },
+        {
+          "id": "recommend",
+          "required": false,
+          "expressions": [
+            "recommend",
+            "popular",
+            "favorite"
+          ]
+        }
+      ],
+      "examples": [
+        "I recommend the chicken curry.",
+        "The chicken curry is popular."
+      ],
+      "reaction": "grade",
+      "next": "n4"
+    },
+    "n4": {
+      "id": "n4",
+      "prompt": "Does it come with rice?",
+      "task": "ご飯が付くと伝える",
+      "acceptedIntents": [
+        {
+          "id": "yes",
+          "required": true,
+          "expressions": [
+            "yes",
+            "it does",
+            "comes with rice",
+            "rice is included"
+          ]
+        },
+        {
+          "id": "rice",
+          "required": false,
+          "expressions": [
+            "rice"
+          ]
+        }
+      ],
+      "examples": [
+        "Yes, it comes with rice.",
+        "Yes, rice is included."
+      ],
+      "reaction": "grade",
+      "next": "n5"
+    },
+    "n5": {
+      "id": "n5",
+      "prompt": "Can I have some water, please?",
+      "task": "水を持ってくると伝える",
+      "acceptedIntents": [
+        {
+          "id": "water",
+          "required": true,
+          "expressions": [
+            "water",
+            "bring you some",
+            "get you some",
+            "right away",
+            "of course"
+          ]
+        }
+      ],
+      "examples": [
+        "Of course. I will bring you some water.",
+        "Sure, right away."
+      ],
+      "reaction": "grade",
+      "next": "n6"
+    },
+    "n6": {
+      "id": "n6",
+      "prompt": "Can I pay by card?",
+      "task": "カード決済できると伝える",
+      "acceptedIntents": [
+        {
+          "id": "card",
+          "required": true,
+          "expressions": [
+          "card",
+          "cards",
+          "credit card"
+          ]
+        },
+        {
+          "id": "yes",
+          "required": false,
+          "expressions": [
+            "yes",
+            "of course",
+            "accepted"
+          ]
+        }
+      ],
+      "examples": [
+        "Yes, you can pay by card.",
+        "Of course, cards are accepted."
+      ],
+      "reaction": "grade",
+      "next": null
+    }
+  }
+}

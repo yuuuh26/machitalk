@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": 1,
+  "sceneId": "mall-ask",
+  "title": "モールで店を探す",
+  "mode": "ask",
+  "category": "shopping",
+  "difficulty": "A2–B1",
+  "avatar": "aiko",
+  "startNode": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "prompt": "Hello! What are you looking for?",
+      "task": "書店の場所を尋ねる",
+      "acceptedIntents": [
+        {
+          "id": "bookstore",
+          "required": true,
+          "expressions": [
+            "bookstore",
+            "book shop",
+            "bookshop"
+          ]
+        },
+        {
+          "id": "where",
+          "required": false,
+          "expressions": [
+            "where",
+            "looking for",
+            "find"
+          ]
+        }
+      ],
+      "examples": [
+        "Where is the bookstore?",
+        "I am looking for the bookstore."
+      ],
+      "reaction": "grade",
+      "next": "n2"
+    },
+    "n2": {
+      "id": "n2",
+      "prompt": "The bookstore is on the second floor.",
+      "task": "エスカレーターの場所を聞く",
+      "acceptedIntents": [
+        {
+          "id": "escalator",
+          "required": true,
+          "expressions": [
+            "escalator",
+            "stairs",
+          "elevator",
+          "lift",
+          "second floor"
+          ]
+        },
+        {
+          "id": "where",
+          "required": false,
+          "expressions": [
+            "where",
+            "how do i get"
+          ]
+        }
+      ],
+      "examples": [
+        "Where is the escalator?",
+        "How do I get to the second floor?"
+      ],
+      "reaction": "grade",
+      "next": "n3"
+    },
+    "n3": {
+      "id": "n3",
+      "prompt": "The escalator is just around that corner.",
+      "task": "トイレの場所を聞く",
+      "acceptedIntents": [
+        {
+          "id": "restroom",
+          "required": true,
+          "expressions": [
+            "restroom",
+            "bathroom",
+            "toilet",
+            "washroom"
+          ]
+        },
+        {
+          "id": "where",
+          "required": false,
+          "expressions": [
+            "where",
+            "find"
+          ]
+        }
+      ],
+      "examples": [
+        "Where is the restroom?",
+        "Where can I find a bathroom?"
+      ],
+      "reaction": "grade",
+      "next": "n4"
+    },
+    "n4": {
+      "id": "n4",
+      "prompt": "It is next to the food court.",
+      "task": "フードコートの階を確認する",
+      "acceptedIntents": [
+        {
+          "id": "food",
+          "required": true,
+          "expressions": [
+            "food court"
+          ]
+        },
+        {
+          "id": "floor",
+          "required": false,
+          "expressions": [
+            "which floor",
+            "what floor",
+            "second floor",
+            "where"
+          ]
+        }
+      ],
+      "examples": [
+        "Which floor is the food court on?",
+        "Where is the food court?"
+      ],
+      "reaction": "grade",
+      "next": "n5"
+    },
+    "n5": {
+      "id": "n5",
+      "prompt": "It is on the third floor.",
+      "task": "免税カウンターの場所を尋ねる",
+      "acceptedIntents": [
+        {
+          "id": "taxfree",
+          "required": true,
+          "expressions": [
+            "tax free",
+            "taxfree",
+            "tax refund"
+          ]
+        },
+        {
+          "id": "counter",
+          "required": false,
+          "expressions": [
+            "counter",
+            "desk",
+            "where"
+          ]
+        }
+      ],
+      "examples": [
+        "Where is the tax-free counter?",
+        "Is there a tax refund desk?"
+      ],
+      "reaction": "grade",
+      "next": "n6"
+    },
+    "n6": {
+      "id": "n6",
+      "prompt": "It is beside the main entrance.",
+      "task": "お礼を伝える",
+      "acceptedIntents": [
+        {
+          "id": "thanks",
+          "required": true,
+          "expressions": [
+            "thank you",
+            "thanks",
+            "appreciate it"
+          ]
+        }
+      ],
+      "examples": [
+        "Thank you for your help!",
+        "Thanks!"
+      ],
+      "reaction": "grade",
+      "next": null
+    }
+  }
+}

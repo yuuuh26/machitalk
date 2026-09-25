@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "avatars": [
+    {
+      "id": "aiko",
+      "name": "Aiko",
+      "default": true,
+      "image": "./assets/avatar/aiko/expressions.png",
+      "crop": { "width": 140, "height": 185, "sourceWidth": 1536, "sourceHeight": 1024 },
+      "assets": {
+        "neutral": { "x": 922, "y": 59 },
+        "listening": { "x": 1225, "y": 59 },
+        "thinking": { "x": 1379, "y": 59 },
+        "encourage": { "x": 1379, "y": 285 },
+        "good": { "x": 922, "y": 285 },
+        "great": { "x": 1073, "y": 59 },
+        "excellent": { "x": 1073, "y": 285 },
+        "perfect": { "x": 1379, "y": 285 },
+        "explaining": { "x": 1073, "y": 285 }
+      }
+    }
+  ]
+}

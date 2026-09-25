@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "scenes": [
+    { "id": "station-ask", "title": "駅で聞く", "subtitle": "Asking for Directions", "mode": "ask", "category": "transport", "difficulty": "A2–B1", "emoji": "🚉", "file": "./data/scenes/station-ask.json" },
+    { "id": "restaurant-ask", "title": "レストランで注文", "subtitle": "Ordering Food", "mode": "ask", "category": "food", "difficulty": "A2–B1", "emoji": "🍽️", "file": "./data/scenes/restaurant-ask.json" },
+    { "id": "mall-ask", "title": "モールで店を探す", "subtitle": "Asking for a Store", "mode": "ask", "category": "shopping", "difficulty": "A2–B1", "emoji": "🛍️", "file": "./data/scenes/mall-ask.json" },
+    { "id": "town-ask", "title": "街で道を聞く", "subtitle": "Asking for Directions", "mode": "ask", "category": "tourism", "difficulty": "A2–B1", "emoji": "📍", "file": "./data/scenes/town-ask.json" },
+    { "id": "station-guide", "title": "駅で案内する", "subtitle": "Giving Directions", "mode": "guide", "category": "transport", "difficulty": "A2–B1", "emoji": "🚉", "file": "./data/scenes/station-guide.json" },
+    { "id": "restaurant-guide", "title": "お客さんを案内", "subtitle": "Helping a Customer", "mode": "guide", "category": "food", "difficulty": "A2–B1", "emoji": "🍽️", "file": "./data/scenes/restaurant-guide.json" },
+    { "id": "mall-guide", "title": "モールを案内", "subtitle": "Helping a Visitor", "mode": "guide", "category": "shopping", "difficulty": "A2–B1", "emoji": "🛍️", "file": "./data/scenes/mall-guide.json" },
+    { "id": "town-guide", "title": "観光客を道案内", "subtitle": "Guiding a Tourist", "mode": "guide", "category": "tourism", "difficulty": "A2–B1", "emoji": "📍", "file": "./data/scenes/town-guide.json" }
+  ]
+}

@@ -1,0 +1,168 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": 1,
+  "sceneId": "restaurant-ask",
+  "title": "レストランで注文",
+  "mode": "ask",
+  "category": "food",
+  "difficulty": "A2–B1",
+  "avatar": "aiko",
+  "startNode": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "prompt": "Welcome! How many people?",
+      "task": "2人と伝える",
+      "acceptedIntents": [
+        {
+          "id": "two",
+          "required": true,
+          "expressions": [
+            "two people",
+            "table for two",
+            "just two",
+            "there are two",
+            "2 people"
+          ]
+        }
+      ],
+      "examples": [
+        "A table for two, please.",
+        "There are two of us."
+      ],
+      "reaction": "grade",
+      "next": "n2"
+    },
+    "n2": {
+      "id": "n2",
+      "prompt": "This way, please. Here is the menu.",
+      "task": "おすすめを聞く",
+      "acceptedIntents": [
+        {
+          "id": "recommend",
+          "required": true,
+          "expressions": [
+            "recommend",
+            "suggest",
+            "popular",
+            "special"
+          ]
+        }
+      ],
+      "examples": [
+        "What do you recommend?",
+        "What is popular here?"
+      ],
+      "reaction": "grade",
+      "next": "n3"
+    },
+    "n3": {
+      "id": "n3",
+      "prompt": "Our chicken curry is very popular.",
+      "task": "チキンカレーを注文する",
+      "acceptedIntents": [
+        {
+          "id": "curry",
+          "required": true,
+          "expressions": [
+            "chicken curry",
+            "the curry"
+          ]
+        },
+        {
+          "id": "order",
+          "required": false,
+          "expressions": [
+            "ill have",
+            "i would like",
+            "id like",
+            "can i have"
+          ]
+        }
+      ],
+      "examples": [
+        "I would like the chicken curry, please.",
+        "I will have the chicken curry."
+      ],
+      "reaction": "grade",
+      "next": "n4"
+    },
+    "n4": {
+      "id": "n4",
+      "prompt": "Would you like something to drink?",
+      "task": "水を頼む",
+      "acceptedIntents": [
+        {
+          "id": "water",
+          "required": true,
+          "expressions": [
+            "water"
+          ]
+        },
+        {
+          "id": "polite",
+          "required": false,
+          "expressions": [
+            "please",
+            "could i",
+            "can i"
+          ]
+        }
+      ],
+      "examples": [
+        "Water, please.",
+        "Could I have some water?"
+      ],
+      "reaction": "grade",
+      "next": "n5"
+    },
+    "n5": {
+      "id": "n5",
+      "prompt": "Of course. Would you like anything else?",
+      "task": "追加はないと伝える",
+      "acceptedIntents": [
+        {
+          "id": "no",
+          "required": true,
+          "expressions": [
+            "no thank you",
+          "no thanks",
+          "thats all",
+          "that is all",
+          "nothing else",
+            "that will be all"
+          ]
+        }
+      ],
+      "examples": [
+        "No, thank you. That is all.",
+        "That is all, thanks."
+      ],
+      "reaction": "grade",
+      "next": "n6"
+    },
+    "n6": {
+      "id": "n6",
+      "prompt": "Enjoy your meal! You can pay at the counter.",
+      "task": "会計場所を確認する",
+      "acceptedIntents": [
+        {
+          "id": "counter",
+          "required": true,
+          "expressions": [
+            "at the counter",
+            "pay here",
+            "where do i pay",
+            "where is the counter"
+          ]
+        }
+      ],
+      "examples": [
+        "Can I pay at the counter?",
+        "Where do I pay?"
+      ],
+      "reaction": "grade",
+      "next": null
+    }
+  }
+}

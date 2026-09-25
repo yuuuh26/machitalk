@@ -1,0 +1,167 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": 1,
+  "sceneId": "town-ask",
+  "title": "街で道を聞く",
+  "mode": "ask",
+  "category": "tourism",
+  "difficulty": "A2–B1",
+  "avatar": "aiko",
+  "startNode": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "prompt": "Hello! You look a little lost.",
+      "task": "城への行き方を尋ねる",
+      "acceptedIntents": [
+        {
+          "id": "castle",
+          "required": true,
+          "expressions": [
+            "castle"
+          ]
+        },
+        {
+          "id": "ask",
+          "required": false,
+          "expressions": [
+            "how do i get",
+            "where is",
+            "how can i get"
+          ]
+        }
+      ],
+      "examples": [
+        "How do I get to the castle?",
+        "Where is the castle?"
+      ],
+      "reaction": "grade",
+      "next": "n2"
+    },
+    "n2": {
+      "id": "n2",
+      "prompt": "Go straight along this street.",
+      "task": "曲がる方向を聞く",
+      "acceptedIntents": [
+        {
+          "id": "turn",
+          "required": true,
+          "expressions": [
+            "turn",
+            "left",
+            "right",
+            "which way"
+          ]
+        }
+      ],
+      "examples": [
+        "Where should I turn?",
+        "Do I turn left or right?"
+      ],
+      "reaction": "grade",
+      "next": "n3"
+    },
+    "n3": {
+      "id": "n3",
+      "prompt": "Turn left at the next traffic light.",
+      "task": "信号で左か確認する",
+      "acceptedIntents": [
+        {
+          "id": "left",
+          "required": true,
+          "expressions": [
+            "left"
+          ]
+        },
+        {
+          "id": "light",
+          "required": false,
+          "expressions": [
+            "traffic light",
+            "light"
+          ]
+        }
+      ],
+      "examples": [
+        "Left at the traffic light, right?",
+        "Should I turn left at the light?"
+      ],
+      "reaction": "grade",
+      "next": "n4"
+    },
+    "n4": {
+      "id": "n4",
+      "prompt": "Exactly. The castle will be on your right.",
+      "task": "歩く時間を尋ねる",
+      "acceptedIntents": [
+        {
+          "id": "time",
+          "required": true,
+          "expressions": [
+            "how long",
+            "how many minutes",
+            "walking time"
+          ]
+        }
+      ],
+      "examples": [
+        "How long does it take to walk there?",
+        "How many minutes away is it?"
+      ],
+      "reaction": "grade",
+      "next": "n5"
+    },
+    "n5": {
+      "id": "n5",
+      "prompt": "It is about ten minutes on foot.",
+      "task": "近くの駅を尋ねる",
+      "acceptedIntents": [
+        {
+          "id": "station",
+          "required": true,
+          "expressions": [
+            "station",
+            "train stop"
+          ]
+        },
+        {
+          "id": "nearby",
+          "required": false,
+          "expressions": [
+            "near",
+            "closest",
+            "nearest"
+          ]
+        }
+      ],
+      "examples": [
+        "Is there a station near the castle?",
+        "What is the nearest station?"
+      ],
+      "reaction": "grade",
+      "next": "n6"
+    },
+    "n6": {
+      "id": "n6",
+      "prompt": "Yes, the station is across from the park.",
+      "task": "お礼を伝える",
+      "acceptedIntents": [
+        {
+          "id": "thanks",
+          "required": true,
+          "expressions": [
+            "thank you",
+            "thanks",
+            "appreciate it"
+          ]
+        }
+      ],
+      "examples": [
+        "Thank you for the directions!",
+        "Thanks so much!"
+      ],
+      "reaction": "grade",
+      "next": null
+    }
+  }
+}

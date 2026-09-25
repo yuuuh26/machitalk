@@ -1,0 +1,201 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": 1,
+  "sceneId": "town-guide",
+  "title": "観光客を道案内",
+  "mode": "guide",
+  "category": "tourism",
+  "difficulty": "A2–B1",
+  "avatar": "aiko",
+  "startNode": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "prompt": "Excuse me. How do I get to the castle?",
+      "task": "まっすぐ進むよう案内する",
+      "acceptedIntents": [
+        {
+          "id": "straight",
+          "required": true,
+          "expressions": [
+            "go straight",
+            "walk straight",
+            "keep going straight",
+            "straight ahead",
+            "continue straight"
+          ]
+        },
+        {
+          "id": "street",
+          "required": false,
+          "expressions": [
+            "this street",
+            "the road",
+            "ahead"
+          ]
+        }
+      ],
+      "examples": [
+        "Go straight along this street.",
+        "Keep going straight ahead."
+      ],
+      "reaction": "grade",
+      "next": "n2"
+    },
+    "n2": {
+      "id": "n2",
+      "prompt": "Should I turn at the traffic light?",
+      "task": "信号で左に曲がるよう伝える",
+      "contradictions": ["turn right", "take a right", "go right"],
+      "acceptedIntents": [
+        {
+          "id": "left",
+          "required": true,
+          "expressions": [
+            "turn left",
+            "take a left",
+            "go left"
+          ]
+        },
+        {
+          "id": "light",
+          "required": false,
+          "expressions": [
+            "traffic light",
+            "the light"
+          ]
+        }
+      ],
+      "examples": [
+        "Yes, turn left at the traffic light.",
+        "Take a left at the next light."
+      ],
+      "reaction": "grade",
+      "next": "n3"
+    },
+    "n3": {
+      "id": "n3",
+      "prompt": "What will I see after I turn?",
+      "task": "城は右側に見えると伝える",
+      "acceptedIntents": [
+        {
+          "id": "right",
+          "required": true,
+          "expressions": [
+            "on your right",
+            "to your right",
+            "right side"
+          ]
+        },
+        {
+          "id": "castle",
+          "required": false,
+          "expressions": [
+            "castle"
+          ]
+        }
+      ],
+      "examples": [
+        "The castle will be on your right.",
+        "You will see the castle on your right."
+      ],
+      "reaction": "grade",
+      "next": "n4"
+    },
+    "n4": {
+      "id": "n4",
+      "prompt": "Is it far from here?",
+      "task": "徒歩で約10分と伝える",
+      "acceptedIntents": [
+        {
+          "id": "time",
+          "required": true,
+          "expressions": [
+          "ten minutes",
+          "10 minutes",
+          "ten minute"
+          ]
+        },
+        {
+          "id": "walk",
+          "required": false,
+          "expressions": [
+            "walk",
+            "on foot",
+            "about",
+            "around"
+          ]
+        }
+      ],
+      "examples": [
+        "It is about ten minutes on foot.",
+        "About a ten-minute walk."
+      ],
+      "reaction": "grade",
+      "next": "n5"
+    },
+    "n5": {
+      "id": "n5",
+      "prompt": "Is there a station near the castle?",
+      "task": "公園の向かいに駅があると伝える",
+      "acceptedIntents": [
+        {
+          "id": "station",
+          "required": true,
+          "expressions": [
+            "station",
+            "train stop"
+          ]
+        },
+        {
+          "id": "park",
+          "required": false,
+          "expressions": [
+            "across from the park",
+            "opposite the park",
+            "near the park"
+          ]
+        }
+      ],
+      "examples": [
+        "Yes, the station is across from the park.",
+        "There is a station opposite the park."
+      ],
+      "reaction": "grade",
+      "next": "n6"
+    },
+    "n6": {
+      "id": "n6",
+      "prompt": "Thanks! I am excited to see it.",
+      "task": "楽しい観光を願う",
+      "acceptedIntents": [
+        {
+          "id": "wish",
+          "required": true,
+          "expressions": [
+            "enjoy",
+            "have fun",
+            "have a great time",
+            "youre welcome",
+            "no problem"
+          ]
+        },
+        {
+          "id": "castle",
+          "required": false,
+          "expressions": [
+            "castle",
+            "visit",
+            "trip"
+          ]
+        }
+      ],
+      "examples": [
+        "Enjoy your visit to the castle!",
+        "You are welcome. Have a great time!"
+      ],
+      "reaction": "grade",
+      "next": null
+    }
+  }
+}

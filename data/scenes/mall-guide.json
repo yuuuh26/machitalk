@@ -1,0 +1,193 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": 1,
+  "sceneId": "mall-guide",
+  "title": "モールを案内",
+  "mode": "guide",
+  "category": "shopping",
+  "difficulty": "A2–B1",
+  "avatar": "aiko",
+  "startNode": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "prompt": "Excuse me. Where is the bookstore?",
+      "task": "書店が2階と案内する",
+      "acceptedIntents": [
+        {
+          "id": "bookstore",
+          "required": true,
+          "expressions": [
+            "bookstore",
+            "book shop",
+            "bookshop"
+          ]
+        },
+        {
+          "id": "second",
+          "required": false,
+          "expressions": [
+            "second floor",
+            "floor two",
+            "2nd floor"
+          ]
+        }
+      ],
+      "examples": [
+        "The bookstore is on the second floor.",
+        "You can find the bookstore on floor two."
+      ],
+      "reaction": "grade",
+      "next": "n2"
+    },
+    "n2": {
+      "id": "n2",
+      "prompt": "How do I get up there?",
+      "task": "エスカレーターへ案内する",
+      "acceptedIntents": [
+        {
+          "id": "escalator",
+          "required": true,
+          "expressions": [
+            "escalator",
+            "elevator",
+            "lift",
+            "stairs"
+          ]
+        },
+        {
+          "id": "direction",
+          "required": false,
+          "expressions": [
+            "over there",
+            "around the corner",
+            "to your right",
+            "to your left"
+          ]
+        }
+      ],
+      "examples": [
+        "Take the escalator around the corner.",
+        "The escalator is to your right."
+      ],
+      "reaction": "grade",
+      "next": "n3"
+    },
+    "n3": {
+      "id": "n3",
+      "prompt": "Is there a restroom nearby?",
+      "task": "フードコートの隣だと伝える",
+      "acceptedIntents": [
+        {
+          "id": "restroom",
+          "required": true,
+          "expressions": [
+            "restroom",
+            "bathroom",
+            "toilet",
+            "washroom"
+          ]
+        },
+        {
+          "id": "food",
+          "required": false,
+          "expressions": [
+            "food court",
+            "next to"
+          ]
+        }
+      ],
+      "examples": [
+        "Yes, the restroom is next to the food court.",
+        "The bathroom is beside the food court."
+      ],
+      "reaction": "grade",
+      "next": "n4"
+    },
+    "n4": {
+      "id": "n4",
+      "prompt": "Where is the food court?",
+      "task": "3階と案内する",
+      "acceptedIntents": [
+        {
+          "id": "third",
+          "required": true,
+          "expressions": [
+            "third floor",
+            "floor three",
+            "3rd floor"
+          ]
+        },
+        {
+          "id": "food",
+          "required": false,
+          "expressions": [
+            "food court"
+          ]
+        }
+      ],
+      "examples": [
+        "The food court is on the third floor.",
+        "It is on floor three."
+      ],
+      "reaction": "grade",
+      "next": "n5"
+    },
+    "n5": {
+      "id": "n5",
+      "prompt": "Can I get a tax refund here?",
+      "task": "免税カウンターがあると伝える",
+      "acceptedIntents": [
+        {
+          "id": "refund",
+          "required": true,
+          "expressions": [
+            "tax free",
+            "taxfree",
+            "tax refund",
+            "refund"
+          ]
+        },
+        {
+          "id": "counter",
+          "required": false,
+          "expressions": [
+            "counter",
+            "desk",
+            "main entrance"
+          ]
+        }
+      ],
+      "examples": [
+        "Yes, the tax-free counter is by the main entrance.",
+        "There is a tax refund desk near the entrance."
+      ],
+      "reaction": "grade",
+      "next": "n6"
+    },
+    "n6": {
+      "id": "n6",
+      "prompt": "Thank you! You have been very helpful.",
+      "task": "親切に返す",
+      "acceptedIntents": [
+        {
+          "id": "welcome",
+          "required": true,
+          "expressions": [
+            "youre welcome",
+            "my pleasure",
+            "happy to help",
+            "glad to help",
+            "no problem"
+          ]
+        }
+      ],
+      "examples": [
+        "You're welcome!",
+        "Happy to help!"
+      ],
+      "reaction": "grade",
+      "next": null
+    }
+  }
+}

@@ -1,0 +1,174 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": 1,
+  "sceneId": "station-ask",
+  "title": "駅で聞く",
+  "mode": "ask",
+  "category": "transport",
+  "difficulty": "A2–B1",
+  "avatar": "aiko",
+  "startNode": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "prompt": "Hello! Can I help you?",
+      "task": "大阪駅への行き方を尋ねる",
+      "acceptedIntents": [
+        {
+          "id": "ask",
+          "required": true,
+          "expressions": [
+            "how can i get to",
+            "how do i get to",
+            "which train goes to",
+            "i need to go to"
+          ]
+        },
+        {
+          "id": "osaka",
+          "required": false,
+          "expressions": [
+            "osaka"
+          ]
+        }
+      ],
+      "examples": [
+        "How can I get to Osaka Station?",
+        "Which train goes to Osaka?"
+      ],
+      "reaction": "grade",
+      "next": "n2"
+    },
+    "n2": {
+      "id": "n2",
+      "prompt": "Take the local train from this station.",
+      "task": "乗り換えが必要か聞く",
+      "acceptedIntents": [
+        {
+          "id": "change",
+          "required": true,
+          "expressions": [
+            "need to change",
+            "have to change",
+            "need to transfer",
+            "have to transfer",
+            "direct train"
+          ]
+        }
+      ],
+      "examples": [
+        "Do I need to change trains?",
+        "Is it a direct train?"
+      ],
+      "reaction": "grade",
+      "next": "n3"
+    },
+    "n3": {
+      "id": "n3",
+      "prompt": "No, it goes directly there.",
+      "task": "ホームを尋ねる",
+      "acceptedIntents": [
+        {
+          "id": "platform",
+          "required": true,
+          "expressions": [
+            "which platform",
+            "what platform",
+            "which track",
+            "what track"
+          ]
+        }
+      ],
+      "examples": [
+        "Which platform should I use?",
+        "What platform does it leave from?"
+      ],
+      "reaction": "grade",
+      "next": "n4"
+    },
+    "n4": {
+      "id": "n4",
+      "prompt": "Platform three, just ahead.",
+      "task": "所要時間を尋ねる",
+      "acceptedIntents": [
+        {
+          "id": "time",
+          "required": true,
+          "expressions": [
+            "how long",
+            "how many minutes",
+            "how much time"
+          ]
+        }
+      ],
+      "examples": [
+        "How long does it take?",
+        "How many minutes will it take?"
+      ],
+      "reaction": "grade",
+      "next": "n5"
+    },
+    "n5": {
+      "id": "n5",
+      "prompt": "It takes about fifteen minutes.",
+      "task": "運賃を尋ねる",
+      "acceptedIntents": [
+        {
+          "id": "fare",
+          "required": true,
+          "expressions": [
+            "how much",
+            "fare",
+            "cost",
+            "price"
+          ]
+        },
+        {
+          "id": "ticket",
+          "required": false,
+          "expressions": [
+            "ticket",
+            "ride"
+          ]
+        }
+      ],
+      "examples": [
+        "How much is the fare?",
+        "How much does a ticket cost?"
+      ],
+      "reaction": "grade",
+      "next": "n6"
+    },
+    "n6": {
+      "id": "n6",
+      "prompt": "It is 190 yen. You can use an IC card.",
+      "task": "お礼を伝える",
+      "acceptedIntents": [
+        {
+          "id": "thanks",
+          "required": true,
+          "expressions": [
+            "thank you",
+            "thanks",
+            "appreciate it"
+          ]
+        },
+        {
+          "id": "extra",
+          "required": false,
+          "expressions": [
+            "help",
+            "very much",
+            "so much"
+          ]
+        }
+      ],
+      "examples": [
+        "Thank you for your help!",
+        "Thanks so much!"
+      ],
+      "reaction": "grade",
+      "next": null
+    }
+  }
+}

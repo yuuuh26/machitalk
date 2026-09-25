@@ -1,0 +1,204 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": 1,
+  "sceneId": "station-guide",
+  "title": "駅で案内する",
+  "mode": "guide",
+  "category": "transport",
+  "difficulty": "A2–B1",
+  "avatar": "aiko",
+  "startNode": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "prompt": "Excuse me. How can I get to Osaka Station?",
+      "task": "この電車で大阪駅へ行けると案内する",
+      "acceptedIntents": [
+        {
+          "id": "train",
+          "required": true,
+          "expressions": [
+            "take this train",
+            "take the train",
+            "ride this train",
+            "get on this train",
+            "board this train"
+          ]
+        },
+        {
+          "id": "destination",
+          "required": false,
+          "expressions": [
+            "osaka"
+          ]
+        }
+      ],
+      "examples": [
+        "Take this train to Osaka Station.",
+        "You can take this train to Osaka."
+      ],
+      "reaction": "grade",
+      "next": "n2"
+    },
+    "n2": {
+      "id": "n2",
+      "prompt": "Do I need to change trains?",
+      "task": "乗り換え不要と伝える",
+      "acceptedIntents": [
+        {
+          "id": "direct",
+          "required": true,
+          "expressions": [
+            "no you dont",
+            "no you do not",
+            "no need to change",
+            "no transfer",
+          "direct train",
+          "go directly",
+          "without changing"
+          ]
+        },
+        {
+          "id": "comfort",
+          "required": false,
+          "expressions": [
+            "straight",
+            "direct",
+            "all the way"
+          ]
+        }
+      ],
+      "examples": [
+        "No, you don't. It's a direct train.",
+        "No, you can go directly."
+      ],
+      "reaction": "grade",
+      "next": "n3"
+    },
+    "n3": {
+      "id": "n3",
+      "prompt": "Which platform should I use?",
+      "task": "3番ホームを伝える",
+      "acceptedIntents": [
+        {
+          "id": "platform",
+          "required": true,
+          "expressions": [
+            "platform three",
+            "platform 3",
+            "track three",
+            "track 3"
+          ]
+        },
+        {
+          "id": "direction",
+          "required": false,
+          "expressions": [
+            "over there",
+            "this way",
+            "from here"
+          ]
+        }
+      ],
+      "examples": [
+        "Platform three.",
+        "Please use platform three over there."
+      ],
+      "reaction": "grade",
+      "next": "n4"
+    },
+    "n4": {
+      "id": "n4",
+      "prompt": "How long does it take?",
+      "task": "約15分と伝える",
+      "acceptedIntents": [
+        {
+          "id": "time",
+          "required": true,
+          "expressions": [
+            "fifteen minutes",
+            "15 minutes",
+            "a quarter of an hour"
+          ]
+        },
+        {
+          "id": "about",
+          "required": false,
+          "expressions": [
+            "about",
+            "around",
+            "roughly"
+          ]
+        }
+      ],
+      "examples": [
+        "About fifteen minutes.",
+        "It takes around fifteen minutes."
+      ],
+      "reaction": "grade",
+      "next": "n5"
+    },
+    "n5": {
+      "id": "n5",
+      "prompt": "Does this train stop at Umeda, too?",
+      "task": "梅田にも止まると伝える",
+      "acceptedIntents": [
+        {
+          "id": "yes",
+          "required": true,
+          "expressions": [
+            "yes",
+            "it does",
+            "stops at umeda"
+          ]
+        },
+        {
+          "id": "umeda",
+          "required": false,
+          "expressions": [
+            "umeda"
+          ]
+        }
+      ],
+      "examples": [
+        "Yes, it stops at Umeda, too.",
+        "Yes, it does."
+      ],
+      "reaction": "grade",
+      "next": "n6"
+    },
+    "n6": {
+      "id": "n6",
+      "prompt": "Thank you so much for your help!",
+      "task": "親切に返す",
+      "acceptedIntents": [
+        {
+          "id": "welcome",
+          "required": true,
+          "expressions": [
+            "youre welcome",
+            "my pleasure",
+            "no problem",
+            "glad to help",
+            "happy to help"
+          ]
+        },
+        {
+          "id": "kind",
+          "required": false,
+          "expressions": [
+            "enjoy",
+            "have a good",
+            "safe trip"
+          ]
+        }
+      ],
+      "examples": [
+        "You're welcome. Have a good trip!",
+        "My pleasure!"
+      ],
+      "reaction": "grade",
+      "next": null
+    }
+  }
+}
