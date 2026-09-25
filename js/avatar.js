@@ -1,12 +1,13 @@
 export function avatarStyle(avatar, mood = 'neutral') {
   const image = avatar.assets?.[mood] || avatar.assets?.neutral;
   if (!image) return '';
+  if (image.image) return `background-image:url('${image.image}');background-size:cover;background-position:center top;`;
   const crop = avatar.crop;
+  if (!crop) return '';
   const sx = crop.sourceWidth / crop.width * 100;
-  const sy = crop.sourceHeight / crop.height * 100;
   const px = image.x / (crop.sourceWidth - crop.width) * 100;
   const py = image.y / (crop.sourceHeight - crop.height) * 100;
-  return `background-image:url('${avatar.image}');background-size:${sx}% ${sy}%;background-position:${px}% ${py}%;`;
+  return `background-image:url('${avatar.image}');background-size:${sx}% auto;background-position:${px}% ${py}%;`;
 }
 
 export function setAvatar(element, avatar, mood) {
