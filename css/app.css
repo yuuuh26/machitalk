@@ -121,3 +121,11 @@
 @keyframes capture-blink{50%{opacity:.35}}
 @media(max-width:360px){.talk-main .task-row .mic-button{width:66px;height:66px}.task-row{gap:9px}}
 @media(prefers-reduced-motion:reduce){.capture-state i{animation:none}}
+
+/* Show live and final recognition over the lower portrait without hiding the avatar. */
+.talk-main .heard-line{margin-top:9px;padding:8px 11px;border:1px solid #d4e7ff6b;border-radius:11px;background:#102d52a8;color:#fff;box-shadow:0 3px 11px #061b3152;max-height:93px;overflow-y:auto;overflow-wrap:anywhere}
+.talk-main .heard-line span{display:block;color:#c8e5ff;font-size:10px;font-weight:800;letter-spacing:.3px;margin-bottom:3px}
+.talk-main .heard-line strong{display:block;font-size:clamp(13px,3.7vw,16px);line-height:1.35;font-weight:750}
+.talk-main .heard-line.live{border-color:#d4e7ff9c}
+.talk-main .heard-line.unheard strong{font-size:13px}
+.talk-main .scene-backdrop.with-heard .feedback{bottom:clamp(180px,35%,280px)}
