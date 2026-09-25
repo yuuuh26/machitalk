@@ -9,7 +9,7 @@ import { loadSettings, saveSettings, saveSession, loadSessions, persistenceStatu
 const app = document.querySelector('#app');
 const toastElement = document.querySelector('#toast');
 const URLS = { app: 'https://yuuuh26.github.io/machitalk/', repo: 'https://github.com/yuuuh26/machitalk' };
-const state = { screen: 'home', registry: null, settings: { ...DEFAULT_SETTINGS }, storage: '確認中', persistent: '確認中', filter: 'all', scene: null, meta: null, avatar: null, nodeId: null, turn: 0, feedback: null, transcript: '', status: 'ready', hintShown: false, hintUsed: false, answerShown: false, recognitionIssues: 0, session: null, streak: 0, timer: null, epoch: 0 };
+const state = { screen: 'home', registry: null, settings: { ...DEFAULT_SETTINGS }, storage: '確認中', persistent: '確認中', filter: 'all', scene: null, meta: null, avatar: null, nodeId: null, turn: 0, feedback: null, transcript: '', answerSource: 'voice', status: 'ready', hintShown: false, hintUsed: false, answerShown: false, recognitionIssues: 0, session: null, streak: 0, timer: null, epoch: 0 };
 const escapeHTML = value => String(value ?? '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
 const avatar = () => state.registry.avatars.find(item => item.id === state.settings.selectedAvatar) || state.registry.avatars.find(item => item.id === state.scene?.avatar) || state.registry.avatars.find(item => item.default) || state.registry.avatars[0];
 const currentNode = () => state.scene?.nodes[state.nodeId];
@@ -54,7 +54,7 @@ async function startScene(id) {
     const scene = await loadScene(meta);
     if (epoch !== state.epoch) return;
     state.scene = scene; state.meta = meta; state.nodeId = scene.startNode; state.turn = 1;
-    state.feedback = null; state.transcript = ''; state.status = 'ready'; state.hintShown = !!state.settings.hintMode; state.hintUsed = state.hintShown; state.answerShown = false; state.recognitionIssues = 0; state.streak = 0;
+    state.feedback = null; state.transcript = ''; state.answerSource = 'voice'; state.status = 'ready'; state.hintShown = !!state.settings.hintMode; state.hintUsed = state.hintShown; state.answerShown = false; state.recognitionIssues = 0; state.streak = 0;
     state.session = { sceneId: meta.id, contentVersion: scene.contentVersion || 1, playedAt: new Date().toISOString(), completed: false, goodCount: 0, greatCount: 0, excellentCount: 0, perfectCount: 0, retryCount: 0, hintCount: 0, skippedCount: 0, duration: 0 };
     if (state.hintUsed) state.session.hintCount++;
     state.startedAt = Date.now(); state.screen = 'talk'; renderTalk(); playPrompt();
@@ -80,7 +80,7 @@ function renderTalk() {
   const answer = state.answerShown && !success ? `<div class="answer-card"><span>答え合わせ · 言い方の例</span><p>${escapeHTML(node.instruction || node.task)}</p>${node.examples.map((example, i) => `<div class="answer-example"><strong lang="en">${escapeHTML(example)}</strong><button data-action="sample" data-index="${i}" aria-label="例文${i + 1}を聞く">🔊 聞く</button></div>`).join('')}<small>同じ意味なら、この例文と違う言い方でも正解になるよ。</small></div>` : '';
   const task = `<div class="task-card"><span>あなたの番 · 英語で答えよう</span><strong>${escapeHTML(node.instruction || node.task)}</strong><div class="hint-toggle"><button data-action="hint-mode" aria-pressed="${!!state.settings.hintMode}">💡 ヒントモード ${state.settings.hintMode ? 'ON' : 'OFF'}</button></div></div>`;
   const entry = !success ? `<button class="mic-button ${state.status === 'listening' ? 'recording' : ''}" data-action="mic" ${state.status === 'checking' ? 'disabled' : ''}>${state.status === 'listening' ? '🛑 終了' : '🎤 話す'}</button>${state.status === 'listening' ? '<p id="speech-live" class="live-transcript" aria-live="polite">聞き取り中…話し終えたら少し待ってね</p>' : ''}<form id="type-form" class="type-form"><label for="typed">${speechSupported() ? '聞き取りが合わないときは文字でも答えられるよ' : '文字入力で答えてね'}</label><div><input id="typed" name="typed" type="text" lang="en" autocapitalize="sentences" autocomplete="off" placeholder="英語を入力"><button type="submit">判定</button></div></form><div class="help-row">${state.feedback ? '<button data-action="retry">もう一度答える</button>' : ''}${state.hintShown ? '' : '<button data-action="hint">💡 ヒントを見る</button>'}${state.answerShown ? '' : '<button data-action="show-answer">答えを見る</button>'}<button data-action="skip">次へ進む</button></div>` : '<p class="moving">次の会話へ…</p>';
-  app.innerHTML = layout('', `<section class="conversation"><div class="scene-backdrop ${escapeHTML(state.meta.category)} ${success ? 'celebrate ' + grade : ''}"><div id="avatar" class="avatar" role="img"></div><div class="portrait-shade" aria-hidden="true"></div>${sparks}<div class="talk-overlay-head"><button class="talk-back" data-action="home" aria-label="会話を終了してホームに戻る">←</button><div class="talk-scene"><span class="mode-pill ${state.meta.mode}">${state.meta.mode.toUpperCase()}</span><h1>${escapeHTML(state.meta.emoji)} ${escapeHTML(state.meta.title)}</h1></div><span class="progress-label">${state.turn} / ${turnCount(state.scene)}</span></div><div class="talk-progress"><span style="width:${Math.round(state.turn / turnCount(state.scene) * 100)}%"></span></div>${success ? feedbackHTML() : ''}<div class="speech-card"><span class="speaker">${escapeHTML(profile.name)} says</span><p class="english" ${state.settings.captions ? '' : 'aria-label="字幕は設定で非表示"'}>${state.settings.captions ? escapeHTML(node.prompt) : '•••'}</p><button class="replay" data-action="replay" aria-label="もう一度聞く">🔊 Replay</button></div></div></section><section class="reply">${task}${hint}${state.transcript ? `<div class="transcript"><small>聞き取った英語</small><p lang="en">${escapeHTML(state.transcript)}</p></div>` : ''}${!success ? feedbackHTML() : ''}${answer}${entry}</section>`, { immersive: true });
+  app.innerHTML = layout('', `<section class="conversation"><div class="scene-backdrop ${escapeHTML(state.meta.category)} ${success ? 'celebrate ' + grade : ''}"><div id="avatar" class="avatar" role="img"></div><div class="portrait-shade" aria-hidden="true"></div>${sparks}<div class="talk-overlay-head"><button class="talk-back" data-action="home" aria-label="会話を終了してホームに戻る">←</button><div class="talk-scene"><span class="mode-pill ${state.meta.mode}">${state.meta.mode.toUpperCase()}</span><h1>${escapeHTML(state.meta.emoji)} ${escapeHTML(state.meta.title)}</h1></div><span class="progress-label">${state.turn} / ${turnCount(state.scene)}</span></div><div class="talk-progress"><span style="width:${Math.round(state.turn / turnCount(state.scene) * 100)}%"></span></div>${success ? feedbackHTML() : ''}<div class="speech-card"><span class="speaker">${escapeHTML(profile.name)} says</span><p class="english" ${state.settings.captions ? '' : 'aria-label="字幕は設定で非表示"'}>${state.settings.captions ? escapeHTML(node.prompt) : '•••'}</p><button class="replay" data-action="replay" aria-label="もう一度聞く">🔊 Replay</button></div></div></section><section class="reply">${task}${hint}${state.transcript ? `<div class="transcript"><small>${state.answerSource === 'typed' ? '入力した英語' : '聞き取った英語'}</small><p lang="en">${escapeHTML(state.transcript)}</p></div>` : ''}${!success ? feedbackHTML() : ''}${answer}${entry}</section>`, { immersive: true });
   setAvatar(document.querySelector('#avatar'), profile, mood);
 }
 
@@ -94,7 +94,7 @@ function markHintUsed() {
 function onRecognition(alternatives, typed = false) {
   if (state.screen !== 'talk') return;
   const result = evaluateAlternatives(currentNode(), alternatives);
-  state.status = 'ready'; state.transcript = result.transcript;
+  state.status = 'ready'; state.transcript = result.transcript; state.answerSource = typed ? 'typed' : 'voice';
   const decision = classifyAttempt(result, { typed, issues: state.recognitionIssues });
   if (decision === 'wrong') {
     state.session.retryCount++; state.streak = 0; state.answerShown = true;
@@ -115,7 +115,7 @@ function onRecognition(alternatives, typed = false) {
 
 function recognitionIssue(message, transcript = '') {
   state.recognitionIssues++;
-  state.status = 'ready'; state.transcript = transcript;
+  state.status = 'ready'; state.transcript = transcript; state.answerSource = 'voice';
   const remaining = MAX_RECOGNITION_ISSUES - state.recognitionIssues;
   if (remaining <= 0) state.answerShown = true;
   state.feedback = { grade: transcript ? 'uncertain' : 'no-speech', message: remaining > 0
@@ -127,7 +127,7 @@ function recognitionIssue(message, transcript = '') {
 function advance(evaluation) {
   const next = nextNode(state.scene, currentNode(), evaluation);
   if (!next) { showClear(); return; }
-  state.nodeId = next; state.turn++; state.feedback = null; state.transcript = ''; state.hintShown = !!state.settings.hintMode; state.hintUsed = state.hintShown; state.answerShown = false; state.recognitionIssues = 0; state.status = 'ready';
+  state.nodeId = next; state.turn++; state.feedback = null; state.transcript = ''; state.answerSource = 'voice'; state.hintShown = !!state.settings.hintMode; state.hintUsed = state.hintShown; state.answerShown = false; state.recognitionIssues = 0; state.status = 'ready';
   if (state.hintUsed) state.session.hintCount++;
   renderTalk(); playPrompt();
 }
