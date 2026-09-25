@@ -86,7 +86,8 @@ function onRecognition(transcript, confidence) {
   state.session[`${result.grade}Count`]++; state.streak++;
   renderTalk(); playEffect(result.grade);
   const epoch = state.epoch;
-  state.timer = setTimeout(() => { if (epoch === state.epoch && state.screen === 'talk') advance(result); }, result.grade === 'perfect' ? 1050 : 800);
+  const reactionTime = result.grade === 'perfect' ? 1900 : result.grade === 'excellent' ? 1600 : 1250;
+  state.timer = setTimeout(() => { if (epoch === state.epoch && state.screen === 'talk') advance(result); }, reactionTime);
 }
 
 function advance(evaluation) {

@@ -31,5 +31,5 @@
 .talk-main .help-row{margin-bottom:0}
 .talk-active~.toast{bottom:calc(18px + env(safe-area-inset-bottom))}
 @keyframes portrait-breathe{to{filter:brightness(1.035) saturate(1.03)}}
-@keyframes portrait-reaction{35%{filter:brightness(1.16) saturate(1.25)}100%{filter:brightness(1) saturate(1)}}
+@keyframes portrait-reaction{35%{transform:scale(1.035);filter:brightness(1.16) saturate(1.25)}100%{transform:scale(1);filter:brightness(1) saturate(1)}}
 @media(max-height:700px){.talk-main .scene-backdrop{height:min(68dvh,150vw)}.talk-main .speech-card{padding:9px 13px}.talk-main .english{font-size:17px}}
