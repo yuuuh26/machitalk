@@ -11,13 +11,15 @@ test('registry and every scene remain data driven and playable', async () => {
   const avatars = await readJSON('../data/avatar-registry.json');
   assert.equal(registry.scenes.length, 8);
   assert.deepEqual(registry.scenes.reduce((totals, scene) => ({ ...totals, [scene.mode]: (totals[scene.mode] || 0) + 1 }), {}), { ask: 4, guide: 4 });
-  assert.ok(avatars.avatars[0].assets.perfect);
-  const portrait = avatars.avatars[0].assets;
-  const reactions = ['good', 'great', 'excellent', 'perfect'].map(mood => portrait[mood].image);
-  assert.equal(new Set(reactions).size, 4, 'each grade needs a distinct expression');
-  for (const mood of ['neutral', 'speaking', 'listening', 'encourage', 'good', 'great', 'excellent', 'perfect']) {
-    const image = portrait[mood].image;
-    assert.ok((await readFile(new URL(`../${image.slice(2)}`, import.meta.url))).length > 0, `${mood}: missing portrait`);
+  assert.deepEqual(avatars.avatars.map(avatar => avatar.id), ['aiko', 'linnea']);
+  for (const avatar of avatars.avatars) {
+    const portrait = avatar.assets;
+    const reactions = ['good', 'great', 'excellent', 'perfect'].map(mood => portrait[mood].image);
+    assert.equal(new Set(reactions).size, 4, `${avatar.id}: each grade needs a distinct expression`);
+    for (const mood of ['neutral', 'speaking', 'listening', 'encourage', 'good', 'great', 'excellent', 'perfect']) {
+      const image = portrait[mood].image;
+      assert.ok((await readFile(new URL(`../${image.slice(2)}`, import.meta.url))).length > 0, `${avatar.id}/${mood}: missing portrait`);
+    }
   }
   for (const entry of registry.scenes) {
     const scene = await readJSON(`../${entry.file.slice(2)}`);

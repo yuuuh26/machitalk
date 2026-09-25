@@ -129,3 +129,13 @@
 .talk-main .heard-line.live{border-color:#d4e7ff9c}
 .talk-main .heard-line.unheard strong{font-size:13px}
 .talk-main .scene-backdrop.with-heard .feedback{bottom:clamp(180px,35%,280px)}
+
+/* Avatar choice remains in settings and previews the actual conversation portrait. */
+.avatar-setting{padding-bottom:3px}
+.avatar-picker{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:7px 0 2px}
+.avatar-picker button{min-width:0;display:flex;align-items:center;gap:10px;padding:9px;border:2px solid #e1eaf5;border-radius:16px;background:#fff;color:#244769;text-align:left}
+.avatar-picker button[aria-pressed=true]{border-color:#3b8bf0;background:#f0f7ff;box-shadow:0 4px 14px #5591de30}
+.avatar-picker .avatar-thumb{flex:none;width:60px;height:75px;border-radius:11px;background-color:#dceaf7;background-repeat:no-repeat}
+.avatar-picker strong{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.avatar-picker small{margin-left:auto;font-size:10px;font-weight:800;color:#4a87cd;white-space:nowrap}
+@media(max-width:420px){.avatar-picker button{flex-direction:column;gap:5px}.avatar-picker small{margin-left:0}}

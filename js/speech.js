@@ -1,7 +1,7 @@
 let utterance = null;
 let recognition = null;
 let contextualPhrasesSupported = true;
-export function availableVoices() { return speechSynthesis.getVoices().filter(voice => voice.lang.toLowerCase().startsWith('en')); }
+export function availableVoices() { return 'speechSynthesis' in window ? speechSynthesis.getVoices().filter(voice => voice.lang.toLowerCase().startsWith('en')) : []; }
 export function voicesChanged(callback) { if ('speechSynthesis' in window) speechSynthesis.addEventListener('voiceschanged', callback); }
 export function stopSpeaking() { if ('speechSynthesis' in window) speechSynthesis.cancel(); utterance = null; }
 // Web Speech voices do not expose gender. Match the English voices whose names

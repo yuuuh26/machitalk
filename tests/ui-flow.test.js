@@ -15,7 +15,7 @@ test('conversation offers a hint, reveals a clear wrong answer, and celebrates a
   globalThis.FormData = class { get() { return this.value; } static value = ''; constructor() { this.value = globalThis.FormData.value; } };
   await import('../js/app.js');
   for (let i = 0; i < 10 && !app.innerHTML.includes('QUICK START'); i++) await new Promise(resolve => setTimeout(resolve, 0));
-  const click = action => handlers.click({ target: { closest: () => ({ dataset: { action } }) } });
+  const click = (action, id) => handlers.click({ target: { closest: () => ({ dataset: { action, id } }) } });
   await click('quick');
   assert.match(app.innerHTML, /この電車に乗れば大阪駅へ行ける/);
   assert.match(app.innerHTML, /data-action="hint"/);
@@ -32,6 +32,16 @@ test('conversation offers a hint, reveals a clear wrong answer, and celebrates a
   handlers.submit({ target: { id: 'type-form' }, preventDefault() {} });
   assert.match(app.innerHTML, /grade-sparks/);
   assert.match(app.innerHTML, /class="feedback (good|great|excellent|perfect)"/);
+  await click('home');
+  await click('settings');
+  assert.match(app.innerHTML, /aria-label="Linneaを選ぶ"/);
+  await click('avatar-select', 'linnea');
+  assert.match(app.innerHTML, /data-id="linnea" aria-pressed="true"/);
+  await click('home');
+  assert.match(app.innerHTML, /aria-label="Linnea"/);
+  await click('quick');
+  assert.match(app.innerHTML, /Linnea says/);
+  assert.match(avatar.style.cssText, /avatar\/linnea\/neutral\.webp/);
   await click('home');
   globalThis.FormData = OriginalFormData;
   delete globalThis.window; delete globalThis.document; delete globalThis.fetch;
