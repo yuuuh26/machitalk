@@ -4,14 +4,18 @@ let contextualPhrasesSupported = true;
 export function availableVoices() { return speechSynthesis.getVoices().filter(voice => voice.lang.toLowerCase().startsWith('en')); }
 export function voicesChanged(callback) { if ('speechSynthesis' in window) speechSynthesis.addEventListener('voiceschanged', callback); }
 export function stopSpeaking() { if ('speechSynthesis' in window) speechSynthesis.cancel(); utterance = null; }
-export function speak(text, settings) {
+export function speak(text, settings, onFinish) {
   if (!('speechSynthesis' in window)) return false;
   stopSpeaking();
-  utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = 'en-US'; utterance.rate = Number(settings.speed) || 1;
+  const current = new SpeechSynthesisUtterance(text);
+  utterance = current;
+  current.lang = 'en-US'; current.rate = Number(settings.speed) || 1;
   const voice = availableVoices().find(item => item.voiceURI === settings.voice);
-  if (voice) utterance.voice = voice;
-  speechSynthesis.speak(utterance);
+  if (voice) current.voice = voice;
+  current.onend = () => { if (utterance === current) { utterance = null; onFinish?.(true); } };
+  current.onerror = () => { if (utterance === current) { utterance = null; onFinish?.(false); } };
+  try { speechSynthesis.speak(current); }
+  catch { utterance = null; return false; }
   return true;
 }
 export function speechSupported() { return !!(window.SpeechRecognition || window.webkitSpeechRecognition); }
