@@ -4,14 +4,23 @@ let contextualPhrasesSupported = true;
 export function availableVoices() { return speechSynthesis.getVoices().filter(voice => voice.lang.toLowerCase().startsWith('en')); }
 export function voicesChanged(callback) { if ('speechSynthesis' in window) speechSynthesis.addEventListener('voiceschanged', callback); }
 export function stopSpeaking() { if ('speechSynthesis' in window) speechSynthesis.cancel(); utterance = null; }
-export function speak(text, settings, onFinish) {
+// Web Speech voices do not expose gender. Match the English voices whose names
+// identify a male speaker, and lower the pitch when the device has none.
+const MALE_VOICE = /(?:\bmale(?:\b|[_\d])|\b(?:man|david|guy|daniel|alex|fred|george|james|oliver|ryan|brian|matthew|mark|aaron|thomas|arthur|rishi|reed|evan|rocko|christopher|andrew|eric|roger|stephen)\b)/i;
+export function chooseExampleVoice(voices) {
+  return voices.find(voice => MALE_VOICE.test(`${voice.name} ${voice.voiceURI || ''}`)) || null;
+}
+export function speak(text, settings, onFinish, { example = false } = {}) {
   if (!('speechSynthesis' in window)) return false;
   stopSpeaking();
   const current = new SpeechSynthesisUtterance(text);
   utterance = current;
   current.lang = 'en-US'; current.rate = Number(settings.speed) || 1;
-  const voice = availableVoices().find(item => item.voiceURI === settings.voice);
+  const voices = availableVoices();
+  const maleVoice = example ? chooseExampleVoice(voices) : null;
+  const voice = maleVoice || voices.find(item => item.voiceURI === settings.voice);
   if (voice) current.voice = voice;
+  if (example) current.pitch = maleVoice ? 1 : .78;
   current.onend = () => { if (utterance === current) { utterance = null; onFinish?.(true); } };
   current.onerror = () => { if (utterance === current) { utterance = null; onFinish?.(false); } };
   try { speechSynthesis.speak(current); }

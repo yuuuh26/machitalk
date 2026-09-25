@@ -44,7 +44,7 @@ test('memory modes wait for the question, hide the model answer, and accept a pa
     assert.match(spoken.at(-1).text, /How can I get to Osaka Station/);
     assert.equal(avatar.dataset.mood, 'speaking');
     assert.doesNotMatch(app.innerHTML, /data-action="practice-mode"/);
-    assert.match(app.innerHTML, /data-action="mic" disabled/);
+    assert.match(app.innerHTML, /data-action="mic"[^>]* disabled/);
     assert.doesNotMatch(app.innerHTML, /class="memory-flash"/);
     spoken.at(-1).onend();
     tick(649);
@@ -54,7 +54,7 @@ test('memory modes wait for the question, hide the model answer, and accept a pa
     spoken.at(-1).onend();
     assert.match(app.innerHTML, /思い出して英語で話そう/);
     assert.equal(avatar.dataset.mood, 'neutral');
-    assert.doesNotMatch(app.innerHTML, /data-action="mic" disabled/);
+    assert.doesNotMatch(app.innerHTML, /data-action="mic"[^>]* disabled/);
     assert.doesNotMatch(app.innerHTML, /class="memory-flash"/);
     globalThis.FormData.value = 'This train goes to Osaka.';
     handlers.submit({ target: { id: 'type-form' }, preventDefault() {} });
@@ -74,7 +74,7 @@ test('memory modes wait for the question, hide the model answer, and accept a pa
     assert.match(app.innerHTML, /class="memory-flash"/);
     tick(1);
     assert.doesNotMatch(app.innerHTML, /class="memory-flash"/);
-    assert.doesNotMatch(app.innerHTML, /data-action="mic" disabled/);
+    assert.doesNotMatch(app.innerHTML, /data-action="mic"[^>]* disabled/);
     globalThis.FormData.value = 'This train goes to Osaka.';
     handlers.submit({ target: { id: 'type-form' }, preventDefault() {} });
     assert.match(app.innerHTML, /class="feedback (good|great|excellent|perfect)"/);

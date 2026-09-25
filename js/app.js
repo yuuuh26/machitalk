@@ -14,7 +14,7 @@ const MODES = [
   { id: 'listen', label: '聞いて答える', help: '質問の少しあとに答えを読み上げるよ。覚えてから話そう。' },
   { id: 'flash', label: '2秒で見て覚える', help: '質問の少しあとに答えを2秒だけ表示するよ。覚えてから話そう。' }
 ];
-const state = { screen: 'home', registry: null, settings: { ...DEFAULT_SETTINGS }, storage: '確認中', persistent: '確認中', filter: 'all', scene: null, meta: null, avatar: null, nodeId: null, turn: 0, feedback: null, transcript: '', answerSource: 'voice', status: 'ready', hintShown: false, hintUsed: false, answerShown: false, recognitionIssues: 0, cueStage: 'ready', cueVisible: false, cueToken: 0, cueTimer: null, session: null, streak: 0, timer: null, epoch: 0 };
+const state = { screen: 'home', registry: null, settings: { ...DEFAULT_SETTINGS }, storage: '確認中', persistent: '確認中', filter: 'all', scene: null, meta: null, avatar: null, nodeId: null, turn: 0, feedback: null, transcript: '', answerSource: 'voice', status: 'ready', hintShown: false, hintUsed: false, answerShown: false, recognitionIssues: 0, autoAttempted: false, cueStage: 'ready', cueVisible: false, cueToken: 0, cueTimer: null, session: null, streak: 0, timer: null, epoch: 0 };
 const escapeHTML = value => String(value ?? '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
 const avatar = () => state.registry.avatars.find(item => item.id === state.settings.selectedAvatar) || state.registry.avatars.find(item => item.id === state.scene?.avatar) || state.registry.avatars.find(item => item.default) || state.registry.avatars[0];
 const currentNode = () => state.scene?.nodes[state.nodeId];
@@ -51,7 +51,7 @@ function modePicker() {
 function showHome() {
   stopActivity(); state.screen = 'home'; state.scene = null;
   const cover = avatar();
-  app.innerHTML = layout('MachiTalk', `<section class="hero"><div class="hero-copy"><p class="eyebrow">ASK & GUIDE ENGLISH</p><h1>街で使う<span>英会話。</span></h1><p>聞いて、声に出して、伝わる楽しさを。</p><button class="primary" data-action="quick">▶ QUICK START <span>2〜4分の会話へ</span></button></div><div class="hero-person" role="img" aria-label="Aiko" style="${avatarStyle(cover, 'neutral')}"></div></section><div class="welcome"><strong>話せるって、もっと楽しい。</strong><span>一緒に練習しよう！</span></div><button class="mode-home" data-action="settings">練習方法：<strong>${practiceMode().label}</strong><span>設定で変更 →</span></button><section class="section"><div class="section-heading"><div><p class="eyebrow">CHOOSE YOUR ROLE</p><h2>今日はどちらで話す？</h2></div></div><div class="mode-row"><button class="mode-card ask" data-action="filter" data-mode="ask"><span>↗</span><strong>ASK</strong><small>自分から尋ねる・注文する</small></button><button class="mode-card guide" data-action="filter" data-mode="guide"><span>↖</span><strong>GUIDE</strong><small>外国人を案内する</small></button></div></section><section class="section"><div class="section-heading"><div><p class="eyebrow">REAL SITUATIONS</p><h2>8つのシーン</h2></div><button class="text-link" data-action="scenes">すべて見る →</button></div>${sceneCards(state.registry.scenes.slice(0, 4))}</section><p class="credit">Made by YUU · v1.4.0</p>`, { active: 'home' });
+  app.innerHTML = layout('MachiTalk', `<section class="hero"><div class="hero-copy"><p class="eyebrow">ASK & GUIDE ENGLISH</p><h1>街で使う<span>英会話。</span></h1><p>聞いて、声に出して、伝わる楽しさを。</p><button class="primary" data-action="quick">▶ QUICK START <span>2〜4分の会話へ</span></button></div><div class="hero-person" role="img" aria-label="Aiko" style="${avatarStyle(cover, 'neutral')}"></div></section><div class="welcome"><strong>話せるって、もっと楽しい。</strong><span>一緒に練習しよう！</span></div><button class="mode-home" data-action="settings">練習方法：<strong>${practiceMode().label}</strong><span>設定で変更 →</span></button><p class="auto-info">各問題の最初は、アバターが話し終わってから自動で録音するよ。マイクの許可を確認してね。</p><section class="section"><div class="section-heading"><div><p class="eyebrow">CHOOSE YOUR ROLE</p><h2>今日はどちらで話す？</h2></div></div><div class="mode-row"><button class="mode-card ask" data-action="filter" data-mode="ask"><span>↗</span><strong>ASK</strong><small>自分から尋ねる・注文する</small></button><button class="mode-card guide" data-action="filter" data-mode="guide"><span>↖</span><strong>GUIDE</strong><small>外国人を案内する</small></button></div></section><section class="section"><div class="section-heading"><div><p class="eyebrow">REAL SITUATIONS</p><h2>8つのシーン</h2></div><button class="text-link" data-action="scenes">すべて見る →</button></div>${sceneCards(state.registry.scenes.slice(0, 4))}</section><p class="credit">Made by YUU · v1.5.0</p>`, { active: 'home' });
 }
 
 function showScenes(filter = 'all') {
@@ -69,7 +69,7 @@ async function startScene(id) {
     const scene = await loadScene(meta);
     if (epoch !== state.epoch) return;
     state.scene = scene; state.meta = meta; state.nodeId = scene.startNode; state.turn = 1;
-    state.feedback = null; state.transcript = ''; state.answerSource = 'voice'; state.status = 'ready'; state.hintShown = !!state.settings.hintMode; state.hintUsed = state.hintShown; state.answerShown = false; state.recognitionIssues = 0; state.streak = 0;
+    state.feedback = null; state.transcript = ''; state.answerSource = 'voice'; state.status = 'ready'; state.hintShown = !!state.settings.hintMode; state.hintUsed = state.hintShown; state.answerShown = false; state.recognitionIssues = 0; state.autoAttempted = false; state.streak = 0;
     state.session = { sceneId: meta.id, contentVersion: scene.contentVersion || 1, playedAt: new Date().toISOString(), completed: false, goodCount: 0, greatCount: 0, excellentCount: 0, perfectCount: 0, retryCount: 0, hintCount: 0, skippedCount: 0, duration: 0 };
     if (state.hintUsed) state.session.hintCount++;
     state.startedAt = Date.now(); state.screen = 'talk'; renderTalk(); playPrompt();
@@ -94,12 +94,15 @@ function renderTalk() {
   const hint = state.hintShown && !success ? `<div class="hint-panel"><strong>💡 ヒント</strong><p>使える言葉：${escapeHTML(node.hint?.words || '')}</p><p>言い出し：<b lang="en">${escapeHTML(node.hint?.starter || node.examples[0].split(' ').slice(0, 3).join(' ') + ' ...')}</b></p>${state.answerShown ? '' : '<button data-action="show-answer">全文の答えを見る</button>'}</div>` : '';
   const answer = state.answerShown && !success ? `<div class="answer-card"><span>答え合わせ · 言い方の例</span><p>${escapeHTML(node.instruction || node.task)}</p>${node.examples.map((example, i) => `<div class="answer-example"><strong lang="en">${escapeHTML(example)}</strong><button data-action="sample" data-index="${i}" aria-label="例文${i + 1}を聞く">🔊 聞く</button></div>`).join('')}<small>同じ意味なら、この例文と違う言い方でも正解になるよ。</small></div>` : '';
   const mode = practiceMode();
-  const task = `<div class="task-card"><span>あなたの番 · 英語で答えよう</span><strong>${escapeHTML(node.instruction || node.task)}</strong><p class="practice-help">例文と違う言い方でも正解になるよ。</p></div>`;
-  const cueMessage = { question: 'まず質問を聞こう', pause: '少し待ってね…', 'answer-audio': 'お手本を聞いて覚えよう', 'answer-visible': 'お手本を2秒だけ覚えよう', ready: '思い出して英語で話そう' }[state.cueStage];
-  const cueStatus = !success && mode.id !== 'free' ? `<p class="cue-status" role="status">${cueMessage}</p>` : '';
+  const cuePending = state.cueStage !== 'ready' && !state.answerShown;
+  const micLabel = state.status === 'listening' ? '停止' : state.status === 'connecting' ? '準備中' : state.autoAttempted ? '再録音' : '録音';
+  const mic = !success ? `<button class="mic-button ${state.status === 'listening' ? 'recording' : ''}" data-action="mic" aria-label="${state.status === 'listening' ? '録音を終了' : state.autoAttempted ? '再録音を開始' : '録音を開始'}" ${state.status === 'checking' || state.status === 'connecting' || cuePending ? 'disabled' : ''}><span aria-hidden="true">${state.status === 'listening' ? '■' : '🎤'}</span><span>${micLabel}</span></button>` : '';
+  const recordingState = state.status === 'listening' ? '<span class="capture-state recording" role="status"><i aria-hidden="true"></i>録音中…</span>' : state.status === 'connecting' ? '<span class="capture-state" role="status">マイクを準備中…</span>' : state.cueStage === 'arming' ? '<span class="capture-state" role="status">少し待って、自動で録音するよ</span>' : '';
+  const task = `<div class="task-card"><div class="task-row"><div class="task-copy"><span>あなたの番 · 英語で答えよう</span><strong>${escapeHTML(node.instruction || node.task)}</strong>${recordingState}${state.status === 'listening' ? '<small id="speech-live" class="live-transcript" aria-live="polite">話し終えたら少し待ってね</small>' : ''}</div>${mic}</div><p class="practice-help">例文と違う言い方でも正解になるよ。</p></div>`;
+  const cueMessage = { question: 'まず質問を聞こう', pause: '少し待ってね…', 'answer-audio': 'お手本を聞いて覚えよう', 'answer-visible': 'お手本を2秒だけ覚えよう', arming: 'まもなく自動録音', ready: '思い出して英語で話そう' }[state.cueStage];
+  const cueStatus = !success && mode.id !== 'free' && state.cueStage !== 'arming' ? `<p class="cue-status" role="status">${cueMessage}</p>` : '';
   const cueFlash = !success && state.cueVisible ? `<div class="memory-flash" role="status" aria-live="assertive"><small>2秒だけ覚えよう</small><strong lang="en">${escapeHTML(node.examples[0])}</strong></div>` : '';
-  const cuePending = mode.id !== 'free' && state.cueStage !== 'ready' && !state.answerShown;
-  const entry = !success ? `<button class="mic-button ${state.status === 'listening' ? 'recording' : ''}" data-action="mic" ${state.status === 'checking' || cuePending ? 'disabled' : ''}>${state.status === 'listening' ? '🛑 終了' : '🎤 話す'}</button>${state.status === 'listening' ? '<p id="speech-live" class="live-transcript" aria-live="polite">聞き取り中…話し終えたら少し待ってね</p>' : ''}<form id="type-form" class="type-form"><label for="typed">${speechSupported() ? '聞き取りが合わないときは文字でも答えられるよ' : '文字入力で答えてね'}</label><div><input id="typed" name="typed" type="text" lang="en" autocapitalize="sentences" autocomplete="off" placeholder="英語を入力" ${cuePending ? 'disabled' : ''}><button type="submit" ${cuePending ? 'disabled' : ''}>判定</button></div></form><div class="help-row">${mode.id === 'free' || state.answerShown ? '' : '<button data-action="cue-replay">お手本をもう一度</button>'}${state.feedback ? '<button data-action="retry">もう一度答える</button>' : ''}${state.hintShown ? '' : '<button data-action="hint">💡 ヒントを見る</button>'}${state.answerShown ? '' : '<button data-action="show-answer">答えを見る</button>'}<button data-action="skip">次へ進む</button></div>` : '<p class="moving">次の会話へ…</p>';
+  const entry = !success ? `<form id="type-form" class="type-form"><label for="typed">${speechSupported() ? '聞き取りが合わないときは文字でも答えられるよ' : '文字入力で答えてね'}</label><div><input id="typed" name="typed" type="text" lang="en" autocapitalize="sentences" autocomplete="off" placeholder="英語を入力" ${cuePending ? 'disabled' : ''}><button type="submit" ${cuePending ? 'disabled' : ''}>判定</button></div></form><div class="help-row">${mode.id === 'free' || state.answerShown ? '' : '<button data-action="cue-replay">お手本をもう一度</button>'}${state.hintShown ? '' : '<button data-action="hint">💡 ヒントを見る</button>'}${state.answerShown ? '' : '<button data-action="show-answer">答えを見る</button>'}<button data-action="skip">次へ進む</button></div>` : '<p class="moving">次の会話へ…</p>';
   app.innerHTML = layout('', `<section class="conversation"><div class="scene-backdrop ${escapeHTML(state.meta.category)} ${success ? 'celebrate ' + grade : ''}"><div id="avatar" class="avatar" role="img"></div><div class="portrait-shade" aria-hidden="true"></div>${sparks}${cueFlash}<div class="talk-overlay-head"><button class="talk-back" data-action="home" aria-label="会話を終了してホームに戻る">←</button><div class="talk-scene"><span class="mode-pill ${state.meta.mode}">${state.meta.mode.toUpperCase()}</span><h1>${escapeHTML(state.meta.emoji)} ${escapeHTML(state.meta.title)}</h1></div><span class="progress-label">${state.turn} / ${turnCount(state.scene)}</span></div><div class="talk-progress"><span style="width:${Math.round(state.turn / turnCount(state.scene) * 100)}%"></span></div>${success ? feedbackHTML() : ''}<div class="speech-card"><span class="speaker">${escapeHTML(profile.name)} says</span><p class="english" ${state.settings.captions ? '' : 'aria-label="字幕は設定で非表示"'}>${state.settings.captions ? escapeHTML(node.prompt) : '•••'}</p><button class="replay" data-action="replay" aria-label="もう一度聞く">🔊 Replay</button></div></div></section><section class="reply">${task}${cueStatus}${hint}${state.transcript ? `<div class="transcript"><small>${state.answerSource === 'typed' ? '入力した英語' : '聞き取った英語'}</small><p lang="en">${escapeHTML(state.transcript)}</p></div>` : ''}${!success ? feedbackHTML() : ''}${answer}${entry}</section>`, { immersive: true });
   setAvatar(document.querySelector('#avatar'), profile, mood);
 }
@@ -109,15 +112,27 @@ function playPrompt() {
   const mode = practiceMode().id;
   const token = state.cueToken, epoch = state.epoch, nodeId = state.nodeId;
   const stillHere = () => state.screen === 'talk' && state.epoch === epoch && state.nodeId === nodeId && state.cueToken === token;
+  const readyToAnswer = (mayRecord = true) => {
+    if (!stillHere()) return;
+    clearTimeout(state.cueTimer);
+    if (!mayRecord || state.autoAttempted || state.answerShown || !speechSupported()) {
+      state.cueStage = 'ready'; renderTalk(); return;
+    }
+    state.cueStage = 'arming'; renderTalk();
+    // Let the device speaker and echo cancellation settle before opening the mic.
+    state.cueTimer = setTimeout(() => {
+      if (stillHere()) { state.cueStage = 'ready'; startRecording(); }
+    }, 850);
+  };
   if (mode === 'free') {
     if (!state.settings.autoPlay) return;
     state.cueStage = 'question'; renderTalk();
-    const finished = () => {
+    const finished = success => {
       if (!stillHere()) return;
-      clearTimeout(state.cueTimer); state.cueStage = 'ready'; renderTalk();
+      readyToAnswer(success);
     };
-    state.cueTimer = setTimeout(() => { if (stillHere()) { stopSpeaking(); finished(); } }, 12000);
-    if (!speak(currentNode().prompt, state.settings, finished)) finished();
+    state.cueTimer = setTimeout(() => { if (stillHere()) { stopSpeaking(); finished(false); } }, 12000);
+    if (!speak(currentNode().prompt, state.settings, finished)) finished(false);
     return;
   }
   const showFlash = () => {
@@ -125,7 +140,7 @@ function playPrompt() {
     state.cueVisible = true; state.cueStage = 'answer-visible'; renderTalk();
     state.cueTimer = setTimeout(() => {
       if (!stillHere()) return;
-      state.cueVisible = false; state.cueStage = 'ready'; renderTalk();
+      state.cueVisible = false; readyToAnswer();
     }, 2000);
   };
   const showAnswer = () => {
@@ -136,10 +151,10 @@ function playPrompt() {
       if (!stillHere()) return;
       clearTimeout(state.cueTimer);
       if (!success) { showFlash(); return; }
-      state.cueStage = 'ready'; renderTalk();
+      readyToAnswer();
     };
     state.cueTimer = setTimeout(() => { if (stillHere()) { stopSpeaking(); finishAnswer(false); } }, 12000);
-    if (!speak(currentNode().examples[0], state.settings, finishAnswer)) finishAnswer(false);
+    if (!speak(currentNode().examples[0], state.settings, finishAnswer, { example: true })) finishAnswer(false);
   };
   let questionDone = false;
   const afterQuestion = () => {
@@ -187,16 +202,32 @@ function recognitionIssue(message, transcript = '') {
   const remaining = MAX_RECOGNITION_ISSUES - state.recognitionIssues;
   if (remaining <= 0) state.answerShown = true;
   state.feedback = { grade: transcript ? 'uncertain' : 'no-speech', message: remaining > 0
-    ? `${message} あと${remaining}回試せるよ。`
+    ? `${message} あと${remaining}回、録音ボタンを押して試せるよ。`
     : `${message} 3回試したので答えを表示するね。文字でも答えられるよ。` };
   renderTalk();
+}
+
+function startRecording() {
+  if (state.screen !== 'talk' || ['connecting', 'listening'].includes(state.status)) return;
+  stopListening(); cancelCue();
+  state.autoAttempted = true;
+  const nodeId = state.nodeId, epoch = state.epoch;
+  const stillHere = () => state.screen === 'talk' && state.epoch === epoch && state.nodeId === nodeId;
+  state.feedback = null; state.transcript = ''; state.status = 'connecting'; renderTalk();
+  listen({ node: currentNode(),
+    onStart: () => { if (stillHere()) { state.status = 'listening'; renderTalk(); } },
+    onInterim: transcript => { if (stillHere()) { const live = document.querySelector('#speech-live'); if (live) live.textContent = `聞き取り中：${transcript}`; } },
+    onResult: alternatives => { if (stillHere()) onRecognition(alternatives); },
+    onNoSpeech: message => { if (stillHere()) recognitionIssue(message); },
+    onError: message => { if (stillHere()) recognitionIssue(message); }
+  });
 }
 
 function advance(evaluation) {
   cancelCue();
   const next = nextNode(state.scene, currentNode(), evaluation);
   if (!next) { showClear(); return; }
-  state.nodeId = next; state.turn++; state.feedback = null; state.transcript = ''; state.answerSource = 'voice'; state.hintShown = !!state.settings.hintMode; state.hintUsed = state.hintShown; state.answerShown = false; state.recognitionIssues = 0; state.status = 'ready';
+  state.nodeId = next; state.turn++; state.feedback = null; state.transcript = ''; state.answerSource = 'voice'; state.hintShown = !!state.settings.hintMode; state.hintUsed = state.hintShown; state.answerShown = false; state.recognitionIssues = 0; state.autoAttempted = false; state.status = 'ready';
   if (state.hintUsed) state.session.hintCount++;
   renderTalk(); playPrompt();
 }
@@ -222,7 +253,7 @@ async function showSettings() {
   try { state.persistent = await persistenceStatus(); } catch { state.persistent = '確認できません'; }
   if (state.screen !== 'settings') return;
   const voices = availableVoices();
-  app.innerHTML = layout('', `<section class="page-head"><p class="eyebrow">MAKE IT YOURS</p><h1>設定</h1></section><section class="settings-panel practice-settings"><h2>練習方法を選ぶ</h2><p class="note">ここで選んだ方法が、次に始める会話の全問題に使われるよ。</p>${modePicker()}<p class="practice-help">${practiceMode().help} 例文以外の自然な言い方も正解になるよ。</p></section><section class="settings-panel"><h2>音声と表示</h2><label class="setting-line"><span>Voice<small>端末の英語音声</small></span><select data-setting="voice"><option value="">自動選択</option>${voices.map(item => `<option value="${escapeHTML(item.voiceURI)}" ${state.settings.voice === item.voiceURI ? 'selected' : ''}>${escapeHTML(item.name)} (${escapeHTML(item.lang)})</option>`).join('')}</select></label><label class="setting-line"><span>Speech speed</span><select data-setting="speed">${[.8,1,1.2].map(value => `<option value="${value}" ${Number(state.settings.speed) === value ? 'selected' : ''}>${value}×</option>`).join('')}</select></label><label class="setting-line"><span>字幕</span><input type="checkbox" data-setting="captions" ${state.settings.captions ? 'checked' : ''}></label><label class="setting-line"><span>自動読み上げ</span><input type="checkbox" data-setting="autoPlay" ${state.settings.autoPlay ? 'checked' : ''}></label><label class="setting-line"><span>ヒントモード<small>会話中に単語と言い出しを表示</small></span><input type="checkbox" data-setting="hintMode" ${state.settings.hintMode ? 'checked' : ''}></label><label class="setting-line"><span>Avatar</span><select data-setting="selectedAvatar">${state.registry.avatars.map(item => `<option value="${escapeHTML(item.id)}" ${state.settings.selectedAvatar === item.id ? 'selected' : ''}>${escapeHTML(item.name)}</option>`).join('')}</select></label></section><p class="note">音声認識はChrome側のサービスを利用する場合があります。学習履歴はこの端末に保存します。</p><section class="settings-panel"><h2>端末保存</h2><div class="setting-line"><span>学習履歴</span><strong>${escapeHTML(state.storage)}</strong></div><div class="setting-line"><span>永続ストレージ</span><strong id="persist-status">${escapeHTML(state.persistent)}</strong></div><button class="secondary" data-action="persist">永続ストレージを申請</button><p class="note">ブラウザの判断で未取得になる場合があります。端末内のデータもブラウザの消去操作で失われます。</p></section><section class="settings-panel"><h2>リンク</h2>${[['app','App URL'],['repo','Repository URL']].map(([key,label]) => `<div class="link-row"><span><strong>${label}</strong><small>${escapeHTML(URLS[key])}</small></span><button class="copy" data-action="copy" data-key="${key}">コピー</button></div>`).join('')}</section><p class="credit">Made by YUU · v1.4.0</p>`, { active: 'settings' });
+  app.innerHTML = layout('', `<section class="page-head"><p class="eyebrow">MAKE IT YOURS</p><h1>設定</h1></section><section class="settings-panel practice-settings"><h2>練習方法を選ぶ</h2><p class="note">ここで選んだ方法が、次に始める会話の全問題に使われるよ。</p>${modePicker()}<p class="practice-help">${practiceMode().help} 例文以外の自然な言い方も正解になるよ。</p></section><section class="settings-panel"><h2>音声と表示</h2><label class="setting-line"><span>Voice<small>端末の英語音声</small></span><select data-setting="voice"><option value="">自動選択</option>${voices.map(item => `<option value="${escapeHTML(item.voiceURI)}" ${state.settings.voice === item.voiceURI ? 'selected' : ''}>${escapeHTML(item.name)} (${escapeHTML(item.lang)})</option>`).join('')}</select></label><p class="note">見本の答えは、端末に男性英語音声があれば優先して読むよ。</p><label class="setting-line"><span>Speech speed</span><select data-setting="speed">${[.8,1,1.2].map(value => `<option value="${value}" ${Number(state.settings.speed) === value ? 'selected' : ''}>${value}×</option>`).join('')}</select></label><label class="setting-line"><span>字幕</span><input type="checkbox" data-setting="captions" ${state.settings.captions ? 'checked' : ''}></label><label class="setting-line"><span>自動読み上げ</span><input type="checkbox" data-setting="autoPlay" ${state.settings.autoPlay ? 'checked' : ''}></label><label class="setting-line"><span>ヒントモード<small>会話中に単語と言い出しを表示</small></span><input type="checkbox" data-setting="hintMode" ${state.settings.hintMode ? 'checked' : ''}></label><label class="setting-line"><span>Avatar</span><select data-setting="selectedAvatar">${state.registry.avatars.map(item => `<option value="${escapeHTML(item.id)}" ${state.settings.selectedAvatar === item.id ? 'selected' : ''}>${escapeHTML(item.name)}</option>`).join('')}</select></label></section><p class="note">音声認識はChrome側のサービスを利用する場合があります。学習履歴はこの端末に保存します。</p><section class="settings-panel"><h2>端末保存</h2><div class="setting-line"><span>学習履歴</span><strong>${escapeHTML(state.storage)}</strong></div><div class="setting-line"><span>永続ストレージ</span><strong id="persist-status">${escapeHTML(state.persistent)}</strong></div><button class="secondary" data-action="persist">永続ストレージを申請</button><p class="note">ブラウザの判断で未取得になる場合があります。端末内のデータもブラウザの消去操作で失われます。</p></section><section class="settings-panel"><h2>リンク</h2>${[['app','App URL'],['repo','Repository URL']].map(([key,label]) => `<div class="link-row"><span><strong>${label}</strong><small>${escapeHTML(URLS[key])}</small></span><button class="copy" data-action="copy" data-key="${key}">コピー</button></div>`).join('')}</section><p class="credit">Made by YUU · v1.5.0</p>`, { active: 'settings' });
 }
 
 app.addEventListener('click', async event => {
@@ -233,9 +264,9 @@ app.addEventListener('click', async event => {
   if (action === 'history') return showHistory();
   if (action === 'settings') return showSettings();
   if (action === 'filter') return showScenes(target.dataset.mode);
-  if (action === 'quick') return startScene('station-guide');
-  if (action === 'start') return startScene(target.dataset.id);
-  if (action === 'next-scene') { const scenes = state.registry.scenes; return startScene(scenes[(scenes.findIndex(s => s.id === state.meta.id) + 1) % scenes.length].id); }
+  if (action === 'quick') { prepareEffects(); return startScene('station-guide'); }
+  if (action === 'start') { prepareEffects(); return startScene(target.dataset.id); }
+  if (action === 'next-scene') { prepareEffects(); const scenes = state.registry.scenes; return startScene(scenes[(scenes.findIndex(s => s.id === state.meta.id) + 1) % scenes.length].id); }
   if (action === 'practice-mode' && state.screen === 'settings') {
     const mode = MODES.find(item => item.id === target.dataset.mode);
     if (!mode || mode.id === practiceMode().id) return;
@@ -251,24 +282,15 @@ app.addEventListener('click', async event => {
     if (state.status === 'listening') { stopListening(); state.status = 'ready'; renderTalk(); }
     if (action === 'replay' && practiceMode().id !== 'free' && !state.answerShown) return playPrompt();
     cancelCue();
-    return speak(action === 'replay' ? currentNode().prompt : currentNode().examples[Number(target.dataset.index) || 0], state.settings);
+    return speak(action === 'replay' ? currentNode().prompt : currentNode().examples[Number(target.dataset.index) || 0], state.settings, undefined, { example: action === 'sample' });
   }
-  if (action === 'show-answer' && state.screen === 'talk') { cancelCue(); markHintUsed(); state.answerShown = true; renderTalk(); return; }
+  if (action === 'show-answer' && state.screen === 'talk') { stopListening(); state.status = 'ready'; cancelCue(); markHintUsed(); state.answerShown = true; renderTalk(); return; }
   if (action === 'mic' && state.screen === 'talk') {
-    if (practiceMode().id !== 'free' && state.cueStage !== 'ready' && !state.answerShown) return;
+    if (state.cueStage !== 'ready' && !state.answerShown) return;
     if (state.status === 'listening') { stopListening(); state.status = 'ready'; renderTalk(); return; }
-    cancelCue();
     prepareEffects();
-    const nodeId = state.nodeId; state.feedback = null; state.status = 'listening'; renderTalk();
-    return listen({ node: currentNode(),
-      onStart: () => {},
-      onInterim: transcript => { if (state.screen === 'talk' && state.nodeId === nodeId) { const live = document.querySelector('#speech-live'); if (live) live.textContent = `聞き取り中：${transcript}`; } },
-      onResult: alternatives => { if (state.screen === 'talk' && state.nodeId === nodeId) onRecognition(alternatives); },
-      onNoSpeech: message => { if (state.screen === 'talk' && state.nodeId === nodeId) recognitionIssue(message); },
-      onError: message => { if (state.screen === 'talk' && state.nodeId === nodeId) recognitionIssue(message); }
-    });
+    return startRecording();
   }
-  if (action === 'retry' && state.screen === 'talk') { stopListening(); state.feedback = null; state.transcript = ''; state.status = 'ready'; renderTalk(); return; }
   if (action === 'hint' && state.screen === 'talk') { markHintUsed(); state.hintShown = true; renderTalk(); return; }
   if (action === 'skip' && state.screen === 'talk') { stopListening(); state.session.skippedCount++; state.streak = 0; advance(null); return; }
   if (action === 'copy') { try { await navigator.clipboard.writeText(URLS[target.dataset.key]); toast('コピーしました'); } catch { toast('コピーできませんでした。URLを選択してコピーしてください。'); } return; }
@@ -278,7 +300,7 @@ app.addEventListener('click', async event => {
 app.addEventListener('submit', event => {
   if (event.target.id !== 'type-form') return;
   event.preventDefault(); const text = new FormData(event.target).get('typed')?.trim();
-  if (practiceMode().id !== 'free' && state.cueStage !== 'ready' && !state.answerShown) return toast('お手本が終わってから答えてね。');
+  if (state.cueStage !== 'ready' && !state.answerShown) return toast('アバターの声やお手本が終わってから答えてね。');
   if (!text) return toast('英語で入力してください。');
   prepareEffects();
   stopListening(); onRecognition([{ transcript: text, confidence: 1 }], true);
