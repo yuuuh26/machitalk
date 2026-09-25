@@ -78,15 +78,29 @@
 @media(prefers-reduced-motion:reduce){.talk-main .avatar{animation:none!important;transform:none;will-change:auto}}
 
 /* Memory practice keeps the model answer temporary; the normal scoring stays the same. */
-.mode-home{margin-top:24px;padding:16px;border:1px solid #dceaf9;border-radius:18px;background:#f6faff}
-.mode-home h2{font-size:15px;margin:0 0 11px}.mode-home>p{font-size:12px;line-height:1.5;color:#567494;margin:10px 0 0}
+.mode-home{width:100%;margin-top:18px;padding:11px 14px;border:1px solid #dceaf9;border-radius:14px;background:#f6faff;color:#44769f;text-align:left;display:flex;align-items:center;gap:5px;font-size:12px}
+.mode-home strong{color:#1f65b6}.mode-home span{margin-left:auto;font-size:11px;font-weight:800}
 .practice-picker{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:13px}
 .practice-picker button{min-width:0;min-height:42px;border:1px solid #cbdff3;border-radius:11px;background:#fff;color:#386995;font-size:11px;font-weight:800;line-height:1.3;padding:6px}
 .practice-picker button[aria-pressed=true]{background:#2878d9;color:#fff;border-color:#2878d9;box-shadow:0 3px 9px #3288ee44}
-.mode-home .practice-picker{margin-top:0}
+.practice-settings .note{margin:0}.practice-settings .practice-picker{margin:12px 0}
+.practice-settings .practice-picker button{min-height:56px;font-size:12px}
+.practice-settings .practice-help{margin:8px 0 0}
 .practice-help{font-size:12px;line-height:1.5;color:#577491;margin:9px 0 0}
 .cue-status{font-size:12px;font-weight:800;color:#3278c9;text-align:center;margin:11px 0 0}
 .memory-flash{position:absolute;z-index:5;left:14px;right:14px;bottom:158px;padding:15px 18px;border:1px solid #ffffff9c;border-radius:18px;background:#102a4dc9;color:#fff;box-shadow:0 10px 27px #071c3a70;backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);text-align:center}
 .memory-flash small{display:block;font-size:11px;font-weight:800;color:#c8e5ff;margin-bottom:6px}
 .memory-flash strong{display:block;font-size:clamp(17px,5vw,23px);line-height:1.3;text-shadow:0 2px 6px #081933}
 @media(max-width:360px){.practice-picker button{font-size:10px;padding:5px 3px}.memory-flash{bottom:146px}}
+
+/* Let the portrait dominate the opening viewport while keeping the speaking controls below. */
+.talk-main .scene-backdrop{height:min(78dvh,165vw,900px)}
+.talk-main .reply{padding:12px 20px 25px}
+.talk-main .task-card{padding:12px 14px}
+.talk-main .task-card>span{margin-bottom:3px}
+.talk-main .practice-help{margin-top:5px}
+.talk-main .avatar[data-mood=speaking]{animation:portrait-speaking 2.1s ease-in-out infinite}
+.talk-main .avatar[data-mood=encourage]{animation:portrait-encourage 2.8s ease-in-out infinite}
+@keyframes portrait-speaking{0%,100%{transform:translate3d(0,0,0) scale(1.02)}50%{transform:translate3d(0,-3px,0) scale(1.026)}}
+@keyframes portrait-encourage{0%,100%{transform:translate3d(0,0,0) scale(1.02)}50%{transform:translate3d(0,2px,0) scale(1.025) rotate(.2deg)}}
+@media(prefers-reduced-motion:reduce){.talk-main .avatar[data-mood=speaking],.talk-main .avatar[data-mood=encourage]{animation:none!important}}

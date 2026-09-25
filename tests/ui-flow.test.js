@@ -18,7 +18,8 @@ test('conversation offers a hint, reveals a clear wrong answer, and celebrates a
   const click = action => handlers.click({ target: { closest: () => ({ dataset: { action } }) } });
   await click('quick');
   assert.match(app.innerHTML, /この電車に乗れば大阪駅へ行ける/);
-  assert.match(app.innerHTML, /ヒントモード OFF/);
+  assert.match(app.innerHTML, /data-action="hint"/);
+  assert.doesNotMatch(app.innerHTML, /data-action="practice-mode"/);
   await click('hint');
   assert.match(app.innerHTML, /使える言葉/);
   assert.doesNotMatch(app.innerHTML, /答え合わせ · 言い方の例/);

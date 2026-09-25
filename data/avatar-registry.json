@@ -8,14 +8,15 @@
       "image": "./assets/avatar/aiko/neutral.webp",
       "assets": {
         "neutral": { "image": "./assets/avatar/aiko/neutral.webp" },
+        "speaking": { "image": "./assets/avatar/aiko/speaking.webp" },
         "listening": { "image": "./assets/avatar/aiko/listening.webp" },
         "thinking": { "image": "./assets/avatar/aiko/listening.webp" },
-        "encourage": { "image": "./assets/avatar/aiko/neutral.webp" },
-        "good": { "image": "./assets/avatar/aiko/delighted.webp" },
+        "encourage": { "image": "./assets/avatar/aiko/encouraging.webp" },
+        "good": { "image": "./assets/avatar/aiko/pleased.webp" },
         "great": { "image": "./assets/avatar/aiko/delighted.webp" },
         "excellent": { "image": "./assets/avatar/aiko/celebrating.webp" },
-        "perfect": { "image": "./assets/avatar/aiko/celebrating.webp" },
-        "explaining": { "image": "./assets/avatar/aiko/listening.webp" }
+        "perfect": { "image": "./assets/avatar/aiko/thrilled.webp" },
+        "explaining": { "image": "./assets/avatar/aiko/speaking.webp" }
       }
     }
   ]

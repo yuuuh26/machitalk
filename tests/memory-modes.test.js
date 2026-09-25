@@ -35,10 +35,15 @@ test('memory modes wait for the question, hide the model answer, and accept a pa
   };
   const click = (action, mode) => handlers.click({ target: { closest: () => ({ dataset: { action, mode } }) } });
   try {
-    assert.match(app.innerHTML, /聞いて覚える/);
+    assert.doesNotMatch(app.innerHTML, /data-action="practice-mode"/);
+    await click('settings');
+    assert.match(app.innerHTML, /聞いて答える/);
     await click('practice-mode', 'listen');
+    await click('home');
     await click('quick');
     assert.match(spoken.at(-1).text, /How can I get to Osaka Station/);
+    assert.equal(avatar.dataset.mood, 'speaking');
+    assert.doesNotMatch(app.innerHTML, /data-action="practice-mode"/);
     assert.match(app.innerHTML, /data-action="mic" disabled/);
     assert.doesNotMatch(app.innerHTML, /class="memory-flash"/);
     spoken.at(-1).onend();
@@ -48,6 +53,7 @@ test('memory modes wait for the question, hide the model answer, and accept a pa
     assert.equal(spoken.at(-1).text, 'Take this train to Osaka Station.');
     spoken.at(-1).onend();
     assert.match(app.innerHTML, /思い出して英語で話そう/);
+    assert.equal(avatar.dataset.mood, 'neutral');
     assert.doesNotMatch(app.innerHTML, /data-action="mic" disabled/);
     assert.doesNotMatch(app.innerHTML, /class="memory-flash"/);
     globalThis.FormData.value = 'This train goes to Osaka.';
@@ -55,7 +61,9 @@ test('memory modes wait for the question, hide the model answer, and accept a pa
     assert.match(app.innerHTML, /class="feedback (good|great|excellent|perfect)"/);
 
     await click('home');
+    await click('settings');
     await click('practice-mode', 'flash');
+    await click('home');
     await click('quick');
     const question = spoken.at(-1);
     question.onend();
@@ -80,7 +88,9 @@ test('memory modes wait for the question, hide the model answer, and accept a pa
     assert.match(app.innerHTML, /答え合わせ · 言い方の例/);
     await click('home');
 
+    await click('settings');
     await click('practice-mode', 'listen');
+    await click('home');
     await click('quick');
     const stalledQuestion = spoken.at(-1);
     tick(12000);
