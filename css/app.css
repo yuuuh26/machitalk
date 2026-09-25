@@ -5,10 +5,10 @@
 .talk-main{padding:0 0 calc(16px + env(safe-area-inset-bottom))}
 .talk-main .conversation{margin:0;border-radius:0 0 25px 25px;box-shadow:none}
 .talk-main .scene-backdrop{height:min(72dvh,150vw,780px);min-height:340px;background:#dbe9f6}
-.talk-main .avatar{inset:0;width:100%;height:100%;transform:none;border-radius:0;box-shadow:none;transition:filter .2s;background-color:#dbe9f6}
+.talk-main .avatar{inset:0;width:100%;height:100%;transform:none;transform-origin:50% 64%;border-radius:0;box-shadow:none;transition:filter .2s;background-color:#dbe9f6;animation:portrait-idle 7.5s ease-in-out infinite;will-change:transform}
 .talk-main .avatar[data-mood=perfect]{box-shadow:none;filter:saturate(1.14) brightness(1.045)}
 .talk-main .avatar[data-mood=excellent]{box-shadow:none;filter:saturate(1.1)}
-.talk-main .avatar[data-mood=listening]{animation:portrait-breathe 1.6s ease-in-out infinite alternate}
+.talk-main .avatar[data-mood=listening]{animation:portrait-listening 2.6s ease-in-out infinite}
 .talk-main .avatar.react,.talk-main .avatar[data-mood=excellent].react,.talk-main .avatar[data-mood=perfect].react{animation:portrait-reaction .8s ease-out}
 .portrait-shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,#0b284d9c 0%,transparent 24%,transparent 53%,#18355b3d 100%)}
 .talk-overlay-head{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;gap:11px;padding:calc(13px + env(safe-area-inset-top)) 16px 12px;color:#fff}
@@ -30,8 +30,9 @@
 .talk-main .type-form{padding-top:12px}
 .talk-main .help-row{margin-bottom:0}
 .talk-active~.toast{bottom:calc(18px + env(safe-area-inset-bottom))}
-@keyframes portrait-breathe{to{filter:brightness(1.035) saturate(1.03)}}
-@keyframes portrait-reaction{35%{transform:scale(1.035);filter:brightness(1.16) saturate(1.25)}100%{transform:scale(1);filter:brightness(1) saturate(1)}}
+@keyframes portrait-idle{0%,100%{transform:translate3d(0,0,0) scale(1.018) rotate(0)}30%{transform:translate3d(-2px,-3px,0) scale(1.025) rotate(-.18deg)}66%{transform:translate3d(2px,1px,0) scale(1.019) rotate(.16deg)}}
+@keyframes portrait-listening{0%,100%{transform:translate3d(0,0,0) scale(1.019);filter:brightness(1)}50%{transform:translate3d(0,-4px,0) scale(1.027);filter:brightness(1.035) saturate(1.03)}}
+@keyframes portrait-reaction{35%{transform:scale(1.055) translateY(-6px);filter:brightness(1.16) saturate(1.25)}100%{transform:scale(1.018);filter:brightness(1) saturate(1)}}
 @media(max-height:700px){.talk-main .scene-backdrop{height:min(68dvh,150vw)}.talk-main .speech-card{padding:9px 13px}.talk-main .english{font-size:17px}}
 
 /* Conversation prompts and progressive help */
@@ -74,3 +75,4 @@
 @keyframes grade-shimmer{to{background-position:100% 0}}
 @media(max-height:850px){.talk-main .scene-backdrop{height:min(65dvh,145vw)}}
 @media(max-height:700px){.talk-main .scene-backdrop{height:min(60dvh,140vw)}}
+@media(prefers-reduced-motion:reduce){.talk-main .avatar{animation:none!important;transform:none;will-change:auto}}
