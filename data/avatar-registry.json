@@ -18,6 +18,23 @@
         "perfect": { "image": "./assets/avatar/aiko/thrilled.webp" },
         "explaining": { "image": "./assets/avatar/aiko/speaking.webp" }
       }
+    },
+    {
+      "id": "linnea",
+      "name": "Linnea",
+      "image": "./assets/avatar/linnea/neutral.webp",
+      "assets": {
+        "neutral": { "image": "./assets/avatar/linnea/neutral.webp" },
+        "speaking": { "image": "./assets/avatar/linnea/speaking.webp" },
+        "listening": { "image": "./assets/avatar/linnea/listening.webp" },
+        "thinking": { "image": "./assets/avatar/linnea/listening.webp" },
+        "encourage": { "image": "./assets/avatar/linnea/encouraging.webp" },
+        "good": { "image": "./assets/avatar/linnea/pleased.webp" },
+        "great": { "image": "./assets/avatar/linnea/delighted.webp" },
+        "excellent": { "image": "./assets/avatar/linnea/celebrating.webp" },
+        "perfect": { "image": "./assets/avatar/linnea/thrilled.webp" },
+        "explaining": { "image": "./assets/avatar/linnea/speaking.webp" }
+      }
     }
   ]
 }
