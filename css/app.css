@@ -33,3 +33,44 @@
 @keyframes portrait-breathe{to{filter:brightness(1.035) saturate(1.03)}}
 @keyframes portrait-reaction{35%{transform:scale(1.035);filter:brightness(1.16) saturate(1.25)}100%{transform:scale(1);filter:brightness(1) saturate(1)}}
 @media(max-height:700px){.talk-main .scene-backdrop{height:min(68dvh,150vw)}.talk-main .speech-card{padding:9px 13px}.talk-main .english{font-size:17px}}
+
+/* Conversation prompts and progressive help */
+.task-card{border-radius:18px;background:linear-gradient(135deg,#eaf5ff,#f4f8ff);padding:15px 16px;border:1px solid #d6e8fa;box-shadow:0 4px 14px #8bacce20}
+.task-card>span{display:block;font-size:11px;letter-spacing:.5px;color:#3977bd;font-weight:900;margin-bottom:7px}
+.task-card>strong{display:block;color:#17385e;font-size:16px;line-height:1.55}
+.hint-toggle{display:flex;justify-content:flex-end;margin-top:10px}
+.hint-toggle button,.hint-panel button{border:1px solid #b9daf3;border-radius:999px;background:#fff;color:#2876bc;padding:7px 12px;font-weight:800;font-size:12px}
+.hint-toggle button[aria-pressed=true]{background:#337fdc;color:#fff;border-color:#337fdc}
+.hint-panel{border-radius:16px;background:linear-gradient(125deg,#fff9dd,#fff0ce);border:1px solid #f5d793;padding:14px 16px;margin-top:12px;color:#5b4d2f;line-height:1.5}
+.hint-panel strong{color:#9b6a00}.hint-panel p{margin:7px 0;font-size:13px}.hint-panel b{color:#754e00}.hint-panel button{border-color:#efc565;color:#8f6300;margin-top:5px}
+.answer-card{margin-top:14px;background:#fff4e9;border:2px solid #ffcc99;border-radius:18px;padding:15px 16px;box-shadow:0 7px 20px #cf83542a}
+.answer-card>span{font-weight:900;color:#c3672a;font-size:14px}.answer-card>p{font-size:12px;color:#795a46;margin:6px 0 12px}
+.answer-example{display:flex;align-items:center;gap:10px;justify-content:space-between;background:#fff;border-radius:11px;padding:10px 11px;margin-top:7px}
+.answer-example strong{font-size:14px;line-height:1.4;color:#18385b}.answer-example button{flex:none;border:0;border-radius:9px;background:#e9f3ff;color:#2f76c1;font-size:11px;font-weight:800;padding:9px}
+.answer-card small{display:block;margin-top:11px;color:#926f53;line-height:1.45}
+.live-transcript{text-align:center;color:#3880c5;font-size:12px;font-weight:700;margin:-9px 0 18px;min-height:18px}
+.talk-main .feedback.gentle{margin-top:14px;text-align:left;padding:12px 15px}.talk-main .feedback.gentle small{display:block;line-height:1.5;margin-top:3px}
+.talk-main .transcript{margin-top:14px}
+.talk-main .reply .mic-button{margin-top:17px}
+
+/* Bigger, grade-specific reactions over the portrait */
+.grade-aura,.grade-sparks{position:absolute;inset:0;pointer-events:none}
+.grade-aura{z-index:1;background:radial-gradient(circle at 50% 45%,#fff8 0%,transparent 60%);mix-blend-mode:screen;animation:grade-aura 1.4s ease-out both}
+.celebrate.good{--grade-color:#5fefb2}.celebrate.great{--grade-color:#54c7ff}.celebrate.excellent{--grade-color:#c091ff}.celebrate.perfect{--grade-color:#ffda63}
+.celebrate.excellent .grade-aura,.celebrate.perfect .grade-aura{background:radial-gradient(circle at 50% 43%,#fffbd4bb 0%,#cc8dff77 37%,transparent 72%)}
+.grade-sparks{z-index:3;overflow:hidden}
+.grade-sparks i{position:absolute;left:var(--x);top:var(--y);width:7px;height:13px;border-radius:2px;background:var(--grade-color);box-shadow:0 0 12px var(--grade-color);opacity:0;animation:grade-spark 1.7s ease-out var(--delay) both}
+.celebrate.excellent .grade-sparks i:nth-child(3n),.celebrate.perfect .grade-sparks i:nth-child(3n){background:#fff}.celebrate.perfect .grade-sparks i:nth-child(4n){background:#ff80b0}
+.talk-main .conversation .feedback{z-index:4;bottom:142px;min-height:106px;border-width:3px;animation:grade-banner .85s cubic-bezier(.17,1.5,.31,1) both}
+.talk-main .conversation .feedback strong{font-size:clamp(32px,10vw,56px);letter-spacing:2px;line-height:1;text-shadow:0 3px 8px #18334b44}
+.talk-main .conversation .feedback small{font-size:14px;font-weight:900;margin-top:8px}
+.talk-main .conversation .feedback.good{background:linear-gradient(125deg,#d6ffe4,#8de8ba);color:#138953;box-shadow:0 0 32px #55eab9}
+.talk-main .conversation .feedback.great{background:linear-gradient(125deg,#d9f5ff,#83c9ff);color:#0b70ca;box-shadow:0 0 42px #5acbff}
+.talk-main .conversation .feedback.excellent{background:linear-gradient(120deg,#edddff,#dcb7ff,#fff0c2);color:#8450ba;box-shadow:0 0 50px #be94ff}
+.talk-main .conversation .feedback.perfect{background:linear-gradient(100deg,#fff1b6,#ffd9ec,#d8e7ff,#fff0ad);background-size:220% 100%;color:#bd6c12;box-shadow:0 0 65px #ffd065;border-color:#fff6bb;animation:grade-banner .85s cubic-bezier(.17,1.5,.31,1) both,grade-shimmer 1.5s .75s linear infinite}
+@keyframes grade-spark{0%{transform:translateY(36px) rotate(0) scale(.2);opacity:0}20%{opacity:1}100%{transform:translateY(-65px) translateX(20px) rotate(290deg) scale(1);opacity:0}}
+@keyframes grade-aura{0%{opacity:0;transform:scale(.65)}25%{opacity:1}100%{opacity:0;transform:scale(1.25)}}
+@keyframes grade-banner{0%{opacity:0;transform:translateY(46px) scale(.45) rotate(-4deg)}65%{opacity:1;transform:translateY(-8px) scale(1.12) rotate(1deg)}100%{opacity:1;transform:translateY(0) scale(1) rotate(0)}}
+@keyframes grade-shimmer{to{background-position:100% 0}}
+@media(max-height:850px){.talk-main .scene-backdrop{height:min(65dvh,145vw)}}
+@media(max-height:700px){.talk-main .scene-backdrop{height:min(60dvh,140vw)}}

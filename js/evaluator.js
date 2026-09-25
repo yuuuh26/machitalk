@@ -1,7 +1,27 @@
 export const THRESHOLDS = Object.freeze({ good: 60, great: 75, excellent: 85, perfect: 95 });
 
 export function normalize(input) {
-  return String(input || '').normalize('NFKC').toLowerCase().replace(/[’']/g, '').replace(/[^a-z0-9]+/g, ' ').trim().replace(/\s+/g, ' ');
+  return String(input || '').normalize('NFKC').toLowerCase()
+    .replace(/’/g, "'")
+    .replace(/\b(can't|cannot)\b/g, 'cannot')
+    .replace(/\b(won't|wont)\b/g, 'will not')
+    .replace(/\b(don't|dont)\b/g, 'do not')
+    .replace(/\b(doesn't|doesnt)\b/g, 'does not')
+    .replace(/\b(isn't|isnt)\b/g, 'is not')
+    .replace(/\b(aren't|arent)\b/g, 'are not')
+    .replace(/\b(i'll|ill)\b/g, 'i will')
+    .replace(/\bi'd\b/g, 'i would')
+    .replace(/\bi'm\b/g, 'i am')
+    .replace(/\b(you're|youre)\b/g, 'you are')
+    .replace(/\bit's\b/g, 'it is')
+    .replace(/\b(there's|theres)\b/g, 'there is')
+    .replace(/\b(that's|thats)\b/g, 'that is')
+    .replace(/\bwe're\b/g, 'we are')
+    .replace(/\b(3rd|3)\b/g, 'three')
+    .replace(/\b(2nd|2)\b/g, 'two')
+    .replace(/\b(15)\b/g, 'fifteen')
+    .replace(/\b(10)\b/g, 'ten')
+    .replace(/[^a-z0-9]+/g, ' ').trim().replace(/\s+/g, ' ');
 }
 
 function includesPhrase(text, phrase) {
@@ -38,4 +58,22 @@ export function evaluate(node, transcript, confidence) {
   score = Math.min(100, Math.max(THRESHOLDS.good, score));
   const grade = score >= THRESHOLDS.perfect ? 'perfect' : score >= THRESHOLDS.excellent ? 'excellent' : score >= THRESHOLDS.great ? 'great' : 'good';
   return { grade, score, matched, missing };
+}
+
+// Recognition services can return several plausible interpretations of one utterance.
+// Only consider alternatives close to the leading hypothesis so a distant guess cannot force a pass.
+export function evaluateAlternatives(node, alternatives) {
+  const candidates = (alternatives || []).filter(item => item?.transcript?.trim()).slice(0, 5);
+  if (!candidates.length) return { ...evaluate(node, ''), transcript: '', confidence: undefined };
+  const topConfidence = candidates[0].confidence;
+  let chosen = { ...evaluate(node, candidates[0].transcript, topConfidence), ...candidates[0], usedAlternative: false };
+  for (const [index, item] of candidates.entries()) {
+    if (index === 0) continue;
+    if (Number.isFinite(topConfidence) && topConfidence > 0 && Number.isFinite(item.confidence) && item.confidence > 0 && topConfidence - item.confidence > .2) continue;
+    const result = evaluate(node, item.transcript, item.confidence);
+    if (result.grade !== 'try-again' && result.grade !== 'no-speech' && (chosen.grade === 'try-again' || chosen.grade === 'no-speech')) {
+      chosen = { ...result, ...item, usedAlternative: true };
+    }
+  }
+  return chosen;
 }

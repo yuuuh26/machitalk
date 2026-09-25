@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "contentVersion": 1,
+  "contentVersion": 2,
   "sceneId": "mall-ask",
   "title": "モールで店を探す",
   "mode": "ask",
@@ -20,7 +20,10 @@
           "expressions": [
             "bookstore",
             "book shop",
-            "bookshop"
+            "bookshop",
+            "book store",
+            "book section",
+            "place that sells books"
           ]
         },
         {
@@ -38,7 +41,13 @@
         "I am looking for the bookstore."
       ],
       "reaction": "grade",
-      "next": "n2"
+      "next": "n2",
+      "instruction": "店員に「書店はどこですか？」と英語で尋ねてね。",
+      "hint": {
+        "words": "bookstore＝書店",
+        "starter": "Where can I find ...?"
+      },
+      "contradictions": []
     },
     "n2": {
       "id": "n2",
@@ -50,10 +59,11 @@
           "required": true,
           "expressions": [
             "escalator",
-            "stairs",
-          "elevator",
-          "lift",
-          "second floor"
+            "moving stairs",
+            "where can i find the escalator",
+            "how can i reach the second floor",
+            "how do i go upstairs",
+            "how do i get to the second floor"
           ]
         },
         {
@@ -70,7 +80,13 @@
         "How do I get to the second floor?"
       ],
       "reaction": "grade",
-      "next": "n3"
+      "next": "n3",
+      "instruction": "書店へ行くため、エスカレーターの場所か2階への行き方を尋ねてね。",
+      "hint": {
+        "words": "escalator＝エスカレーター / second floor＝2階",
+        "starter": "Where is the ...?"
+      },
+      "contradictions": []
     },
     "n3": {
       "id": "n3",
@@ -84,7 +100,11 @@
             "restroom",
             "bathroom",
             "toilet",
-            "washroom"
+            "washroom",
+            "ladies room",
+            "mens room",
+            "the loo",
+            "a place to use the toilet"
           ]
         },
         {
@@ -101,7 +121,13 @@
         "Where can I find a bathroom?"
       ],
       "reaction": "grade",
-      "next": "n4"
+      "next": "n4",
+      "instruction": "エスカレーターの案内を聞いたら、今度はトイレの場所を尋ねてね。",
+      "hint": {
+        "words": "restroom / bathroom＝トイレ",
+        "starter": "Where can I find ...?"
+      },
+      "contradictions": []
     },
     "n4": {
       "id": "n4",
@@ -112,7 +138,9 @@
           "id": "food",
           "required": true,
           "expressions": [
-            "food court"
+            "food court",
+            "dining area",
+            "food hall"
           ]
         },
         {
@@ -122,7 +150,10 @@
             "which floor",
             "what floor",
             "second floor",
-            "where"
+            "where",
+            "what level",
+            "which level",
+            "on what level"
           ]
         }
       ],
@@ -131,7 +162,13 @@
         "Where is the food court?"
       ],
       "reaction": "grade",
-      "next": "n5"
+      "next": "n5",
+      "instruction": "フードコートが何階にあるか、店員に確認してね。",
+      "hint": {
+        "words": "food court＝フードコート / floor＝階",
+        "starter": "Which floor is ...?"
+      },
+      "contradictions": []
     },
     "n5": {
       "id": "n5",
@@ -144,7 +181,10 @@
           "expressions": [
             "tax free",
             "taxfree",
-            "tax refund"
+            "tax refund",
+            "duty free",
+            "tax return",
+            "tax reimbursement"
           ]
         },
         {
@@ -153,7 +193,10 @@
           "expressions": [
             "counter",
             "desk",
-            "where"
+            "where",
+            "booth",
+            "office",
+            "where can i find"
           ]
         }
       ],
@@ -162,7 +205,13 @@
         "Is there a tax refund desk?"
       ],
       "reaction": "grade",
-      "next": "n6"
+      "next": "n6",
+      "instruction": "免税カウンターの場所を尋ねてね。",
+      "hint": {
+        "words": "tax refund desk＝免税カウンター",
+        "starter": "Where is the ...?"
+      },
+      "contradictions": []
     },
     "n6": {
       "id": "n6",
@@ -175,7 +224,10 @@
           "expressions": [
             "thank you",
             "thanks",
-            "appreciate it"
+            "appreciate it",
+            "thank you so much",
+            "many thanks",
+            "i appreciate your help"
           ]
         }
       ],
@@ -184,7 +236,13 @@
         "Thanks!"
       ],
       "reaction": "grade",
-      "next": null
+      "next": null,
+      "instruction": "案内してくれた店員へ、お礼を伝えてね。",
+      "hint": {
+        "words": "thank you / thanks＝ありがとう",
+        "starter": "Thank you ..."
+      },
+      "contradictions": []
     }
   }
 }

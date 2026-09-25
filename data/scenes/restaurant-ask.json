@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "contentVersion": 1,
+  "contentVersion": 2,
   "sceneId": "restaurant-ask",
   "title": "レストランで注文",
   "mode": "ask",
@@ -22,7 +22,12 @@
             "table for two",
             "just two",
             "there are two",
-            "2 people"
+            "2 people",
+            "a table for 2",
+            "we are two",
+            "we have two people",
+            "a party of two",
+            "just the two of us"
           ]
         }
       ],
@@ -31,7 +36,19 @@
         "There are two of us."
       ],
       "reaction": "grade",
-      "next": "n2"
+      "next": "n2",
+      "instruction": "店員に、席が必要なのは2人だと伝えてね。",
+      "hint": {
+        "words": "a table for two＝2人席",
+        "starter": "A table for ..."
+      },
+      "contradictions": [
+        "table for one",
+        "table for three",
+        "one person",
+        "three people",
+        "four people"
+      ]
     },
     "n2": {
       "id": "n2",
@@ -45,7 +62,11 @@
             "recommend",
             "suggest",
             "popular",
-            "special"
+            "special",
+            "what should i try",
+            "what would you suggest",
+            "your favorite dish",
+            "what is good here"
           ]
         }
       ],
@@ -54,7 +75,13 @@
         "What is popular here?"
       ],
       "reaction": "grade",
-      "next": "n3"
+      "next": "n3",
+      "instruction": "メニューを見て、おすすめの料理を尋ねてね。",
+      "hint": {
+        "words": "recommend＝おすすめする / popular＝人気の",
+        "starter": "What do you ...?"
+      },
+      "contradictions": []
     },
     "n3": {
       "id": "n3",
@@ -66,7 +93,8 @@
           "required": true,
           "expressions": [
             "chicken curry",
-            "the curry"
+            "the curry",
+            "chicken curries"
           ]
         },
         {
@@ -76,7 +104,11 @@
             "ill have",
             "i would like",
             "id like",
-            "can i have"
+            "can i have",
+            "i want",
+            "could i get",
+            "may i have",
+            "i will take"
           ]
         }
       ],
@@ -85,7 +117,16 @@
         "I will have the chicken curry."
       ],
       "reaction": "grade",
-      "next": "n4"
+      "next": "n4",
+      "instruction": "チキンカレーを注文してね。",
+      "hint": {
+        "words": "chicken curry＝チキンカレー",
+        "starter": "I'd like ..."
+      },
+      "contradictions": [
+        "no curry",
+        "dont want curry"
+      ]
     },
     "n4": {
       "id": "n4",
@@ -96,7 +137,9 @@
           "id": "water",
           "required": true,
           "expressions": [
-            "water"
+            "water",
+            "a glass of water",
+            "some drinking water"
           ]
         },
         {
@@ -114,7 +157,13 @@
         "Could I have some water?"
       ],
       "reaction": "grade",
-      "next": "n5"
+      "next": "n5",
+      "instruction": "飲み物として、水を頼んでね。",
+      "hint": {
+        "words": "water＝水 / please＝お願いします",
+        "starter": "Could I have ...?"
+      },
+      "contradictions": []
     },
     "n5": {
       "id": "n5",
@@ -126,11 +175,15 @@
           "required": true,
           "expressions": [
             "no thank you",
-          "no thanks",
-          "thats all",
-          "that is all",
-          "nothing else",
-            "that will be all"
+            "no thanks",
+            "thats all",
+            "that is all",
+            "nothing else",
+            "that will be all",
+            "im good thanks",
+            "we are all set",
+            "nothing more",
+            "no more thank you"
           ]
         }
       ],
@@ -139,7 +192,13 @@
         "That is all, thanks."
       ],
       "reaction": "grade",
-      "next": "n6"
+      "next": "n6",
+      "instruction": "追加注文はない、と店員に伝えてね。",
+      "hint": {
+        "words": "that's all＝以上です / no thanks＝結構です",
+        "starter": "No, thank ..."
+      },
+      "contradictions": []
     },
     "n6": {
       "id": "n6",
@@ -153,7 +212,12 @@
             "at the counter",
             "pay here",
             "where do i pay",
-            "where is the counter"
+            "where is the counter",
+            "can i pay over there",
+            "where can i pay",
+            "do i pay at the register",
+            "where is the register",
+            "at the register"
           ]
         }
       ],
@@ -162,7 +226,13 @@
         "Where do I pay?"
       ],
       "reaction": "grade",
-      "next": null
+      "next": null,
+      "instruction": "会計はどこでできるか、店員に確認してね。",
+      "hint": {
+        "words": "pay＝支払う / counter＝レジ",
+        "starter": "Where do I ...?"
+      },
+      "contradictions": []
     }
   }
 }
