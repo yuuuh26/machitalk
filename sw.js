@@ -1,5 +1,5 @@
-const CACHE = 'machitalk-v1.2.0';
-const SHELL = ['./', './index.html', './css/app.css', './js/app.js', './js/scene-engine.js', './js/speech.js', './js/evaluator.js', './js/attempts.js', './js/effects.js', './js/avatar.js', './js/storage.js', './data/scene-registry.json', './data/avatar-registry.json', './assets/avatar/aiko/neutral.webp', './assets/avatar/aiko/listening.webp', './assets/avatar/aiko/delighted.webp', './assets/avatar/aiko/celebrating.webp', './manifest.json', './assets/icons/icon-192.png', './assets/icons/icon-512.png'];
+const CACHE = 'machitalk-v1.2.1';
+const SHELL = ['./', './index.html', './css/app.css?v=1.2.1', './js/app.js?v=1.2.1', './js/scene-engine.js', './js/speech.js', './js/evaluator.js', './js/attempts.js', './js/effects.js', './js/avatar.js', './js/storage.js', './data/scene-registry.json', './data/avatar-registry.json', './assets/avatar/aiko/neutral.webp', './assets/avatar/aiko/listening.webp', './assets/avatar/aiko/delighted.webp', './assets/avatar/aiko/celebrating.webp', './manifest.json', './assets/icons/icon-192.png', './assets/icons/icon-512.png'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(SHELL)).then(() => self.skipWaiting()));
 });
@@ -8,7 +8,7 @@ self.addEventListener('activate', event => {
 });
 self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET' || new URL(event.request.url).origin !== self.location.origin) return;
-  event.respondWith(fetch(event.request).then(response => {
+  event.respondWith(fetch(event.request, { cache: 'no-store' }).then(response => {
     if (response.ok) { const copy = response.clone(); caches.open(CACHE).then(cache => cache.put(event.request, copy)); }
     return response;
   }).catch(() => caches.match(event.request)));
