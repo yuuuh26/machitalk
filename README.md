@@ -1,4 +1,4 @@
-# MachiTalk v1.2.0
+# MachiTalk v1.2.1
 
 街で使う英会話を練習する、Android Chrome向けの無料・端末内保存型PWA。ASK 4シーン、GUIDE 4シーン。ログイン、広告、外部AI API、アクセス解析はありません。
 
