@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "contentVersion": 1,
+  "contentVersion": 2,
   "sceneId": "mall-guide",
   "title": "モールを案内",
   "mode": "guide",
@@ -20,16 +20,21 @@
           "expressions": [
             "bookstore",
             "book shop",
-            "bookshop"
+            "bookshop",
+            "book store"
           ]
         },
         {
           "id": "second",
-          "required": false,
+          "required": true,
           "expressions": [
             "second floor",
             "floor two",
-            "2nd floor"
+            "2nd floor",
+            "floor 2",
+            "level two",
+            "level 2",
+            "upstairs on the second level"
           ]
         }
       ],
@@ -38,7 +43,19 @@
         "You can find the bookstore on floor two."
       ],
       "reaction": "grade",
-      "next": "n2"
+      "next": "n2",
+      "instruction": "書店は2階にある、とお客さんへ伝えてね。",
+      "hint": {
+        "words": "bookstore＝書店 / second floor＝2階",
+        "starter": "The bookstore is ..."
+      },
+      "contradictions": [
+        "first floor",
+        "floor one",
+        "third floor",
+        "floor three",
+        "not on the second floor"
+      ]
     },
     "n2": {
       "id": "n2",
@@ -52,7 +69,9 @@
             "escalator",
             "elevator",
             "lift",
-            "stairs"
+            "stairs",
+            "moving stairs",
+            "go up by escalator"
           ]
         },
         {
@@ -62,7 +81,11 @@
             "over there",
             "around the corner",
             "to your right",
-            "to your left"
+            "to your left",
+            "just around the corner",
+            "on the right",
+            "ahead",
+            "over on the left"
           ]
         }
       ],
@@ -71,7 +94,13 @@
         "The escalator is to your right."
       ],
       "reaction": "grade",
-      "next": "n3"
+      "next": "n3",
+      "instruction": "上へ行きたいお客さんに、エスカレーターの場所や行き方を案内してね。",
+      "hint": {
+        "words": "escalator＝エスカレーター / around the corner＝角を曲がった先",
+        "starter": "Take the ..."
+      },
+      "contradictions": []
     },
     "n3": {
       "id": "n3",
@@ -85,15 +114,19 @@
             "restroom",
             "bathroom",
             "toilet",
-            "washroom"
+            "washroom",
+            "ladies room",
+            "mens room"
           ]
         },
         {
           "id": "food",
-          "required": false,
+          "required": true,
           "expressions": [
             "food court",
-            "next to"
+            "beside the food court",
+            "adjacent to the food court",
+            "right by the food court"
           ]
         }
       ],
@@ -102,7 +135,16 @@
         "The bathroom is beside the food court."
       ],
       "reaction": "grade",
-      "next": "n4"
+      "next": "n4",
+      "instruction": "トイレはフードコートの隣にある、と伝えてね。",
+      "hint": {
+        "words": "restroom＝トイレ / next to＝隣に",
+        "starter": "The restroom is ..."
+      },
+      "contradictions": [
+        "far from the food court",
+        "inside the food court"
+      ]
     },
     "n4": {
       "id": "n4",
@@ -115,14 +157,19 @@
           "expressions": [
             "third floor",
             "floor three",
-            "3rd floor"
+            "3rd floor",
+            "floor 3",
+            "level three",
+            "level 3"
           ]
         },
         {
           "id": "food",
           "required": false,
           "expressions": [
-            "food court"
+            "food court",
+            "dining area",
+            "food hall"
           ]
         }
       ],
@@ -131,7 +178,19 @@
         "It is on floor three."
       ],
       "reaction": "grade",
-      "next": "n5"
+      "next": "n5",
+      "instruction": "フードコートは3階にある、と伝えてね。",
+      "hint": {
+        "words": "food court＝フードコート / third floor＝3階",
+        "starter": "It is on ..."
+      },
+      "contradictions": [
+        "first floor",
+        "floor one",
+        "second floor",
+        "floor two",
+        "not on the third floor"
+      ]
     },
     "n5": {
       "id": "n5",
@@ -145,7 +204,9 @@
             "tax free",
             "taxfree",
             "tax refund",
-            "refund"
+            "refund",
+            "duty free",
+            "tax return"
           ]
         },
         {
@@ -154,7 +215,11 @@
           "expressions": [
             "counter",
             "desk",
-            "main entrance"
+            "main entrance",
+            "booth",
+            "office",
+            "near the entrance",
+            "by the entrance"
           ]
         }
       ],
@@ -163,7 +228,17 @@
         "There is a tax refund desk near the entrance."
       ],
       "reaction": "grade",
-      "next": "n6"
+      "next": "n6",
+      "instruction": "免税カウンターが入口近くにある、と伝えてね。",
+      "hint": {
+        "words": "tax refund desk＝免税カウンター / entrance＝入口",
+        "starter": "Yes, the tax ..."
+      },
+      "contradictions": [
+        "no tax refund",
+        "cannot get a tax refund",
+        "dont offer tax refunds"
+      ]
     },
     "n6": {
       "id": "n6",
@@ -178,7 +253,10 @@
             "my pleasure",
             "happy to help",
             "glad to help",
-            "no problem"
+            "no problem",
+            "anytime",
+            "not at all",
+            "it was my pleasure"
           ]
         }
       ],
@@ -187,7 +265,13 @@
         "Happy to help!"
       ],
       "reaction": "grade",
-      "next": null
+      "next": null,
+      "instruction": "お礼を言われたので、親切に「どういたしまして」と返してね。",
+      "hint": {
+        "words": "you're welcome / happy to help＝どういたしまして",
+        "starter": "You're ..."
+      },
+      "contradictions": []
     }
   }
 }

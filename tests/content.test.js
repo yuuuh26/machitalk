@@ -18,6 +18,8 @@ test('registry and every scene remain data driven and playable', async () => {
     assert.ok(avatars.avatars.find(avatar => avatar.id === scene.avatar));
     assert.equal(turnCount(scene), 6);
     for (const node of Object.values(scene.nodes)) {
+      assert.ok(node.instruction?.length >= 12, `${entry.id}/${node.id}: missing Japanese instruction`);
+      assert.ok(node.hint?.words && node.hint?.starter, `${entry.id}/${node.id}: missing progressive hint`);
       assert.ok(node.examples.length > 0);
       assert.ok(node.examples.every(example => example.split(/\s+/).length <= 20));
       for (const example of node.examples) {

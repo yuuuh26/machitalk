@@ -1,0 +1,36 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
+
+test('conversation offers a hint, reveals a clear wrong answer, and celebrates a paraphrase', async () => {
+  const handlers = {};
+  const classList = { toggle() {}, add() {}, remove() {} };
+  const app = { innerHTML: '', classList, addEventListener(type, handler) { handlers[type] = handler; } };
+  const toast = { textContent: '', classList };
+  const avatar = { style: {}, dataset: {}, classList, setAttribute() {}, offsetWidth: 100 };
+  globalThis.window = {};
+  globalThis.document = { querySelector(selector) { return selector === '#app' ? app : selector === '#avatar' ? avatar : toast; } };
+  globalThis.fetch = async pathname => ({ ok: true, json: async () => JSON.parse(await readFile(new URL(`../${pathname.replace(/^\.\//, '')}`, import.meta.url))) });
+  const OriginalFormData = globalThis.FormData;
+  globalThis.FormData = class { get() { return this.value; } static value = ''; constructor() { this.value = globalThis.FormData.value; } };
+  await import('../js/app.js');
+  for (let i = 0; i < 10 && !app.innerHTML.includes('QUICK START'); i++) await new Promise(resolve => setTimeout(resolve, 0));
+  const click = action => handlers.click({ target: { closest: () => ({ dataset: { action } }) } });
+  await click('quick');
+  assert.match(app.innerHTML, /この電車に乗れば大阪駅へ行ける/);
+  assert.match(app.innerHTML, /ヒントモード OFF/);
+  await click('hint');
+  assert.match(app.innerHTML, /使える言葉/);
+  assert.doesNotMatch(app.innerHTML, /答え合わせ · 言い方の例/);
+  globalThis.FormData.value = 'Take the bus to Tokyo.';
+  handlers.submit({ target: { id: 'type-form' }, preventDefault() {} });
+  assert.match(app.innerHTML, /答え合わせ · 言い方の例/);
+  assert.match(app.innerHTML, /Take this train to Osaka Station/);
+  globalThis.FormData.value = 'This train goes to Osaka.';
+  handlers.submit({ target: { id: 'type-form' }, preventDefault() {} });
+  assert.match(app.innerHTML, /grade-sparks/);
+  assert.match(app.innerHTML, /class="feedback (good|great|excellent|perfect)"/);
+  await click('home');
+  globalThis.FormData = OriginalFormData;
+  delete globalThis.window; delete globalThis.document; delete globalThis.fetch;
+});

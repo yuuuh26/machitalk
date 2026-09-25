@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "contentVersion": 1,
+  "contentVersion": 2,
   "sceneId": "station-guide",
   "title": "駅で案内する",
   "mode": "guide",
@@ -22,7 +22,12 @@
             "take the train",
             "ride this train",
             "get on this train",
-            "board this train"
+            "board this train",
+            "this train goes to osaka",
+            "this is the train for osaka",
+            "you can get to osaka on this train",
+            "stay on this train for osaka",
+            "hop on this train"
           ]
         },
         {
@@ -38,7 +43,18 @@
         "You can take this train to Osaka."
       ],
       "reaction": "grade",
-      "next": "n2"
+      "next": "n2",
+      "instruction": "この電車に乗れば大阪駅へ行ける、と案内してね。",
+      "hint": {
+        "words": "this train＝この電車 / Osaka Station＝大阪駅",
+        "starter": "You can take ..."
+      },
+      "contradictions": [
+        "dont take this train",
+        "do not take this train",
+        "this train does not go to osaka",
+        "take the other train"
+      ]
     },
     "n2": {
       "id": "n2",
@@ -53,9 +69,15 @@
             "no you do not",
             "no need to change",
             "no transfer",
-          "direct train",
-          "go directly",
-          "without changing"
+            "direct train",
+            "go directly",
+            "without changing",
+            "you can stay on this train",
+            "stay on until osaka",
+            "you do not have to transfer",
+            "you wont need to switch trains",
+            "it goes straight there",
+            "there are no changes"
           ]
         },
         {
@@ -73,7 +95,18 @@
         "No, you can go directly."
       ],
       "reaction": "grade",
-      "next": "n3"
+      "next": "n3",
+      "instruction": "乗り換えは必要なく、そのまま行けると伝えてね。",
+      "hint": {
+        "words": "direct＝直通 / no need to change＝乗り換え不要",
+        "starter": "No, you ..."
+      },
+      "contradictions": [
+        "yes you need to change",
+        "you have to change trains",
+        "you must transfer",
+        "you need to switch trains"
+      ]
     },
     "n3": {
       "id": "n3",
@@ -87,7 +120,12 @@
             "platform three",
             "platform 3",
             "track three",
-            "track 3"
+            "track 3",
+            "platform number three",
+            "platform number 3",
+            "number three platform",
+            "track number three",
+            "from platform three"
           ]
         },
         {
@@ -105,7 +143,21 @@
         "Please use platform three over there."
       ],
       "reaction": "grade",
-      "next": "n4"
+      "next": "n4",
+      "instruction": "乗るのは3番ホームだと伝えてね。",
+      "hint": {
+        "words": "platform three＝3番ホーム",
+        "starter": "Platform ..."
+      },
+      "contradictions": [
+        "platform one",
+        "platform two",
+        "platform four",
+        "platform 1",
+        "platform 2",
+        "platform 4",
+        "not platform three"
+      ]
     },
     "n4": {
       "id": "n4",
@@ -118,7 +170,12 @@
           "expressions": [
             "fifteen minutes",
             "15 minutes",
-            "a quarter of an hour"
+            "a quarter of an hour",
+            "a quarter hour",
+            "around 15 min",
+            "roughly fifteen mins",
+            "about 15 mins",
+            "about a quarter hour"
           ]
         },
         {
@@ -136,7 +193,22 @@
         "It takes around fifteen minutes."
       ],
       "reaction": "grade",
-      "next": "n5"
+      "next": "n5",
+      "instruction": "大阪駅までは約15分かかる、と伝えてね。",
+      "hint": {
+        "words": "fifteen minutes＝15分 / about＝約",
+        "starter": "It takes about ..."
+      },
+      "contradictions": [
+        "five minutes",
+        "ten minutes",
+        "twenty minutes",
+        "30 minutes",
+        "five mins",
+        "ten mins",
+        "twenty mins",
+        "not fifteen minutes"
+      ]
     },
     "n5": {
       "id": "n5",
@@ -149,7 +221,11 @@
           "expressions": [
             "yes",
             "it does",
-            "stops at umeda"
+            "stops at umeda",
+            "sure",
+            "yes it does",
+            "it also stops there",
+            "it stops there too"
           ]
         },
         {
@@ -165,7 +241,17 @@
         "Yes, it does."
       ],
       "reaction": "grade",
-      "next": "n6"
+      "next": "n6",
+      "instruction": "この電車は梅田にも止まる、と答えてね。",
+      "hint": {
+        "words": "stops at Umeda＝梅田に止まる",
+        "starter": "Yes, it ..."
+      },
+      "contradictions": [
+        "no it does not",
+        "does not stop at umeda",
+        "doesnt stop at umeda"
+      ]
     },
     "n6": {
       "id": "n6",
@@ -180,7 +266,11 @@
             "my pleasure",
             "no problem",
             "glad to help",
-            "happy to help"
+            "happy to help",
+            "you are welcome",
+            "not at all",
+            "anytime",
+            "sure thing"
           ]
         },
         {
@@ -198,7 +288,13 @@
         "My pleasure!"
       ],
       "reaction": "grade",
-      "next": null
+      "next": null,
+      "instruction": "お礼を言われたので、親切に返してね。",
+      "hint": {
+        "words": "you're welcome / my pleasure＝どういたしまして",
+        "starter": "You're ..."
+      },
+      "contradictions": []
     }
   }
 }

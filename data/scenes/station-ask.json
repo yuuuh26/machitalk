@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "contentVersion": 1,
+  "contentVersion": 2,
   "sceneId": "station-ask",
   "title": "駅で聞く",
   "mode": "ask",
@@ -21,14 +21,20 @@
             "how can i get to",
             "how do i get to",
             "which train goes to",
-            "i need to go to"
+            "i need to go to",
+            "what is the best way to",
+            "how can i reach",
+            "how do i go to",
+            "which train should i take to",
+            "what train goes to"
           ]
         },
         {
           "id": "osaka",
-          "required": false,
+          "required": true,
           "expressions": [
-            "osaka"
+            "osaka",
+            "osaka station"
           ]
         }
       ],
@@ -37,7 +43,13 @@
         "Which train goes to Osaka?"
       ],
       "reaction": "grade",
-      "next": "n2"
+      "next": "n2",
+      "instruction": "大阪駅へ行きたいので、行き方や乗る電車を尋ねてね。",
+      "hint": {
+        "words": "Osaka Station＝大阪駅 / get to＝到着する",
+        "starter": "How can I get ...?"
+      },
+      "contradictions": []
     },
     "n2": {
       "id": "n2",
@@ -52,7 +64,12 @@
             "have to change",
             "need to transfer",
             "have to transfer",
-            "direct train"
+            "direct train",
+            "is there a transfer",
+            "any transfers",
+            "do i have to switch trains",
+            "can i go without changing",
+            "does this train go directly"
           ]
         }
       ],
@@ -61,7 +78,13 @@
         "Is it a direct train?"
       ],
       "reaction": "grade",
-      "next": "n3"
+      "next": "n3",
+      "instruction": "その電車で、乗り換えが必要かどうかを尋ねてね。",
+      "hint": {
+        "words": "change trains / transfer＝乗り換える",
+        "starter": "Do I need to ...?"
+      },
+      "contradictions": []
     },
     "n3": {
       "id": "n3",
@@ -75,7 +98,12 @@
             "which platform",
             "what platform",
             "which track",
-            "what track"
+            "what track",
+            "what is the platform number",
+            "where does the train leave from",
+            "where should i board",
+            "which platform is it",
+            "what number platform"
           ]
         }
       ],
@@ -84,7 +112,13 @@
         "What platform does it leave from?"
       ],
       "reaction": "grade",
-      "next": "n4"
+      "next": "n4",
+      "instruction": "乗る電車のホーム番号を尋ねてね。",
+      "hint": {
+        "words": "platform＝ホーム / which＝どの",
+        "starter": "Which platform ...?"
+      },
+      "contradictions": []
     },
     "n4": {
       "id": "n4",
@@ -97,7 +131,11 @@
           "expressions": [
             "how long",
             "how many minutes",
-            "how much time"
+            "how much time",
+            "how much time does it take",
+            "how long is the ride",
+            "how long until we get there",
+            "what is the travel time"
           ]
         }
       ],
@@ -106,7 +144,13 @@
         "How many minutes will it take?"
       ],
       "reaction": "grade",
-      "next": "n5"
+      "next": "n5",
+      "instruction": "大阪駅まで何分くらいかかるかを尋ねてね。",
+      "hint": {
+        "words": "how long＝どれくらい時間がかかる",
+        "starter": "How long does ...?"
+      },
+      "contradictions": []
     },
     "n5": {
       "id": "n5",
@@ -120,7 +164,11 @@
             "how much",
             "fare",
             "cost",
-            "price"
+            "price",
+            "what is the fare",
+            "what does it cost",
+            "what is the ticket price",
+            "how much do i need to pay"
           ]
         },
         {
@@ -137,7 +185,13 @@
         "How much does a ticket cost?"
       ],
       "reaction": "grade",
-      "next": "n6"
+      "next": "n6",
+      "instruction": "運賃はいくらか、駅員に尋ねてね。",
+      "hint": {
+        "words": "fare＝運賃 / how much＝いくら",
+        "starter": "How much is ...?"
+      },
+      "contradictions": []
     },
     "n6": {
       "id": "n6",
@@ -150,7 +204,9 @@
           "expressions": [
             "thank you",
             "thanks",
-            "appreciate it"
+            "appreciate it",
+            "many thanks",
+            "i appreciate your help"
           ]
         },
         {
@@ -168,7 +224,13 @@
         "Thanks so much!"
       ],
       "reaction": "grade",
-      "next": null
+      "next": null,
+      "instruction": "案内してくれた駅員へ、お礼を伝えてね。",
+      "hint": {
+        "words": "thank you / thanks＝ありがとう",
+        "starter": "Thank you ..."
+      },
+      "contradictions": []
     }
   }
 }

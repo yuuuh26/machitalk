@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "contentVersion": 1,
+  "contentVersion": 2,
   "sceneId": "restaurant-guide",
   "title": "お客さんを案内",
   "mode": "guide",
@@ -22,7 +22,11 @@
             "follow me",
             "take a seat",
             "have a seat",
-            "table for two"
+            "table for two",
+            "come this way",
+            "let me show you to your table",
+            "please come with me",
+            "your table is ready"
           ]
         }
       ],
@@ -31,7 +35,13 @@
         "Of course. Please follow me."
       ],
       "reaction": "grade",
-      "next": "n2"
+      "next": "n2",
+      "instruction": "2人のお客さんを席へ案内してね。",
+      "hint": {
+        "words": "this way＝こちらへ / follow me＝付いてきてください",
+        "starter": "This way ..."
+      },
+      "contradictions": []
     },
     "n2": {
       "id": "n2",
@@ -45,7 +55,10 @@
             "here is the menu",
             "heres the menu",
             "your menu",
-            "this menu"
+            "this menu",
+            "here you go",
+            "here are the menus",
+            "you can look at this menu"
           ]
         }
       ],
@@ -54,7 +67,13 @@
         "Of course, here is your menu."
       ],
       "reaction": "grade",
-      "next": "n3"
+      "next": "n3",
+      "instruction": "メニューを見たいお客さんに、メニューを渡してね。",
+      "hint": {
+        "words": "menu＝メニュー / here is＝こちらです",
+        "starter": "Here is ..."
+      },
+      "contradictions": []
     },
     "n3": {
       "id": "n3",
@@ -66,7 +85,8 @@
           "required": true,
           "expressions": [
             "curry",
-            "chicken curry"
+            "chicken curry",
+            "our curry"
           ]
         },
         {
@@ -75,7 +95,11 @@
           "expressions": [
             "recommend",
             "popular",
-            "favorite"
+            "favorite",
+            "i suggest",
+            "a great choice",
+            "a popular dish",
+            "our best seller"
           ]
         }
       ],
@@ -84,7 +108,13 @@
         "The chicken curry is popular."
       ],
       "reaction": "grade",
-      "next": "n4"
+      "next": "n4",
+      "instruction": "おすすめの料理として、チキンカレーを伝えてね。",
+      "hint": {
+        "words": "chicken curry＝チキンカレー / recommend＝おすすめ",
+        "starter": "I recommend ..."
+      },
+      "contradictions": []
     },
     "n4": {
       "id": "n4",
@@ -98,7 +128,11 @@
             "yes",
             "it does",
             "comes with rice",
-            "rice is included"
+            "rice is included",
+            "sure",
+            "certainly",
+            "rice comes with it",
+            "it includes rice"
           ]
         },
         {
@@ -114,7 +148,17 @@
         "Yes, rice is included."
       ],
       "reaction": "grade",
-      "next": "n5"
+      "next": "n5",
+      "instruction": "カレーにはご飯が付く、と答えてね。",
+      "hint": {
+        "words": "rice＝ご飯 / included＝付いている",
+        "starter": "Yes, it ..."
+      },
+      "contradictions": [
+        "no rice",
+        "does not come with rice",
+        "rice is not included"
+      ]
     },
     "n5": {
       "id": "n5",
@@ -129,7 +173,10 @@
             "bring you some",
             "get you some",
             "right away",
-            "of course"
+            "of course",
+            "ill get your water",
+            "i can bring some water",
+            "let me get you water"
           ]
         }
       ],
@@ -138,7 +185,13 @@
         "Sure, right away."
       ],
       "reaction": "grade",
-      "next": "n6"
+      "next": "n6",
+      "instruction": "お客さんに水を持ってくる、と伝えてね。",
+      "hint": {
+        "words": "water＝水 / bring＝持ってくる",
+        "starter": "I will bring ..."
+      },
+      "contradictions": []
     },
     "n6": {
       "id": "n6",
@@ -149,9 +202,12 @@
           "id": "card",
           "required": true,
           "expressions": [
-          "card",
-          "cards",
-          "credit card"
+            "card",
+            "cards",
+            "credit card",
+            "debit card",
+            "card payments",
+            "credit cards"
           ]
         },
         {
@@ -160,7 +216,10 @@
           "expressions": [
             "yes",
             "of course",
-            "accepted"
+            "accepted",
+            "sure",
+            "certainly",
+            "we accept"
           ]
         }
       ],
@@ -169,7 +228,19 @@
         "Of course, cards are accepted."
       ],
       "reaction": "grade",
-      "next": null
+      "next": null,
+      "instruction": "カードで支払える、とお客さんに伝えてね。",
+      "hint": {
+        "words": "pay by card＝カードで支払う",
+        "starter": "Yes, you can ..."
+      },
+      "contradictions": [
+        "cannot pay by card",
+        "dont accept cards",
+        "no cards",
+        "cash only",
+        "do not accept credit cards"
+      ]
     }
   }
 }

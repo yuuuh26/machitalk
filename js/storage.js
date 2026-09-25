@@ -1,7 +1,7 @@
 export const DATA_SCHEMA_VERSION = 1;
 const DB_NAME = 'machitalk';
 const DB_VERSION = 1;
-export const DEFAULT_SETTINGS = { schemaVersion: DATA_SCHEMA_VERSION, voice: '', speed: 1, captions: true, autoPlay: true, selectedAvatar: 'aiko' };
+export const DEFAULT_SETTINGS = { schemaVersion: DATA_SCHEMA_VERSION, voice: '', speed: 1, captions: true, autoPlay: true, hintMode: false, selectedAvatar: 'aiko' };
 let dbPromise;
 
 function database() {

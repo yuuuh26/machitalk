@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "contentVersion": 1,
+  "contentVersion": 2,
   "sceneId": "town-ask",
   "title": "街で道を聞く",
   "mode": "ask",
@@ -18,7 +18,8 @@
           "id": "castle",
           "required": true,
           "expressions": [
-            "castle"
+            "castle",
+            "the castle"
           ]
         },
         {
@@ -27,7 +28,11 @@
           "expressions": [
             "how do i get",
             "where is",
-            "how can i get"
+            "how can i get",
+            "can you tell me the way to",
+            "which way to",
+            "can you show me how to reach",
+            "i am trying to find"
           ]
         }
       ],
@@ -36,7 +41,13 @@
         "Where is the castle?"
       ],
       "reaction": "grade",
-      "next": "n2"
+      "next": "n2",
+      "instruction": "お城への行き方や場所を尋ねてね。",
+      "hint": {
+        "words": "castle＝お城 / get to＝行く",
+        "starter": "How do I get ...?"
+      },
+      "contradictions": []
     },
     "n2": {
       "id": "n2",
@@ -50,7 +61,11 @@
             "turn",
             "left",
             "right",
-            "which way"
+            "which way",
+            "where do i make a turn",
+            "where should i make a turn",
+            "which direction should i turn",
+            "when should i turn"
           ]
         }
       ],
@@ -59,7 +74,13 @@
         "Do I turn left or right?"
       ],
       "reaction": "grade",
-      "next": "n3"
+      "next": "n3",
+      "instruction": "まっすぐ進んだあと、どこで曲がるかを尋ねてね。",
+      "hint": {
+        "words": "turn＝曲がる / where＝どこで",
+        "starter": "Where should I ...?"
+      },
+      "contradictions": []
     },
     "n3": {
       "id": "n3",
@@ -70,7 +91,9 @@
           "id": "left",
           "required": true,
           "expressions": [
-            "left"
+            "left",
+            "to the left",
+            "a left turn"
           ]
         },
         {
@@ -78,7 +101,10 @@
           "required": false,
           "expressions": [
             "traffic light",
-            "light"
+            "light",
+            "intersection",
+            "signal",
+            "lights"
           ]
         }
       ],
@@ -87,7 +113,17 @@
         "Should I turn left at the light?"
       ],
       "reaction": "grade",
-      "next": "n4"
+      "next": "n4",
+      "instruction": "次の信号で左に曲がるのか、確認してね。",
+      "hint": {
+        "words": "left＝左 / traffic light＝信号",
+        "starter": "Left at the ...?"
+      },
+      "contradictions": [
+        "turn right",
+        "take a right",
+        "go right"
+      ]
     },
     "n4": {
       "id": "n4",
@@ -100,7 +136,11 @@
           "expressions": [
             "how long",
             "how many minutes",
-            "walking time"
+            "walking time",
+            "how far is it on foot",
+            "how long is the walk",
+            "what is the walking time",
+            "how long to walk there"
           ]
         }
       ],
@@ -109,7 +149,13 @@
         "How many minutes away is it?"
       ],
       "reaction": "grade",
-      "next": "n5"
+      "next": "n5",
+      "instruction": "お城まで歩いて何分かかるか、尋ねてね。",
+      "hint": {
+        "words": "how long＝どれくらい / on foot＝徒歩で",
+        "starter": "How long does ...?"
+      },
+      "contradictions": []
     },
     "n5": {
       "id": "n5",
@@ -121,7 +167,9 @@
           "required": true,
           "expressions": [
             "station",
-            "train stop"
+            "train stop",
+            "railway station",
+            "train station"
           ]
         },
         {
@@ -130,7 +178,10 @@
           "expressions": [
             "near",
             "closest",
-            "nearest"
+            "nearest",
+            "around here",
+            "not far",
+            "close by"
           ]
         }
       ],
@@ -139,7 +190,13 @@
         "What is the nearest station?"
       ],
       "reaction": "grade",
-      "next": "n6"
+      "next": "n6",
+      "instruction": "お城の近くに駅があるか、尋ねてね。",
+      "hint": {
+        "words": "station＝駅 / near＝近くに",
+        "starter": "Is there a station ...?"
+      },
+      "contradictions": []
     },
     "n6": {
       "id": "n6",
@@ -152,7 +209,9 @@
           "expressions": [
             "thank you",
             "thanks",
-            "appreciate it"
+            "appreciate it",
+            "many thanks",
+            "i really appreciate it"
           ]
         }
       ],
@@ -161,7 +220,13 @@
         "Thanks so much!"
       ],
       "reaction": "grade",
-      "next": null
+      "next": null,
+      "instruction": "道案内してくれた相手へ、お礼を伝えてね。",
+      "hint": {
+        "words": "thanks / thank you＝ありがとう",
+        "starter": "Thank you ..."
+      },
+      "contradictions": []
     }
   }
 }

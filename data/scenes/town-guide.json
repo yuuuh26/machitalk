@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "contentVersion": 1,
+  "contentVersion": 2,
   "sceneId": "town-guide",
   "title": "観光客を道案内",
   "mode": "guide",
@@ -22,7 +22,13 @@
             "walk straight",
             "keep going straight",
             "straight ahead",
-            "continue straight"
+            "continue straight",
+            "head straight",
+            "walk straight on",
+            "go straight on",
+            "keep walking straight",
+            "walk down this street",
+            "follow this road straight"
           ]
         },
         {
@@ -40,13 +46,28 @@
         "Keep going straight ahead."
       ],
       "reaction": "grade",
-      "next": "n2"
+      "next": "n2",
+      "instruction": "お城へ向かう人に、この道をまっすぐ進むよう伝えてね。",
+      "hint": {
+        "words": "go straight＝まっすぐ進む",
+        "starter": "Go straight ..."
+      },
+      "contradictions": [
+        "dont go straight",
+        "do not go straight"
+      ]
     },
     "n2": {
       "id": "n2",
       "prompt": "Should I turn at the traffic light?",
       "task": "信号で左に曲がるよう伝える",
-      "contradictions": ["turn right", "take a right", "go right"],
+      "contradictions": [
+        "turn right",
+        "take a right",
+        "go right",
+        "make a right",
+        "dont turn left"
+      ],
       "acceptedIntents": [
         {
           "id": "left",
@@ -54,15 +75,23 @@
           "expressions": [
             "turn left",
             "take a left",
-            "go left"
+            "go left",
+            "make a left",
+            "make a left turn",
+            "turn to the left",
+            "head left"
           ]
         },
         {
           "id": "light",
-          "required": false,
+          "required": true,
           "expressions": [
             "traffic light",
-            "the light"
+            "the light",
+            "intersection",
+            "signal",
+            "lights",
+            "light"
           ]
         }
       ],
@@ -71,7 +100,12 @@
         "Take a left at the next light."
       ],
       "reaction": "grade",
-      "next": "n3"
+      "next": "n3",
+      "instruction": "次の信号で左に曲がるよう案内してね。",
+      "hint": {
+        "words": "turn left＝左折する / traffic light＝信号",
+        "starter": "Turn left at ..."
+      }
     },
     "n3": {
       "id": "n3",
@@ -84,14 +118,19 @@
           "expressions": [
             "on your right",
             "to your right",
-            "right side"
+            "right side",
+            "on the right",
+            "at your right",
+            "on your right hand side",
+            "right hand side"
           ]
         },
         {
           "id": "castle",
           "required": false,
           "expressions": [
-            "castle"
+            "castle",
+            "the castle"
           ]
         }
       ],
@@ -100,7 +139,18 @@
         "You will see the castle on your right."
       ],
       "reaction": "grade",
-      "next": "n4"
+      "next": "n4",
+      "instruction": "曲がったあと、お城は右側に見えると伝えてね。",
+      "hint": {
+        "words": "castle＝お城 / on your right＝右側に",
+        "starter": "The castle is ..."
+      },
+      "contradictions": [
+        "on your left",
+        "to your left",
+        "left side",
+        "not on your right"
+      ]
     },
     "n4": {
       "id": "n4",
@@ -111,9 +161,14 @@
           "id": "time",
           "required": true,
           "expressions": [
-          "ten minutes",
-          "10 minutes",
-          "ten minute"
+            "ten minutes",
+            "10 minutes",
+            "ten minute",
+            "about 10 min",
+            "about ten mins",
+            "a ten minute walk",
+            "roughly ten minutes",
+            "around 10 minutes"
           ]
         },
         {
@@ -132,7 +187,17 @@
         "About a ten-minute walk."
       ],
       "reaction": "grade",
-      "next": "n5"
+      "next": "n5",
+      "instruction": "お城までは歩いて約10分、と伝えてね。",
+      "hint": {
+        "words": "ten minutes＝10分 / on foot＝徒歩で",
+        "starter": "It is about ..."
+      },
+      "contradictions": [
+        "by train",
+        "by car",
+        "drive"
+      ]
     },
     "n5": {
       "id": "n5",
@@ -144,16 +209,21 @@
           "required": true,
           "expressions": [
             "station",
-            "train stop"
+            "train stop",
+            "train station",
+            "railway station"
           ]
         },
         {
           "id": "park",
-          "required": false,
+          "required": true,
           "expressions": [
             "across from the park",
             "opposite the park",
-            "near the park"
+            "near the park",
+            "across the street from the park",
+            "on the other side of the park",
+            "facing the park"
           ]
         }
       ],
@@ -162,7 +232,18 @@
         "There is a station opposite the park."
       ],
       "reaction": "grade",
-      "next": "n6"
+      "next": "n6",
+      "instruction": "駅は公園の向かい側にある、と伝えてね。",
+      "hint": {
+        "words": "station＝駅 / across from＝向かい側に",
+        "starter": "The station is ..."
+      },
+      "contradictions": [
+        "next to the park",
+        "behind the park",
+        "inside the park",
+        "not across from the park"
+      ]
     },
     "n6": {
       "id": "n6",
@@ -177,7 +258,11 @@
             "have fun",
             "have a great time",
             "youre welcome",
-            "no problem"
+            "no problem",
+            "have a wonderful visit",
+            "hope you enjoy the castle",
+            "enjoy sightseeing",
+            "have a lovely time"
           ]
         },
         {
@@ -195,7 +280,13 @@
         "You are welcome. Have a great time!"
       ],
       "reaction": "grade",
-      "next": null
+      "next": null,
+      "instruction": "観光客に、楽しい観光を願う言葉を伝えてね。",
+      "hint": {
+        "words": "enjoy your visit＝観光を楽しんで",
+        "starter": "Enjoy your ..."
+      },
+      "contradictions": []
     }
   }
 }
