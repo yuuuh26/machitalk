@@ -3,6 +3,7 @@
   "scenes": [
     {
       "id": "station-ask",
+      "costume": "station",
       "title": "駅で聞く",
       "subtitle": "Asking for Directions",
       "mode": "ask",
@@ -13,6 +14,7 @@
     },
     {
       "id": "restaurant-ask",
+      "costume": "restaurant",
       "title": "レストランで注文",
       "subtitle": "Ordering Food",
       "mode": "ask",
@@ -23,6 +25,7 @@
     },
     {
       "id": "mall-ask",
+      "costume": "service",
       "title": "モールで店を探す",
       "subtitle": "Asking for a Store",
       "mode": "ask",
@@ -83,6 +86,7 @@
     },
     {
       "id": "bus-ask",
+      "costume": "bus",
       "title": "バスに乗る",
       "subtitle": "Taking a Bus",
       "mode": "ask",
@@ -93,6 +97,7 @@
     },
     {
       "id": "cafe-ask",
+      "costume": "cafe",
       "title": "カフェで注文",
       "subtitle": "Ordering at a Café",
       "mode": "ask",
@@ -103,6 +108,7 @@
     },
     {
       "id": "hotel-ask",
+      "costume": "hotel",
       "title": "ホテルでチェックイン",
       "subtitle": "Checking In",
       "mode": "ask",
@@ -113,6 +119,7 @@
     },
     {
       "id": "pharmacy-ask",
+      "costume": "pharmacy",
       "title": "薬局で相談",
       "subtitle": "At a Pharmacy",
       "mode": "ask",
@@ -123,6 +130,7 @@
     },
     {
       "id": "lost-ask",
+      "costume": "service",
       "title": "落とし物を探す",
       "subtitle": "Finding a Lost Item",
       "mode": "ask",

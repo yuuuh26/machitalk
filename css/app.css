@@ -158,3 +158,11 @@
 .avatar-picker strong{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .avatar-picker small{margin-left:auto;font-size:10px;font-weight:800;color:#4a87cd;white-space:nowrap}
 @media(max-width:420px){.avatar-picker button{flex-direction:column;gap:5px}.avatar-picker small{margin-left:0}}
+
+/* Keep the chosen expression while changing the lower portrait to a scene uniform. */
+.talk-main .avatar[data-costume]:not([data-costume=""])::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:var(--costume-image);background-size:cover;background-position:center top;background-repeat:no-repeat;
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0,transparent var(--costume-start),#000 var(--costume-end),#000 100%);
+  mask-image:linear-gradient(to bottom,transparent 0,transparent var(--costume-start),#000 var(--costume-end),#000 100%);
+}

@@ -6,6 +6,15 @@
       "name": "Aiko",
       "default": true,
       "image": "./assets/avatar/aiko/neutral.webp",
+      "costumes": {
+        "station": "./assets/avatar/aiko/wardrobe/station.webp",
+        "restaurant": "./assets/avatar/aiko/wardrobe/restaurant.webp",
+        "service": "./assets/avatar/aiko/wardrobe/service.webp",
+        "bus": "./assets/avatar/aiko/wardrobe/bus.webp",
+        "cafe": "./assets/avatar/aiko/wardrobe/cafe.webp",
+        "hotel": "./assets/avatar/aiko/wardrobe/hotel.webp",
+        "pharmacy": "./assets/avatar/aiko/wardrobe/pharmacy.webp"
+      },
       "assets": {
         "neutral": { "image": "./assets/avatar/aiko/neutral.webp" },
         "speaking": { "image": "./assets/avatar/aiko/speaking.webp" },
@@ -23,6 +32,15 @@
       "id": "linnea",
       "name": "Linnea",
       "image": "./assets/avatar/linnea/neutral.webp",
+      "costumes": {
+        "station": "./assets/avatar/linnea/wardrobe/station.webp",
+        "restaurant": "./assets/avatar/linnea/wardrobe/restaurant.webp",
+        "service": "./assets/avatar/linnea/wardrobe/service.webp",
+        "bus": "./assets/avatar/linnea/wardrobe/bus.webp",
+        "cafe": "./assets/avatar/linnea/wardrobe/cafe.webp",
+        "hotel": "./assets/avatar/linnea/wardrobe/hotel.webp",
+        "pharmacy": "./assets/avatar/linnea/wardrobe/pharmacy.webp"
+      },
       "assets": {
         "neutral": { "image": "./assets/avatar/linnea/neutral.webp" },
         "speaking": { "image": "./assets/avatar/linnea/speaking.webp" },
@@ -40,6 +58,15 @@
       "id": "koharu",
       "name": "小春",
       "image": "./assets/avatar/koharu/neutral.jpg",
+      "costumes": {
+        "station": "./assets/avatar/koharu/wardrobe/station.webp",
+        "restaurant": "./assets/avatar/koharu/wardrobe/restaurant.webp",
+        "service": "./assets/avatar/koharu/wardrobe/service.webp",
+        "bus": "./assets/avatar/koharu/wardrobe/bus.webp",
+        "cafe": "./assets/avatar/koharu/wardrobe/cafe.webp",
+        "hotel": "./assets/avatar/koharu/wardrobe/hotel.webp",
+        "pharmacy": "./assets/avatar/koharu/wardrobe/pharmacy.webp"
+      },
       "assets": {
         "neutral": { "image": "./assets/avatar/koharu/neutral.jpg" },
         "speaking": { "image": "./assets/avatar/koharu/speaking.webp" },
