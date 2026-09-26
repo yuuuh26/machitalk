@@ -1,6 +1,14 @@
 import { normalize } from './evaluator.js';
 
 export const MAX_RECOGNITION_ISSUES = 3;
+export const REVEAL_AFTER_WRONG = 3;
+export const MAX_WRONG_ATTEMPTS = 5;
+
+export function wrongAttemptAction(count) {
+  if (count >= MAX_WRONG_ATTEMPTS) return 'advance';
+  if (count >= REVEAL_AFTER_WRONG) return 'reveal';
+  return 'retry';
+}
 
 export function classifyAttempt(result, { typed = false, issues = 0 } = {}) {
   if (!['try-again', 'no-speech'].includes(result.grade)) return 'success';

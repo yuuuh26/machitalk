@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 
-test('conversation offers a hint, reveals a clear wrong answer, and celebrates a paraphrase', async () => {
+test('conversation reveals after three wrong answers and moves on after five', async () => {
   const handlers = {};
   const classList = { toggle() {}, add() {}, remove() {} };
   const app = { innerHTML: '', classList, addEventListener(type, handler) { handlers[type] = handler; } };
@@ -24,12 +24,24 @@ test('conversation offers a hint, reveals a clear wrong answer, and celebrates a
   assert.match(app.innerHTML, /使える言葉/);
   assert.doesNotMatch(app.innerHTML, /答え合わせ · 言い方の例/);
   globalThis.FormData.value = 'Take the bus to Tokyo.';
-  handlers.submit({ target: { id: 'type-form' }, preventDefault() {} });
+  const submit = () => handlers.submit({ target: { id: 'type-form' }, preventDefault() {} });
+  submit();
   assert.match(app.innerHTML, /class="speech-card"[\s\S]*入力した英語[\s\S]*Take the bus to Tokyo\.[\s\S]*<\/section><section class="reply">/);
+  assert.doesNotMatch(app.innerHTML, /答え合わせ · 言い方の例/);
+  submit();
+  assert.doesNotMatch(app.innerHTML, /答え合わせ · 言い方の例/);
+  submit();
   assert.match(app.innerHTML, /答え合わせ · 言い方の例/);
   assert.match(app.innerHTML, /Take this train to Osaka Station/);
-  globalThis.FormData.value = 'This train goes to Osaka.';
-  handlers.submit({ target: { id: 'type-form' }, preventDefault() {} });
+  submit();
+  assert.match(app.innerHTML, /あと1回挑戦できるよ/);
+  submit();
+  assert.match(app.innerHTML, /次の問題へ進むよ/);
+  assert.doesNotMatch(app.innerHTML, /id="type-form"/);
+  await new Promise(resolve => setTimeout(resolve, 1450));
+  assert.match(app.innerHTML, /乗り換えは必要なく/);
+  globalThis.FormData.value = 'You can stay on this train.';
+  submit();
   assert.match(app.innerHTML, /grade-sparks/);
   assert.match(app.innerHTML, /class="feedback (good|great|excellent|perfect)"/);
   await click('home');
