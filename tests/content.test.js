@@ -11,7 +11,7 @@ test('registry and every scene remain data driven and playable', async () => {
   const avatars = await readJSON('../data/avatar-registry.json');
   assert.equal(registry.scenes.length, 18);
   assert.deepEqual(registry.scenes.reduce((totals, scene) => ({ ...totals, [scene.mode]: (totals[scene.mode] || 0) + 1 }), {}), { ask: 9, guide: 9 });
-  assert.deepEqual(avatars.avatars.map(avatar => avatar.id), ['aiko', 'linnea']);
+  assert.deepEqual(avatars.avatars.map(avatar => avatar.id), ['aiko', 'linnea', 'koharu']);
   for (const avatar of avatars.avatars) {
     const portrait = avatar.assets;
     const reactions = ['good', 'great', 'excellent', 'perfect'].map(mood => portrait[mood].image);
