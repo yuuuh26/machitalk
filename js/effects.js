@@ -43,3 +43,21 @@ export function playEffect(grade) {
     }
   } catch { /* The on-screen reaction still works without audio. */ }
 }
+
+export function playClearEffect() {
+  try {
+    prepareEffects();
+    if (!context || !master) return;
+    const now = context.currentTime;
+    // A short, distinct major fanfare after the last answer has settled.
+    for (const [frequency, offset, duration] of [[392,0,.20],[523,.15,.20],[659,.30,.22],[784,.45,.26],[1047,.70,.58],[1318,.70,.58],[1568,.70,.58]]) {
+      const oscillator = context.createOscillator(), gain = context.createGain();
+      oscillator.type = 'triangle'; oscillator.frequency.value = frequency;
+      gain.gain.setValueAtTime(.0001, now + offset);
+      gain.gain.exponentialRampToValueAtTime(.12, now + offset + .025);
+      gain.gain.exponentialRampToValueAtTime(.0001, now + offset + duration);
+      oscillator.connect(gain).connect(master);
+      oscillator.start(now + offset); oscillator.stop(now + offset + duration + .02);
+    }
+  } catch { /* Celebration visuals remain available when audio is blocked. */ }
+}

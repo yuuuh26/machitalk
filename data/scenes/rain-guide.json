@@ -1,0 +1,184 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": 1,
+  "sceneId": "rain-guide",
+  "title": "雨の日の案内",
+  "mode": "guide",
+  "category": "tourism",
+  "difficulty": "A2–B1",
+  "avatar": "aiko",
+  "startNode": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "prompt": "It is raining. Is there somewhere nearby to wait?",
+      "task": "近くに屋内のカフェがあると案内してね。",
+      "instruction": "近くに屋内のカフェがあると案内してね。",
+      "hint": {
+        "words": "nearby＝近くに",
+        "starter": "There is a ..."
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "cafe nearby where you can wait",
+            "wait at the cafe nearby",
+            "nearby cafe"
+          ]
+        }
+      ],
+      "examples": [
+        "There is a cafe nearby where you can wait.",
+        "You can wait at the cafe nearby."
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": "n2"
+    },
+    "n2": {
+      "id": "n2",
+      "prompt": "How far is the cafe?",
+      "task": "歩いて約3分と伝えてね。",
+      "instruction": "歩いて約3分と伝えてね。",
+      "hint": {
+        "words": "on foot＝徒歩で",
+        "starter": "It is about ..."
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "three minutes on foot",
+            "three minute walk",
+            "about three minutes away"
+          ]
+        }
+      ],
+      "examples": [
+        "It is about three minutes on foot.",
+        "The cafe is a three-minute walk."
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": "n3"
+    },
+    "n3": {
+      "id": "n3",
+      "prompt": "Which way should I go?",
+      "task": "交差点までまっすぐと案内してね。",
+      "instruction": "交差点までまっすぐと案内してね。",
+      "hint": {
+        "words": "intersection＝交差点",
+        "starter": "Go straight ..."
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "go straight to the intersection",
+            "walk straight until the crossing",
+            "straight to the intersection"
+          ]
+        }
+      ],
+      "examples": [
+        "Go straight to the intersection.",
+        "Walk straight until the crossing."
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": "n4"
+    },
+    "n4": {
+      "id": "n4",
+      "prompt": "And then?",
+      "task": "交差点を右に曲がると教えてね。",
+      "instruction": "交差点を右に曲がると教えてね。",
+      "hint": {
+        "words": "turn right＝右に曲がる",
+        "starter": "Turn right ..."
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "turn right at the intersection",
+            "take a right at the crossing",
+            "turn right at the crossing"
+          ]
+        }
+      ],
+      "examples": [
+        "Turn right at the intersection.",
+        "Take a right at the crossing."
+      ],
+      "contradictions": [
+        "turn left",
+        "take a left"
+      ],
+      "reaction": "grade",
+      "next": "n5"
+    },
+    "n5": {
+      "id": "n5",
+      "prompt": "Will I see it from there?",
+      "task": "右手に見えると説明してね。",
+      "instruction": "右手に見えると説明してね。",
+      "hint": {
+        "words": "on your right＝右手に",
+        "starter": "You will see ..."
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "see it on your right",
+            "cafe will be on the right",
+            "on your right"
+          ]
+        }
+      ],
+      "examples": [
+        "You will see it on your right.",
+        "The cafe will be on the right."
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": "n6"
+    },
+    "n6": {
+      "id": "n6",
+      "prompt": "Wonderful, thank you for your help!",
+      "task": "気をつけて、と返してね。",
+      "instruction": "気をつけて、と返してね。",
+      "hint": {
+        "words": "Stay dry＝濡れないように",
+        "starter": "Take care ..."
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "take care",
+            "stay dry",
+            "enjoy your visit"
+          ]
+        }
+      ],
+      "examples": [
+        "Take care in the rain!",
+        "Stay dry and enjoy your visit!"
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": null
+    }
+  }
+}

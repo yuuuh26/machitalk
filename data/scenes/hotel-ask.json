@@ -1,0 +1,179 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": 1,
+  "sceneId": "hotel-ask",
+  "title": "ホテルでチェックイン",
+  "mode": "ask",
+  "category": "tourism",
+  "difficulty": "A2–B1",
+  "avatar": "aiko",
+  "startNode": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "prompt": "Welcome! How may I help you?",
+      "task": "チェックインしたいと伝えてね。",
+      "instruction": "チェックインしたいと伝えてね。",
+      "hint": {
+        "words": "check in＝チェックインする",
+        "starter": "I would like to ..."
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "check in"
+          ]
+        }
+      ],
+      "examples": [
+        "I would like to check in, please.",
+        "Can I check in now?"
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": "n2"
+    },
+    "n2": {
+      "id": "n2",
+      "prompt": "Certainly. What name is the booking under?",
+      "task": "山本という名前で予約していると伝えてね。",
+      "instruction": "山本という名前で予約していると伝えてね。",
+      "hint": {
+        "words": "under Yamamoto＝山本の名義で",
+        "starter": "The booking is ..."
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "under yamamoto",
+            "reservation for yamamoto",
+            "booking for yamamoto"
+          ]
+        }
+      ],
+      "examples": [
+        "The booking is under Yamamoto.",
+        "I have a reservation under Yamamoto."
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": "n3"
+    },
+    "n3": {
+      "id": "n3",
+      "prompt": "I found your booking for two nights.",
+      "task": "朝食が含まれるか尋ねてね。",
+      "instruction": "朝食が含まれるか尋ねてね。",
+      "hint": {
+        "words": "included＝含まれる",
+        "starter": "Is breakfast ...?"
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "breakfast included",
+            "include breakfast",
+            "come with breakfast"
+          ]
+        }
+      ],
+      "examples": [
+        "Is breakfast included?",
+        "Does my booking include breakfast?"
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": "n4"
+    },
+    "n4": {
+      "id": "n4",
+      "prompt": "Yes, breakfast is included.",
+      "task": "朝食の開始時間を尋ねてね。",
+      "instruction": "朝食の開始時間を尋ねてね。",
+      "hint": {
+        "words": "start＝始まる",
+        "starter": "What time ...?"
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "what time does breakfast start",
+            "when does breakfast begin",
+            "when is breakfast"
+          ]
+        }
+      ],
+      "examples": [
+        "What time does breakfast start?",
+        "When does breakfast begin?"
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": "n5"
+    },
+    "n5": {
+      "id": "n5",
+      "prompt": "It starts at seven in the dining room.",
+      "task": "Wi-Fi のパスワードを尋ねてね。",
+      "instruction": "Wi-Fi のパスワードを尋ねてね。",
+      "hint": {
+        "words": "password＝パスワード",
+        "starter": "What is the ...?"
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "wi fi password",
+            "wifi password",
+            "internet password"
+          ]
+        }
+      ],
+      "examples": [
+        "What is the Wi-Fi password?",
+        "Could you tell me the Wi-Fi password?"
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": "n6"
+    },
+    "n6": {
+      "id": "n6",
+      "prompt": "It is written on your key card. Enjoy your stay!",
+      "task": "フロントの人にお礼を伝えてね。",
+      "instruction": "フロントの人にお礼を伝えてね。",
+      "hint": {
+        "words": "thank you＝ありがとう",
+        "starter": "Thank you ..."
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "thank you",
+            "thanks",
+            "appreciate it"
+          ]
+        }
+      ],
+      "examples": [
+        "Thank you for your help!",
+        "Thanks very much!"
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": null
+    }
+  }
+}

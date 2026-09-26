@@ -1,0 +1,181 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": 1,
+  "sceneId": "ticket-guide",
+  "title": "券売機を手伝う",
+  "mode": "guide",
+  "category": "transport",
+  "difficulty": "A2–B1",
+  "avatar": "aiko",
+  "startNode": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "prompt": "Excuse me. How do I buy a train ticket?",
+      "task": "券売機で買えると案内してね。",
+      "instruction": "券売機で買えると案内してね。",
+      "hint": {
+        "words": "ticket machine＝券売機",
+        "starter": "You can buy ..."
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "buy a ticket at that machine",
+            "use the ticket machine",
+            "ticket machine over there"
+          ]
+        }
+      ],
+      "examples": [
+        "You can buy a ticket at that machine.",
+        "Use the ticket machine over there."
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": "n2"
+    },
+    "n2": {
+      "id": "n2",
+      "prompt": "Which button should I press first?",
+      "task": "英語表示を選ぶように伝えてね。",
+      "instruction": "英語表示を選ぶように伝えてね。",
+      "hint": {
+        "words": "select＝選ぶ",
+        "starter": "Please select ..."
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "select english",
+            "tap the english button",
+            "choose english"
+          ]
+        }
+      ],
+      "examples": [
+        "Please select English on the screen.",
+        "Tap the English button first."
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": "n3"
+    },
+    "n3": {
+      "id": "n3",
+      "prompt": "How do I choose my destination?",
+      "task": "行き先の駅名を選ぶように伝えてね。",
+      "instruction": "行き先の駅名を選ぶように伝えてね。",
+      "hint": {
+        "words": "destination＝行き先",
+        "starter": "Choose your ..."
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "choose your destination",
+            "select the station",
+            "choose the station"
+          ]
+        }
+      ],
+      "examples": [
+        "Choose your destination station.",
+        "Select the station you want to go to."
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": "n4"
+    },
+    "n4": {
+      "id": "n4",
+      "prompt": "Can I pay by card?",
+      "task": "この機械では現金かカードを使えると説明してね。",
+      "instruction": "この機械では現金かカードを使えると説明してね。",
+      "hint": {
+        "words": "cash or card＝現金かカード",
+        "starter": "You can pay ..."
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "pay by cash or card",
+            "accepts cash and cards",
+            "cash and cards"
+          ]
+        }
+      ],
+      "examples": [
+        "You can pay by cash or card here.",
+        "This machine accepts cash and cards."
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": "n5"
+    },
+    "n5": {
+      "id": "n5",
+      "prompt": "Where does the ticket come out?",
+      "task": "券は下の取り出し口から出ると教えてね。",
+      "instruction": "券は下の取り出し口から出ると教えてね。",
+      "hint": {
+        "words": "slot＝取り出し口",
+        "starter": "Your ticket ..."
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "ticket comes out at the bottom",
+            "ticket from the slot below",
+            "ticket at the bottom"
+          ]
+        }
+      ],
+      "examples": [
+        "Your ticket comes out at the bottom.",
+        "Take your ticket from the slot below."
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": "n6"
+    },
+    "n6": {
+      "id": "n6",
+      "prompt": "I have it now. Thank you!",
+      "task": "気をつけて行ってね、と返してね。",
+      "instruction": "気をつけて行ってね、と返してね。",
+      "hint": {
+        "words": "Have a good trip＝よい旅を",
+        "starter": "Have a good ..."
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "have a good trip",
+            "enjoy your journey",
+            "safe travels"
+          ]
+        }
+      ],
+      "examples": [
+        "Have a good trip!",
+        "Enjoy your journey!"
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": null
+    }
+  }
+}

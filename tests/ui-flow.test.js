@@ -43,6 +43,15 @@ test('conversation offers a hint, reveals a clear wrong answer, and celebrates a
   assert.match(app.innerHTML, /Linnea says/);
   assert.match(avatar.style.cssText, /avatar\/linnea\/neutral\.webp/);
   await click('home');
+  await click('scenes');
+  await click('start', 'bus-ask');
+  assert.match(app.innerHTML, /市役所行きのバスか/);
+  for (let turn = 0; turn < 6; turn++) await click('skip');
+  for (let i = 0; i < 10 && !app.innerHTML.includes('SCENE CLEAR'); i++) await new Promise(resolve => setTimeout(resolve, 0));
+  assert.match(app.innerHTML, /clear-confetti/);
+  assert.match(app.innerHTML, /シーンクリア！/);
+  await click('settings');
+  assert.match(app.innerHTML, /アプリの使用容量/);
   globalThis.FormData = OriginalFormData;
   delete globalThis.window; delete globalThis.document; delete globalThis.fetch;
 });
