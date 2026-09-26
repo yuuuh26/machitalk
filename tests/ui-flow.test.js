@@ -8,8 +8,9 @@ test('conversation reveals after three wrong answers and moves on after five', a
   const app = { innerHTML: '', classList, addEventListener(type, handler) { handlers[type] = handler; } };
   const toast = { textContent: '', classList };
   const avatar = { style: {}, dataset: {}, classList, setAttribute() {}, offsetWidth: 100 };
+  let scrollCalls = 0;
   globalThis.window = {};
-  globalThis.document = { querySelector(selector) { return selector === '#app' ? app : selector === '#avatar' ? avatar : toast; } };
+  globalThis.document = { querySelector(selector) { return selector === '#app' ? app : selector === '#avatar' ? avatar : selector === '.answer-card' ? { scrollIntoView() { scrollCalls++; } } : toast; } };
   globalThis.fetch = async pathname => ({ ok: true, json: async () => JSON.parse(await readFile(new URL(`../${pathname.replace(/^\.\//, '')}`, import.meta.url))) });
   const OriginalFormData = globalThis.FormData;
   globalThis.FormData = class { get() { return this.value; } static value = ''; constructor() { this.value = globalThis.FormData.value; } };
@@ -32,6 +33,8 @@ test('conversation reveals after three wrong answers and moves on after five', a
   assert.doesNotMatch(app.innerHTML, /答え合わせ · 言い方の例/);
   submit();
   assert.match(app.innerHTML, /答え合わせ · 言い方の例/);
+  assert.match(app.innerHTML, /class="speech-card"[\s\S]*class="answer-preview"[\s\S]*Take this train to Osaka Station[\s\S]*<\/section><section class="reply">/);
+  assert.equal(scrollCalls, 0);
   assert.match(app.innerHTML, /Take this train to Osaka Station/);
   submit();
   assert.match(app.innerHTML, /あと1回挑戦できるよ/);

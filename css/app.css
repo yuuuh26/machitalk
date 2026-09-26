@@ -149,6 +149,13 @@
 .talk-main .heard-line.unheard strong{font-size:13px}
 .talk-main .scene-backdrop.with-heard .feedback{bottom:clamp(180px,35%,280px)}
 
+/* Keep the revealed sentence in the portrait so the page never jumps away from the avatar. */
+.talk-main .answer-preview{margin-top:10px;padding:10px 12px;max-height:min(22dvh,150px);overflow-y:auto;overscroll-behavior:contain;border:1px solid #ffdb99;border-radius:13px;background:#fff8e9f2;color:#244565;box-shadow:0 4px 17px #081c3d6b}
+.talk-main .answer-preview>span{display:block;margin-bottom:4px;color:#a55e1b;font-size:11px;font-weight:900}
+.talk-main .answer-preview>div{display:flex;align-items:center;gap:8px}
+.talk-main .answer-preview strong{flex:1;min-width:0;font-size:clamp(14px,4vw,17px);line-height:1.35;overflow-wrap:anywhere}
+.talk-main .answer-preview button{flex:none;border:0;border-radius:9px;background:#e6f0ff;color:#2a70bb;padding:7px 9px;font-size:14px}
+
 /* Avatar choice remains in settings and previews the actual conversation portrait. */
 .avatar-setting{padding-bottom:3px}
 .avatar-picker{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:7px 0 2px}
