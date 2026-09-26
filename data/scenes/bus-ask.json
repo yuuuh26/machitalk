@@ -1,0 +1,181 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": 1,
+  "sceneId": "bus-ask",
+  "title": "バスに乗る",
+  "mode": "ask",
+  "category": "transport",
+  "difficulty": "A2–B1",
+  "avatar": "aiko",
+  "startNode": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "prompt": "Hello! Where would you like to go?",
+      "task": "市役所行きのバスか、運転手に尋ねてね。",
+      "instruction": "市役所行きのバスか、運転手に尋ねてね。",
+      "hint": {
+        "words": "City Hall＝市役所",
+        "starter": "Does this bus ...?"
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "bus go to city hall",
+            "bus for city hall",
+            "go to city hall"
+          ]
+        }
+      ],
+      "examples": [
+        "Does this bus go to City Hall?",
+        "Is this the bus for City Hall?"
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": "n2"
+    },
+    "n2": {
+      "id": "n2",
+      "prompt": "Yes, this bus stops there.",
+      "task": "料金の支払い方法を尋ねてね。",
+      "instruction": "料金の支払い方法を尋ねてね。",
+      "hint": {
+        "words": "IC card＝交通系ICカード",
+        "starter": "Can I pay ...?"
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "pay with an ic card",
+            "accept ic cards",
+            "use an ic card"
+          ]
+        }
+      ],
+      "examples": [
+        "Can I pay with an IC card?",
+        "Do you accept IC cards?"
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": "n3"
+    },
+    "n3": {
+      "id": "n3",
+      "prompt": "Yes, touch your card when you get on.",
+      "task": "どの停留所で降りればいいか尋ねてね。",
+      "instruction": "どの停留所で降りればいいか尋ねてね。",
+      "hint": {
+        "words": "get off＝降りる",
+        "starter": "Which stop ...?"
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "which stop should i get off",
+            "where should i get off",
+            "what stop do i get off"
+          ]
+        }
+      ],
+      "examples": [
+        "Which stop should I get off at?",
+        "Where should I get off?"
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": "n4"
+    },
+    "n4": {
+      "id": "n4",
+      "prompt": "Get off at the fifth stop.",
+      "task": "そこまでの所要時間を尋ねてね。",
+      "instruction": "そこまでの所要時間を尋ねてね。",
+      "hint": {
+        "words": "how long＝どのくらいの時間",
+        "starter": "How long ...?"
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "how long does it take",
+            "how many minutes",
+            "how long is the ride"
+          ]
+        }
+      ],
+      "examples": [
+        "How long does it take to get there?",
+        "How many minutes will it take?"
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": "n5"
+    },
+    "n5": {
+      "id": "n5",
+      "prompt": "About twelve minutes, depending on traffic.",
+      "task": "到着したら教えてもらえるか尋ねてね。",
+      "instruction": "到着したら教えてもらえるか尋ねてね。",
+      "hint": {
+        "words": "let me know＝教えてください",
+        "starter": "Could you tell me ...?"
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "tell me when we arrive",
+            "let me know when we get there",
+            "tell me when we get there"
+          ]
+        }
+      ],
+      "examples": [
+        "Could you tell me when we arrive?",
+        "Please let me know when we get there."
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": "n6"
+    },
+    "n6": {
+      "id": "n6",
+      "prompt": "Of course. I will let you know.",
+      "task": "運転手にお礼を伝えてね。",
+      "instruction": "運転手にお礼を伝えてね。",
+      "hint": {
+        "words": "thank you＝ありがとう",
+        "starter": "Thank you ..."
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "thank you",
+            "thanks",
+            "appreciate it"
+          ]
+        }
+      ],
+      "examples": [
+        "Thank you for your help!",
+        "Thanks so much!"
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": null
+    }
+  }
+}

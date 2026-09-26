@@ -1,0 +1,184 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": 1,
+  "sceneId": "photo-guide",
+  "title": "写真撮影を手伝う",
+  "mode": "guide",
+  "category": "tourism",
+  "difficulty": "A2–B1",
+  "avatar": "aiko",
+  "startNode": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "prompt": "Excuse me. Could you take a photo of us?",
+      "task": "写真を撮れると返事をしてね。",
+      "instruction": "写真を撮れると返事をしてね。",
+      "hint": {
+        "words": "take a photo＝写真を撮る",
+        "starter": "Sure, I can ..."
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "can take a photo",
+            "of course i can help",
+            "sure i can help"
+          ]
+        }
+      ],
+      "examples": [
+        "Sure, I can take a photo.",
+        "Of course, I can help."
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": "n2"
+    },
+    "n2": {
+      "id": "n2",
+      "prompt": "Could you include the whole building?",
+      "task": "建物全体を写真に入れると答えてね。",
+      "instruction": "建物全体を写真に入れると答えてね。",
+      "hint": {
+        "words": "whole building＝建物全体",
+        "starter": "I will include ..."
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "include the whole building",
+            "entire building will be in the photo",
+            "get the whole building"
+          ]
+        }
+      ],
+      "examples": [
+        "I will include the whole building.",
+        "Yes, the entire building will be in the photo."
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": "n3"
+    },
+    "n3": {
+      "id": "n3",
+      "prompt": "Should we move a little?",
+      "task": "少し左へ動いてもらうよう伝えてね。",
+      "instruction": "少し左へ動いてもらうよう伝えてね。",
+      "hint": {
+        "words": "to the left＝左へ",
+        "starter": "Could you move ...?"
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "move a little to the left",
+            "step slightly to your left",
+            "move left a little"
+          ]
+        }
+      ],
+      "examples": [
+        "Could you move a little to the left?",
+        "Please step slightly to your left."
+      ],
+      "contradictions": [
+        "to the right",
+        "your right",
+        "move right"
+      ],
+      "reaction": "grade",
+      "next": "n4"
+    },
+    "n4": {
+      "id": "n4",
+      "prompt": "Are we in the frame now?",
+      "task": "撮影準備ができたと伝えてね。",
+      "instruction": "撮影準備ができたと伝えてね。",
+      "hint": {
+        "words": "in the frame＝画面の中",
+        "starter": "You are ..."
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "in the frame now",
+            "both in the picture",
+            "ready for the photo"
+          ]
+        }
+      ],
+      "examples": [
+        "Yes, you are in the frame now.",
+        "You are both in the picture."
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": "n5"
+    },
+    "n5": {
+      "id": "n5",
+      "prompt": "Great! Let us know when to smile.",
+      "task": "笑顔で撮るので数を数えてね。",
+      "instruction": "笑顔で撮るので数を数えてね。",
+      "hint": {
+        "words": "Smile＝笑って",
+        "starter": "Smile! Three ..."
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "three two one",
+            "smile"
+          ]
+        }
+      ],
+      "examples": [
+        "Smile! Three, two, one!",
+        "Here we go. Three, two, one!"
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": "n6"
+    },
+    "n6": {
+      "id": "n6",
+      "prompt": "Thank you! Can we see the photo?",
+      "task": "写真を見てもらうように伝えてね。",
+      "instruction": "写真を見てもらうように伝えてね。",
+      "hint": {
+        "words": "take a look＝見てみる",
+        "starter": "Please take ..."
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "please take a look",
+            "check the photo",
+            "have a look"
+          ]
+        }
+      ],
+      "examples": [
+        "Of course. Please take a look.",
+        "Sure, check the photo."
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": null
+    }
+  }
+}

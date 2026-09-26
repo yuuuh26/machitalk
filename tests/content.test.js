@@ -9,8 +9,8 @@ const readJSON = async path => JSON.parse(await readFile(new URL(path, import.me
 test('registry and every scene remain data driven and playable', async () => {
   const registry = await readJSON('../data/scene-registry.json');
   const avatars = await readJSON('../data/avatar-registry.json');
-  assert.equal(registry.scenes.length, 8);
-  assert.deepEqual(registry.scenes.reduce((totals, scene) => ({ ...totals, [scene.mode]: (totals[scene.mode] || 0) + 1 }), {}), { ask: 4, guide: 4 });
+  assert.equal(registry.scenes.length, 18);
+  assert.deepEqual(registry.scenes.reduce((totals, scene) => ({ ...totals, [scene.mode]: (totals[scene.mode] || 0) + 1 }), {}), { ask: 9, guide: 9 });
   assert.deepEqual(avatars.avatars.map(avatar => avatar.id), ['aiko', 'linnea']);
   for (const avatar of avatars.avatars) {
     const portrait = avatar.assets;
@@ -47,4 +47,17 @@ test('synonyms pass; wrong direction and empty speech do not', async () => {
   assert.equal(evaluate(scene.nodes.n2, 'Turn right at the light.').grade, 'try-again');
   assert.equal(evaluate(scene.nodes.n2, 'Turn left, then turn right at the light.').grade, 'try-again');
   assert.equal(evaluate(scene.nodes.n1, '').grade, 'no-speech');
+});
+
+test('new conversations reject opposite size, temperature, direction, and bus door', async () => {
+  for (const [file, node, wrong] of [
+    ['cafe-ask', 'n2', 'A large one, please.'],
+    ['cafe-ask', 'n3', 'Hot, not iced, please.'],
+    ['bus-guide', 'n3', 'Please get on through the front door.'],
+    ['photo-guide', 'n3', 'Move a little to your right.'],
+    ['rain-guide', 'n4', 'Turn left at the intersection.']
+  ]) {
+    const scene = await readJSON(`../data/scenes/${file}.json`);
+    assert.equal(evaluate(scene.nodes[node], wrong).grade, 'try-again', `${file}/${node}`);
+  }
 });

@@ -1,0 +1,181 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": 1,
+  "sceneId": "lost-ask",
+  "title": "落とし物を探す",
+  "mode": "ask",
+  "category": "tourism",
+  "difficulty": "A2–B1",
+  "avatar": "aiko",
+  "startNode": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "prompt": "Hello! What can I do for you?",
+      "task": "財布をなくしたと伝えてね。",
+      "instruction": "財布をなくしたと伝えてね。",
+      "hint": {
+        "words": "wallet＝財布",
+        "starter": "I lost ..."
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "lost my wallet",
+            "cannot find my wallet",
+            "missing wallet"
+          ]
+        }
+      ],
+      "examples": [
+        "I lost my wallet.",
+        "I cannot find my wallet."
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": "n2"
+    },
+    "n2": {
+      "id": "n2",
+      "prompt": "I am sorry to hear that. Where did you last have it?",
+      "task": "駅で最後に見たと伝えてね。",
+      "instruction": "駅で最後に見たと伝えてね。",
+      "hint": {
+        "words": "last saw＝最後に見た",
+        "starter": "I last saw ..."
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "saw it at the station",
+            "had it was the station",
+            "lost it at the station"
+          ]
+        }
+      ],
+      "examples": [
+        "I last saw it at the station.",
+        "The last place I had it was the station."
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": "n3"
+    },
+    "n3": {
+      "id": "n3",
+      "prompt": "What color is your wallet?",
+      "task": "探している財布は黒色だと伝えてね。",
+      "instruction": "探している財布は黒色だと伝えてね。",
+      "hint": {
+        "words": "black＝黒",
+        "starter": "It is ..."
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "black"
+          ]
+        }
+      ],
+      "examples": [
+        "It is black.",
+        "A black wallet."
+      ],
+      "contradictions": [
+        "not black"
+      ],
+      "reaction": "grade",
+      "next": "n4"
+    },
+    "n4": {
+      "id": "n4",
+      "prompt": "I will check our lost property desk.",
+      "task": "届いているか確認してもらえるか尋ねてね。",
+      "instruction": "届いているか確認してもらえるか尋ねてね。",
+      "hint": {
+        "words": "turned it in＝届けた",
+        "starter": "Could you check ...?"
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "check if someone turned it in",
+            "see if my wallet was found",
+            "check lost property"
+          ]
+        }
+      ],
+      "examples": [
+        "Could you check if someone turned it in?",
+        "Can you see if my wallet was found?"
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": "n5"
+    },
+    "n5": {
+      "id": "n5",
+      "prompt": "It is not here yet. Please leave your contact details.",
+      "task": "電話番号を残せると伝えてね。",
+      "instruction": "電話番号を残せると伝えてね。",
+      "hint": {
+        "words": "phone number＝電話番号",
+        "starter": "I can leave ..."
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "leave my phone number",
+            "here is my phone number",
+            "give you my phone number"
+          ]
+        }
+      ],
+      "examples": [
+        "I can leave my phone number.",
+        "Here is my phone number."
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": "n6"
+    },
+    "n6": {
+      "id": "n6",
+      "prompt": "We will call if it arrives.",
+      "task": "対応してくれた人にお礼を伝えてね。",
+      "instruction": "対応してくれた人にお礼を伝えてね。",
+      "hint": {
+        "words": "thanks＝ありがとう",
+        "starter": "Thank you ..."
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "thank you",
+            "thanks",
+            "appreciate it"
+          ]
+        }
+      ],
+      "examples": [
+        "Thank you for checking!",
+        "Thanks for your help!"
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": null
+    }
+  }
+}

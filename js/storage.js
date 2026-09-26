@@ -56,3 +56,32 @@ export async function requestPersistence() {
   if (!navigator.storage?.persist) return false;
   return navigator.storage.persist();
 }
+
+// GitHub Pages apps share one origin, so navigator.storage.estimate() would also
+// include the user's other projects. Count only MachiTalk's cache and database.
+export async function appStorageUsage() {
+  let cacheBytes = 0, dataBytes = 0, measured = 0;
+  if ('caches' in window) {
+    try {
+      const names = (await caches.keys()).filter(name => name.startsWith('machitalk-'));
+      for (const name of names) {
+        const cache = await caches.open(name);
+        for (const key of await cache.keys()) {
+          const response = await cache.match(key);
+          if (response) cacheBytes += (await response.blob()).size;
+        }
+      }
+      measured++;
+    } catch { /* Some browsers disable Cache Storage. */ }
+  }
+  try {
+    const [sessions, settings] = await Promise.all([
+      request('sessions', 'readonly', store => store.getAll()),
+      request('settings', 'readonly', store => store.getAll())
+    ]);
+    const encoder = new TextEncoder();
+    dataBytes = [...sessions, ...settings].reduce((sum, row) => sum + encoder.encode(JSON.stringify(row)).byteLength, 0);
+    measured++;
+  } catch { /* IndexedDB can be unavailable or blocked. */ }
+  return measured ? { cacheBytes, dataBytes, partial: measured < 2 } : null;
+}

@@ -1,0 +1,181 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": 1,
+  "sceneId": "pharmacy-ask",
+  "title": "薬局で相談",
+  "mode": "ask",
+  "category": "shopping",
+  "difficulty": "A2–B1",
+  "avatar": "aiko",
+  "startNode": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "prompt": "Hello. How can I help?",
+      "task": "薬剤師に相談したいと伝えてね。",
+      "instruction": "薬剤師に相談したいと伝えてね。",
+      "hint": {
+        "words": "pharmacist＝薬剤師",
+        "starter": "Could I speak ...?"
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "speak to the pharmacist",
+            "pharmacist available",
+            "talk to the pharmacist"
+          ]
+        }
+      ],
+      "examples": [
+        "Could I speak to the pharmacist?",
+        "Is a pharmacist available?"
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": "n2"
+    },
+    "n2": {
+      "id": "n2",
+      "prompt": "Yes, I am the pharmacist. What is the problem?",
+      "task": "薬剤師に頭痛があると伝えてね。",
+      "instruction": "薬剤師に頭痛があると伝えてね。",
+      "hint": {
+        "words": "headache＝頭痛",
+        "starter": "I have ..."
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "headache",
+            "head hurts",
+            "head pain"
+          ]
+        }
+      ],
+      "examples": [
+        "I have a headache.",
+        "My head hurts."
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": "n3"
+    },
+    "n3": {
+      "id": "n3",
+      "prompt": "I see. Are you taking any other medicine?",
+      "task": "今はほかの薬を飲んでいないと伝えてね。",
+      "instruction": "今はほかの薬を飲んでいないと伝えてね。",
+      "hint": {
+        "words": "medication＝薬",
+        "starter": "I am not ..."
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "not taking any other medicine",
+            "do not take other medication",
+            "no other medicine"
+          ]
+        }
+      ],
+      "examples": [
+        "I am not taking any other medicine.",
+        "No, I do not take other medication."
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": "n4"
+    },
+    "n4": {
+      "id": "n4",
+      "prompt": "Thank you. I can show you an option.",
+      "task": "服用前に注意点を確認したいと伝えてね。",
+      "instruction": "服用前に注意点を確認したいと伝えてね。",
+      "hint": {
+        "words": "precautions＝注意点",
+        "starter": "Are there any ...?"
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "any precautions",
+            "check before taking",
+            "anything i should know"
+          ]
+        }
+      ],
+      "examples": [
+        "Are there any precautions I should know?",
+        "What should I check before taking it?"
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": "n5"
+    },
+    "n5": {
+      "id": "n5",
+      "prompt": "Please read the label and check with a clinician if you are unsure.",
+      "task": "説明を印刷してもらえるか尋ねてね。",
+      "instruction": "説明を印刷してもらえるか尋ねてね。",
+      "hint": {
+        "words": "instructions＝説明書",
+        "starter": "Could I have ...?"
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "written instructions",
+            "print the instructions",
+            "instructions on paper"
+          ]
+        }
+      ],
+      "examples": [
+        "Could I have written instructions?",
+        "Can you print the instructions for me?"
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": "n6"
+    },
+    "n6": {
+      "id": "n6",
+      "prompt": "Certainly. Here you are.",
+      "task": "薬剤師にお礼を伝えてね。",
+      "instruction": "薬剤師にお礼を伝えてね。",
+      "hint": {
+        "words": "thank you＝ありがとう",
+        "starter": "Thank you ..."
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "thank you",
+            "thanks",
+            "appreciate it"
+          ]
+        }
+      ],
+      "examples": [
+        "Thank you for your help!",
+        "Thanks for explaining everything!"
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": null
+    }
+  }
+}

@@ -1,0 +1,181 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": 1,
+  "sceneId": "clinic-guide",
+  "title": "体調不良の人を案内",
+  "mode": "guide",
+  "category": "tourism",
+  "difficulty": "A2–B1",
+  "avatar": "aiko",
+  "startNode": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "prompt": "Excuse me. I do not feel well. Where is a clinic?",
+      "task": "近くにクリニックがあると伝えてね。",
+      "instruction": "近くにクリニックがあると伝えてね。",
+      "hint": {
+        "words": "clinic＝クリニック",
+        "starter": "There is a ..."
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "clinic near the station",
+            "clinic is close to the station",
+            "clinic by the station"
+          ]
+        }
+      ],
+      "examples": [
+        "There is a clinic near the station.",
+        "A clinic is close to the station."
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": "n2"
+    },
+    "n2": {
+      "id": "n2",
+      "prompt": "Is it within walking distance?",
+      "task": "歩いて約5分と案内してね。",
+      "instruction": "歩いて約5分と案内してね。",
+      "hint": {
+        "words": "on foot＝徒歩で",
+        "starter": "It is about ..."
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "five minutes on foot",
+            "walk there in about five minutes",
+            "five minute walk"
+          ]
+        }
+      ],
+      "examples": [
+        "It is about five minutes on foot.",
+        "You can walk there in about five minutes."
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": "n3"
+    },
+    "n3": {
+      "id": "n3",
+      "prompt": "Which street should I take?",
+      "task": "この道をまっすぐ進むよう教えてね。",
+      "instruction": "この道をまっすぐ進むよう教えてね。",
+      "hint": {
+        "words": "go straight＝まっすぐ進む",
+        "starter": "Go straight ..."
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "go straight along this street",
+            "walk straight down this road",
+            "straight down this street"
+          ]
+        }
+      ],
+      "examples": [
+        "Go straight along this street.",
+        "Walk straight down this road."
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": "n4"
+    },
+    "n4": {
+      "id": "n4",
+      "prompt": "What is the building like?",
+      "task": "青い看板があると教えてね。",
+      "instruction": "青い看板があると教えてね。",
+      "hint": {
+        "words": "blue sign＝青い看板",
+        "starter": "Look for ..."
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "look for the blue sign",
+            "building has a blue sign",
+            "blue sign"
+          ]
+        }
+      ],
+      "examples": [
+        "Look for the blue sign.",
+        "The building has a blue sign."
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": "n5"
+    },
+    "n5": {
+      "id": "n5",
+      "prompt": "What if it is closed?",
+      "task": "受付時間を電話で確認するよう伝えてね。",
+      "instruction": "受付時間を電話で確認するよう伝えてね。",
+      "hint": {
+        "words": "opening hours＝受付時間",
+        "starter": "Please call ..."
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "call to check the opening hours",
+            "phone them to confirm their hours",
+            "call to check the hours"
+          ]
+        }
+      ],
+      "examples": [
+        "Please call to check the opening hours.",
+        "You can phone them to confirm their hours."
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": "n6"
+    },
+    "n6": {
+      "id": "n6",
+      "prompt": "Thank you. That helps a lot.",
+      "task": "無理をせず、つらければすぐ助けを求めてと伝えてね。",
+      "instruction": "無理をせず、つらければすぐ助けを求めてと伝えてね。",
+      "hint": {
+        "words": "seek help＝助けを求める",
+        "starter": "Please ask ..."
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "ask for help right away",
+            "seek help if you feel worse",
+            "get help if you feel worse"
+          ]
+        }
+      ],
+      "examples": [
+        "Please ask for help right away if you feel worse.",
+        "Take care and seek help if you feel worse."
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": null
+    }
+  }
+}

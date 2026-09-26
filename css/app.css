@@ -122,6 +122,25 @@
 @media(max-width:360px){.talk-main .task-row .mic-button{width:66px;height:66px}.task-row{gap:9px}}
 @media(prefers-reduced-motion:reduce){.capture-state i{animation:none}}
 
+/* The end of a whole scene gets its own celebration, separate from each turn. */
+.clear{position:relative;isolation:isolate;overflow:hidden;margin:14px 0 4px;padding:38px 15px 30px;border-radius:28px;background:radial-gradient(circle at 50% 13%,#fff0bd,#f1f7ff 40%,#fff 77%);box-shadow:0 12px 32px #719bd129}
+.clear>*:not(.clear-confetti):not(.clear-glow){position:relative;z-index:1}
+.clear-glow{position:absolute;left:50%;top:-85px;width:320px;height:320px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,#ffe096a8,transparent 72%);animation:clear-glow 2.7s ease-in-out infinite alternate;pointer-events:none}
+.clear .trophy{width:96px;height:96px;border:2px solid #ffe098;border-radius:29px;background:linear-gradient(145deg,#fff7d8,#ffdc82);box-shadow:0 0 0 9px #ffdd8340,0 17px 27px #e9b8586e;animation:clear-trophy .75s cubic-bezier(.2,1.4,.35,1) both}
+.clear h1{font-size:clamp(26px,7vw,38px);letter-spacing:1px;background:linear-gradient(105deg,#257cda,#a46fdf,#ee9d45);background-clip:text;-webkit-background-clip:text;color:transparent;animation:clear-title .85s .18s both}
+.clear h1 span{display:inline-block;animation:clear-cheer 1s .7s both}
+.clear-message{font-size:13px!important;font-weight:800;color:#6e69ae!important;margin:8px 0 17px}
+.clear .results{background:#fff;box-shadow:0 6px 18px #719bd126}
+.clear-confetti{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:2}
+.clear-confetti i{position:absolute;top:-16px;left:var(--x);width:8px;height:13px;border-radius:2px;background:hsl(var(--hue) 85% 64%);transform:rotate(24deg);animation:clear-fall 2.6s var(--delay) ease-in both}
+.clear-confetti i:nth-child(3n){width:7px;height:7px;border-radius:50%}
+@keyframes clear-fall{0%{opacity:0;transform:translate3d(0,-10px,0) rotate(0deg)}8%{opacity:1}86%{opacity:1}100%{opacity:0;transform:translate3d(var(--drift),460px,0) rotate(690deg)}}
+@keyframes clear-trophy{from{opacity:0;transform:scale(.42) rotate(-18deg)}to{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes clear-title{from{opacity:0;transform:translateY(18px) scale(.9)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes clear-cheer{from{transform:scale(.4) rotate(-28deg)}to{transform:scale(1) rotate(10deg)}}
+@keyframes clear-glow{to{opacity:.38;transform:translateX(-50%) scale(1.2)}}
+@media(prefers-reduced-motion:reduce){.clear-confetti{display:none}.clear-glow{animation:none}.clear .trophy,.clear h1,.clear h1 span{animation:none}}
+
 /* Show live and final recognition over the lower portrait without hiding the avatar. */
 .talk-main .heard-line{margin-top:9px;padding:8px 11px;border:1px solid #d4e7ff6b;border-radius:11px;background:#102d52a8;color:#fff;box-shadow:0 3px 11px #061b3152;max-height:93px;overflow-y:auto;overflow-wrap:anywhere}
 .talk-main .heard-line span{display:block;color:#c8e5ff;font-size:10px;font-weight:800;letter-spacing:.3px;margin-bottom:3px}

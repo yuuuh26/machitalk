@@ -1,0 +1,188 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": 1,
+  "sceneId": "bus-guide",
+  "title": "バスの乗り方を案内",
+  "mode": "guide",
+  "category": "transport",
+  "difficulty": "A2–B1",
+  "avatar": "aiko",
+  "startNode": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "prompt": "Excuse me. Where is the bus stop for City Hall?",
+      "task": "道路の反対側のバス停を案内してね。",
+      "instruction": "道路の反対側のバス停を案内してね。",
+      "hint": {
+        "words": "across the street＝道路の反対側",
+        "starter": "The bus stop ..."
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "bus stop is across the street",
+            "other side of the road",
+            "stop is across the road"
+          ]
+        }
+      ],
+      "examples": [
+        "The bus stop is across the street.",
+        "It is on the other side of the road."
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": "n2"
+    },
+    "n2": {
+      "id": "n2",
+      "prompt": "How do I get there safely?",
+      "task": "横断歩道を使うように伝えてね。",
+      "instruction": "横断歩道を使うように伝えてね。",
+      "hint": {
+        "words": "crosswalk＝横断歩道",
+        "starter": "Please use ..."
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "use the crosswalk",
+            "cross at the pedestrian crossing",
+            "use the crossing"
+          ]
+        }
+      ],
+      "examples": [
+        "Please use the crosswalk at the lights.",
+        "Cross at the pedestrian crossing."
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": "n3"
+    },
+    "n3": {
+      "id": "n3",
+      "prompt": "Do I get on through the front door?",
+      "task": "このバスは後ろのドアから乗ると説明してね。",
+      "instruction": "このバスは後ろのドアから乗ると説明してね。",
+      "hint": {
+        "words": "back door＝後ろのドア",
+        "starter": "Please get on ..."
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "get on through the back door",
+            "board from the rear door",
+            "enter through the back"
+          ]
+        }
+      ],
+      "examples": [
+        "Please get on through the back door.",
+        "Board from the rear door."
+      ],
+      "contradictions": [
+        "front door",
+        "not the back"
+      ],
+      "reaction": "grade",
+      "next": "n4"
+    },
+    "n4": {
+      "id": "n4",
+      "prompt": "When should I pay?",
+      "task": "降りるときに支払うと説明してね。",
+      "instruction": "降りるときに支払うと説明してね。",
+      "hint": {
+        "words": "get off＝降りる",
+        "starter": "You pay ..."
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "pay when you get off",
+            "pay as you leave",
+            "pay when you leave"
+          ]
+        }
+      ],
+      "examples": [
+        "You pay when you get off.",
+        "Please pay as you leave the bus."
+      ],
+      "contradictions": [
+        "pay when you get on",
+        "pay as you board",
+        "pay before you leave"
+      ],
+      "reaction": "grade",
+      "next": "n5"
+    },
+    "n5": {
+      "id": "n5",
+      "prompt": "How will I know when to get off?",
+      "task": "車内の表示を見ればよいと教えてね。",
+      "instruction": "車内の表示を見ればよいと教えてね。",
+      "hint": {
+        "words": "display＝車内の表示",
+        "starter": "Watch the ..."
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "stop names on the screen",
+            "next stop is shown on the display",
+            "watch the display"
+          ]
+        }
+      ],
+      "examples": [
+        "Watch the stop names on the screen.",
+        "The next stop is shown on the display."
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": "n6"
+    },
+    "n6": {
+      "id": "n6",
+      "prompt": "That is really helpful. Thanks!",
+      "task": "お礼に対して、よい旅をと返してね。",
+      "instruction": "お礼に対して、よい旅をと返してね。",
+      "hint": {
+        "words": "Enjoy the ride＝楽しい移動を",
+        "starter": "Have a good ..."
+      },
+      "acceptedIntents": [
+        {
+          "id": "goal",
+          "required": true,
+          "expressions": [
+            "have a good trip",
+            "enjoy the ride",
+            "safe travels"
+          ]
+        }
+      ],
+      "examples": [
+        "Have a good trip!",
+        "Enjoy the ride!"
+      ],
+      "contradictions": [],
+      "reaction": "grade",
+      "next": null
+    }
+  }
+}
