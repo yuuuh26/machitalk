@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { evaluate } from '../js/evaluator.js';
 import { nextNode, turnCount } from '../js/scene-engine.js';
+import { avatarStyle } from '../js/avatar.js';
 
 const readJSON = async path => JSON.parse(await readFile(new URL(path, import.meta.url)));
 
@@ -25,6 +26,10 @@ test('registry and every scene remain data driven and playable', async () => {
     for (const costume of uniforms) {
       const image = avatar.costumes[costume];
       assert.ok((await readFile(new URL(`../${image.slice(2)}`, import.meta.url))).length > 0, `${avatar.id}/${costume}: missing uniform`);
+      const style = avatarStyle(avatar, 'perfect', costume);
+      const stylesheetURL = new URL('../css/app.css', import.meta.url);
+      const costumeURL = new URL(style.match(/--costume-image:url\('([^']+)'\)/)?.[1], stylesheetURL);
+      assert.equal(costumeURL.pathname, new URL(`../${image.slice(2)}`, import.meta.url).pathname, `${avatar.id}/${costume}: stylesheet cannot find uniform`);
     }
   }
   for (const entry of registry.scenes) {
