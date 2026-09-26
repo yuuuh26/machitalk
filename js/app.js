@@ -98,6 +98,7 @@ function renderTalk() {
   const sparks = success ? `<div class="grade-sparks" aria-hidden="true">${Array.from({ length: sparkCount }, (_, i) => `<i style="--x:${(i * 71) % 94 + 3}%;--y:${(i * 43) % 74 + 8}%;--delay:${(i % 9) * .065}s"></i>`).join('')}</div><div class="grade-aura" aria-hidden="true"></div>` : '';
   const hint = state.hintShown && !success ? `<div class="hint-panel"><strong>💡 ヒント</strong><p>使える言葉：${escapeHTML(node.hint?.words || '')}</p><p>言い出し：<b lang="en">${escapeHTML(node.hint?.starter || node.examples[0].split(' ').slice(0, 3).join(' ') + ' ...')}</b></p>${state.answerShown ? '' : '<button data-action="show-answer">全文の答えを見る</button>'}</div>` : '';
   const answer = state.answerShown && !success ? `<div class="answer-card"><span>答え合わせ · 言い方の例</span><p>${escapeHTML(node.instruction || node.task)}</p>${node.examples.map((example, i) => `<div class="answer-example"><strong lang="en">${escapeHTML(example)}</strong><button data-action="sample" data-index="${i}" aria-label="例文${i + 1}を聞く">🔊 聞く</button></div>`).join('')}<small>同じ意味なら、この例文と違う言い方でも正解になるよ。</small></div>` : '';
+  const answerPreview = state.answerShown && !success && !moving ? `<div class="answer-preview" role="group" aria-label="答えの文"><span>答えの文</span><div><strong lang="en">${escapeHTML(node.examples[0])}</strong><button data-action="sample" data-index="0" aria-label="答えの文を聞く">🔊</button></div></div>` : '';
   const mode = practiceMode();
   const cuePending = state.cueStage !== 'ready' && !state.answerShown;
   const micLabel = state.status === 'listening' ? '停止' : state.status === 'connecting' ? '準備中' : state.autoAttempted ? '再録音' : '録音';
@@ -114,7 +115,7 @@ function renderTalk() {
   const cueStatus = !success && !moving && mode.id !== 'free' && state.cueStage !== 'arming' ? `<p class="cue-status" role="status">${cueMessage}</p>` : '';
   const cueFlash = !success && state.cueVisible ? `<div class="memory-flash" role="status" aria-live="assertive"><small>2秒だけ覚えよう</small><strong lang="en">${escapeHTML(node.examples[0])}</strong></div>` : '';
   const entry = !success && !moving ? `<form id="type-form" class="type-form"><label for="typed">${speechSupported() ? '聞き取りが合わないときは文字でも答えられるよ' : '文字入力で答えてね'}</label><div><input id="typed" name="typed" type="text" lang="en" autocapitalize="sentences" autocomplete="off" placeholder="英語を入力" ${cuePending ? 'disabled' : ''}><button type="submit" ${cuePending ? 'disabled' : ''}>判定</button></div></form><div class="help-row">${mode.id === 'free' || state.answerShown ? '' : '<button data-action="cue-replay">お手本をもう一度</button>'}${state.hintShown ? '' : '<button data-action="hint">💡 ヒントを見る</button>'}${state.answerShown ? '' : '<button data-action="show-answer">答えを見る</button>'}<button data-action="skip">次へ進む</button></div>` : '<p class="moving">次の会話へ…</p>';
-  app.innerHTML = layout('', `<section class="conversation"><div class="scene-backdrop ${escapeHTML(state.meta.category)} ${heard ? 'with-heard' : ''} ${success ? 'celebrate ' + grade : ''}"><div id="avatar" class="avatar" role="img"></div><div class="portrait-shade" aria-hidden="true"></div>${sparks}${cueFlash}<div class="talk-overlay-head"><button class="talk-back" data-action="home" aria-label="会話を終了してホームに戻る">←</button><div class="talk-scene"><span class="mode-pill ${state.meta.mode}">${state.meta.mode.toUpperCase()}</span><h1>${escapeHTML(state.meta.emoji)} ${escapeHTML(state.meta.title)}</h1></div><span class="progress-label">${state.turn} / ${turnCount(state.scene)}</span></div><div class="talk-progress"><span style="width:${Math.round(state.turn / turnCount(state.scene) * 100)}%"></span></div>${success ? feedbackHTML() : ''}<div class="speech-card"><span class="speaker">${escapeHTML(profile.name)} says</span><p class="english" ${state.settings.captions ? '' : 'aria-label="字幕は設定で非表示"'}>${state.settings.captions ? escapeHTML(node.prompt) : '•••'}</p><button class="replay" data-action="replay" aria-label="もう一度聞く">🔊 Replay</button>${heard}</div></div></section><section class="reply">${task}${cueStatus}${hint}${!success ? feedbackHTML() : ''}${answer}${entry}</section>`, { immersive: true });
+  app.innerHTML = layout('', `<section class="conversation"><div class="scene-backdrop ${escapeHTML(state.meta.category)} ${heard ? 'with-heard' : ''} ${success ? 'celebrate ' + grade : ''}"><div id="avatar" class="avatar" role="img"></div><div class="portrait-shade" aria-hidden="true"></div>${sparks}${cueFlash}<div class="talk-overlay-head"><button class="talk-back" data-action="home" aria-label="会話を終了してホームに戻る">←</button><div class="talk-scene"><span class="mode-pill ${state.meta.mode}">${state.meta.mode.toUpperCase()}</span><h1>${escapeHTML(state.meta.emoji)} ${escapeHTML(state.meta.title)}</h1></div><span class="progress-label">${state.turn} / ${turnCount(state.scene)}</span></div><div class="talk-progress"><span style="width:${Math.round(state.turn / turnCount(state.scene) * 100)}%"></span></div>${success ? feedbackHTML() : ''}<div class="speech-card"><span class="speaker">${escapeHTML(profile.name)} says</span><p class="english" ${state.settings.captions ? '' : 'aria-label="字幕は設定で非表示"'}>${state.settings.captions ? escapeHTML(node.prompt) : '•••'}</p><button class="replay" data-action="replay" aria-label="もう一度聞く">🔊 Replay</button>${heard}${answerPreview}</div></div></section><section class="reply">${task}${cueStatus}${hint}${!success ? feedbackHTML() : ''}${answer}${entry}</section>`, { immersive: true });
   setAvatar(document.querySelector('#avatar'), profile, mood, state.meta.mode === 'ask' ? state.meta.costume : null);
 }
 
@@ -206,15 +207,7 @@ function onRecognition(alternatives, typed = false) {
       renderTalk();
       const epoch = state.epoch;
       state.timer = setTimeout(() => { if (epoch === state.epoch && state.screen === 'talk' && state.status === 'advancing') advance(null); }, 1400);
-    } else {
-      renderTalk();
-      if (state.wrongAttempts === 3) {
-        document.querySelector('.answer-card')?.scrollIntoView?.({
-          block: 'nearest',
-          behavior: window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
-        });
-      }
-    }
+    } else renderTalk();
     return;
   }
   if (decision === 'retry' || decision === 'reveal') {
