@@ -55,6 +55,16 @@ test('conversation reveals after three wrong answers and moves on after five', a
   assert.match(app.innerHTML, /Linnea says/);
   assert.match(avatar.style.cssText, /avatar\/linnea\/neutral\.webp/);
   await click('home');
+  await click('settings');
+  assert.match(app.innerHTML, /aria-label="小春を選ぶ"/);
+  await click('avatar-select', 'koharu');
+  assert.match(app.innerHTML, /data-id="koharu" aria-pressed="true"/);
+  await click('home');
+  assert.match(app.innerHTML, /aria-label="小春"/);
+  await click('quick');
+  assert.match(app.innerHTML, /小春 says/);
+  assert.match(avatar.style.cssText, /avatar\/koharu\/neutral\.jpg/);
+  await click('home');
   await click('scenes');
   await click('start', 'bus-ask');
   assert.match(app.innerHTML, /市役所行きのバスか/);
