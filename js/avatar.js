@@ -1,7 +1,11 @@
-export function avatarStyle(avatar, mood = 'neutral') {
+export function avatarStyle(avatar, mood = 'neutral', costume = null) {
   const image = avatar.assets?.[mood] || avatar.assets?.neutral;
   if (!image) return '';
-  if (image.image) return `background-image:url('${image.image}');background-size:cover;background-position:center top;`;
+  if (image.image) {
+    const clothing = costume && avatar.costumes?.[costume];
+    const overlay = clothing ? `--costume-image:url('${clothing}');--costume-start:${avatar.id === 'linnea' ? '41%' : '49%'};--costume-end:${avatar.id === 'linnea' ? '55%' : '64%'};` : '';
+    return `background-image:url('${image.image}');background-size:cover;background-position:center top;${overlay}`;
+  }
   const crop = avatar.crop;
   if (!crop) return '';
   const sx = crop.sourceWidth / crop.width * 100;
@@ -10,10 +14,11 @@ export function avatarStyle(avatar, mood = 'neutral') {
   return `background-image:url('${avatar.image}');background-size:${sx}% auto;background-position:${px}% ${py}%;`;
 }
 
-export function setAvatar(element, avatar, mood) {
+export function setAvatar(element, avatar, mood, costume = null) {
   if (!element || !avatar) return;
-  element.style.cssText = avatarStyle(avatar, mood);
+  element.style.cssText = avatarStyle(avatar, mood, costume);
   element.dataset.mood = mood;
+  element.dataset.costume = costume && avatar.costumes?.[costume] ? costume : '';
   element.setAttribute('aria-label', `${avatar.name}：${mood}`);
   element.classList.remove('react');
   void element.offsetWidth;

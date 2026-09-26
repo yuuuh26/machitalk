@@ -1,4 +1,4 @@
-# MachiTalk v1.9.0
+# MachiTalk v1.10.0
 
 街で使う英会話を練習する、Android Chrome向けの無料・端末内保存型PWA。ASK 9シーン、GUIDE 9シーン。ログイン、広告、外部AI API、アクセス解析はありません。
 
@@ -23,7 +23,7 @@ Web Speech APIの読み上げ音声・認識精度・権限挙動はブラウザ
 ## シーンを追加
 
 1. `data/scenes/` に既存シーンを参考に新しいJSONを作成します。`sceneId`、`startNode`、各ノードの`prompt`、`task`、`instruction`、`hint`（`words` と `starter`）、`acceptedIntents`、`examples`、`next`を設定します。
-2. `data/scene-registry.json` の `scenes` に `id`、表示情報、`file` を追加します。
+2. `data/scene-registry.json` の `scenes` に `id`、表示情報、`file` を追加します。相手が職員となるASKシーンでは、職業に対応する `costume` も指定します。
 3. `npm test` を実行します。エンジンの変更は不要です。
 
 各 `acceptedIntents` の `expressions` は単語またはフレーズで、同一intent内はOR、`required: true` のintent間はANDです。汎用意味理解ではないため、教材ごとに言い換えを追加できます。`next` は次ノードIDまたは `{ "default": "n2", "variants": [{ "ifIntent": "choice", "node": "n2b" }] }` として分岐できます。
@@ -35,3 +35,7 @@ Web Speech APIの読み上げ音声・認識精度・権限挙動はブラウザ
 設定の「会話のアバター」でAiko・Linnea・小春を写真を見ながら切り替えられます。選択した相手は次の会話とホーム画面に反映され、端末に保存されます。Linneaは選んだ北欧風の金髪女性候補を基に、話す・聞く・励ます・正解4段階の表情を揃えた1024×1536のWebP画像8枚を使用します。小春はユーザーが選んだ写真を通常の表情に使い、会話中と正解時の表情7枚を加えています。初期選択のAikoは維持します。
 
 学習履歴と設定はIndexedDBに保存し、将来の移行用に`schemaVersion`を付与します。ページをオフラインで起動するには一度オンラインで表示します。個々のシーンJSONは利用時に読み込みキャッシュするため、未訪問シーンはオフラインでは使えない場合があります。
+
+## シーンごとの服装
+
+ASKのうち駅・レストラン・モール・バス・カフェ・ホテル・薬局・落とし物窓口では、選んだアバターがそれぞれの職員の服装になります。街中の通行人に道を聞くシーンと、訪問者を案内するGUIDEシーンでは私服を使います。会話中はこれまでの表情と正解エフェクトを保ち、制服はシーンごとに切り替わります。画像は各アバターで共通する役割ごとに再利用します。

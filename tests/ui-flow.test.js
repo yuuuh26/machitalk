@@ -68,10 +68,16 @@ test('conversation reveals after three wrong answers and moves on after five', a
   await click('scenes');
   await click('start', 'bus-ask');
   assert.match(app.innerHTML, /市役所行きのバスか/);
+  assert.match(avatar.style.cssText, /avatar\/koharu\/wardrobe\/bus\.webp/);
+  assert.equal(avatar.dataset.costume, 'bus');
   for (let turn = 0; turn < 6; turn++) await click('skip');
   for (let i = 0; i < 10 && !app.innerHTML.includes('SCENE CLEAR'); i++) await new Promise(resolve => setTimeout(resolve, 0));
   assert.match(app.innerHTML, /clear-confetti/);
   assert.match(app.innerHTML, /シーンクリア！/);
+  await click('scenes');
+  await click('start', 'bus-guide');
+  assert.equal(avatar.dataset.costume, '');
+  assert.doesNotMatch(avatar.style.cssText, /wardrobe\//);
   await click('settings');
   assert.match(app.innerHTML, /アプリの使用容量/);
   globalThis.FormData = OriginalFormData;
