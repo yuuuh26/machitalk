@@ -1,7 +1,9 @@
 {
   "name": "machitalk",
   "private": true,
-  "version": "1.10.2",
+  "version": "1.11.0",
   "type": "module",
-  "scripts": { "test": "node --test" }
+  "scripts": {
+    "test": "node --test"
+  }
 }

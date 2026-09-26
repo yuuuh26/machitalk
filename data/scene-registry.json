@@ -10,7 +10,8 @@
       "category": "transport",
       "difficulty": "A2–B1",
       "emoji": "🚉",
-      "file": "./data/scenes/station-ask.json"
+      "file": "./data/scenes/station-ask.json",
+      "background": "./assets/backgrounds/station.webp"
     },
     {
       "id": "restaurant-ask",
@@ -21,7 +22,8 @@
       "category": "food",
       "difficulty": "A2–B1",
       "emoji": "🍽️",
-      "file": "./data/scenes/restaurant-ask.json"
+      "file": "./data/scenes/restaurant-ask.json",
+      "background": "./assets/backgrounds/restaurant.webp"
     },
     {
       "id": "mall-ask",
@@ -32,7 +34,8 @@
       "category": "shopping",
       "difficulty": "A2–B1",
       "emoji": "🛍️",
-      "file": "./data/scenes/mall-ask.json"
+      "file": "./data/scenes/mall-ask.json",
+      "background": "./assets/backgrounds/mall.webp"
     },
     {
       "id": "town-ask",
@@ -42,7 +45,8 @@
       "category": "tourism",
       "difficulty": "A2–B1",
       "emoji": "📍",
-      "file": "./data/scenes/town-ask.json"
+      "file": "./data/scenes/town-ask.json",
+      "background": "./assets/backgrounds/town.webp"
     },
     {
       "id": "station-guide",
@@ -52,7 +56,8 @@
       "category": "transport",
       "difficulty": "A2–B1",
       "emoji": "🚉",
-      "file": "./data/scenes/station-guide.json"
+      "file": "./data/scenes/station-guide.json",
+      "background": "./assets/backgrounds/station.webp"
     },
     {
       "id": "restaurant-guide",
@@ -62,7 +67,8 @@
       "category": "food",
       "difficulty": "A2–B1",
       "emoji": "🍽️",
-      "file": "./data/scenes/restaurant-guide.json"
+      "file": "./data/scenes/restaurant-guide.json",
+      "background": "./assets/backgrounds/restaurant.webp"
     },
     {
       "id": "mall-guide",
@@ -72,7 +78,8 @@
       "category": "shopping",
       "difficulty": "A2–B1",
       "emoji": "🛍️",
-      "file": "./data/scenes/mall-guide.json"
+      "file": "./data/scenes/mall-guide.json",
+      "background": "./assets/backgrounds/mall.webp"
     },
     {
       "id": "town-guide",
@@ -82,7 +89,8 @@
       "category": "tourism",
       "difficulty": "A2–B1",
       "emoji": "📍",
-      "file": "./data/scenes/town-guide.json"
+      "file": "./data/scenes/town-guide.json",
+      "background": "./assets/backgrounds/town.webp"
     },
     {
       "id": "bus-ask",
@@ -93,7 +101,8 @@
       "category": "transport",
       "difficulty": "A2–B1",
       "emoji": "🚌",
-      "file": "./data/scenes/bus-ask.json"
+      "file": "./data/scenes/bus-ask.json",
+      "background": "./assets/backgrounds/bus.webp"
     },
     {
       "id": "cafe-ask",
@@ -104,7 +113,8 @@
       "category": "food",
       "difficulty": "A2–B1",
       "emoji": "☕",
-      "file": "./data/scenes/cafe-ask.json"
+      "file": "./data/scenes/cafe-ask.json",
+      "background": "./assets/backgrounds/cafe.webp"
     },
     {
       "id": "hotel-ask",
@@ -115,7 +125,8 @@
       "category": "tourism",
       "difficulty": "A2–B1",
       "emoji": "🏨",
-      "file": "./data/scenes/hotel-ask.json"
+      "file": "./data/scenes/hotel-ask.json",
+      "background": "./assets/backgrounds/hotel.webp"
     },
     {
       "id": "pharmacy-ask",
@@ -126,7 +137,8 @@
       "category": "shopping",
       "difficulty": "A2–B1",
       "emoji": "💊",
-      "file": "./data/scenes/pharmacy-ask.json"
+      "file": "./data/scenes/pharmacy-ask.json",
+      "background": "./assets/backgrounds/pharmacy.webp"
     },
     {
       "id": "lost-ask",
@@ -137,7 +149,8 @@
       "category": "tourism",
       "difficulty": "A2–B1",
       "emoji": "🔎",
-      "file": "./data/scenes/lost-ask.json"
+      "file": "./data/scenes/lost-ask.json",
+      "background": "./assets/backgrounds/lost.webp"
     },
     {
       "id": "ticket-guide",
@@ -147,7 +160,8 @@
       "category": "transport",
       "difficulty": "A2–B1",
       "emoji": "🎫",
-      "file": "./data/scenes/ticket-guide.json"
+      "file": "./data/scenes/ticket-guide.json",
+      "background": "./assets/backgrounds/ticket.webp"
     },
     {
       "id": "bus-guide",
@@ -157,7 +171,8 @@
       "category": "transport",
       "difficulty": "A2–B1",
       "emoji": "🚏",
-      "file": "./data/scenes/bus-guide.json"
+      "file": "./data/scenes/bus-guide.json",
+      "background": "./assets/backgrounds/bus.webp"
     },
     {
       "id": "photo-guide",
@@ -167,7 +182,8 @@
       "category": "tourism",
       "difficulty": "A2–B1",
       "emoji": "📸",
-      "file": "./data/scenes/photo-guide.json"
+      "file": "./data/scenes/photo-guide.json",
+      "background": "./assets/backgrounds/photo.webp"
     },
     {
       "id": "rain-guide",
@@ -177,7 +193,8 @@
       "category": "tourism",
       "difficulty": "A2–B1",
       "emoji": "☔",
-      "file": "./data/scenes/rain-guide.json"
+      "file": "./data/scenes/rain-guide.json",
+      "background": "./assets/backgrounds/rain.webp"
     },
     {
       "id": "clinic-guide",
@@ -187,7 +204,8 @@
       "category": "tourism",
       "difficulty": "A2–B1",
       "emoji": "🏥",
-      "file": "./data/scenes/clinic-guide.json"
+      "file": "./data/scenes/clinic-guide.json",
+      "background": "./assets/backgrounds/clinic.webp"
     }
   ]
 }

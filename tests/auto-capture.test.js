@@ -55,10 +55,10 @@ test('the first recording waits for playback, later attempts are manual, and exa
     assert.match(app.innerHTML, /録音中…/);
     assert.match(app.innerHTML, /aria-label="録音を終了"/);
     assert.match(app.innerHTML, /class="speech-card"[\s\S]*id="speech-live"[\s\S]*<\/section><section class="reply">/);
-    recordings[0].onresult({ results: [Object.assign([{ transcript: 'Take this train to Osaka' }], { isFinal: false })] });
-    assert.equal(liveText.textContent, 'Take this train to Osaka');
+    recordings[0].onresult({ results: [Object.assign([{ transcript: 'Take the' }], { isFinal: false })] });
+    assert.equal(liveText.textContent, 'Take the');
     recordings[0].onend();
-    assert.match(app.innerHTML, /class="speech-card"[\s\S]*聞き取った英語[\s\S]*Take this train to Osaka[\s\S]*<\/section><section class="reply">/);
+    assert.match(app.innerHTML, /class="speech-card"[\s\S]*聞き取った英語[\s\S]*Take the[\s\S]*<\/section><section class="reply">/);
     assert.match(app.innerHTML, /再録音を開始/);
     tick(3000);
     assert.equal(recordings.length, 1, 'a failed first attempt must not restart automatically');

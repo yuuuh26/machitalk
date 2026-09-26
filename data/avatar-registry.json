@@ -16,17 +16,38 @@
         "pharmacy": "./assets/avatar/aiko/wardrobe/pharmacy.webp"
       },
       "assets": {
-        "neutral": { "image": "./assets/avatar/aiko/neutral.webp" },
-        "speaking": { "image": "./assets/avatar/aiko/speaking.webp" },
-        "listening": { "image": "./assets/avatar/aiko/listening.webp" },
-        "thinking": { "image": "./assets/avatar/aiko/listening.webp" },
-        "encourage": { "image": "./assets/avatar/aiko/encouraging.webp" },
-        "good": { "image": "./assets/avatar/aiko/pleased.webp" },
-        "great": { "image": "./assets/avatar/aiko/delighted.webp" },
-        "excellent": { "image": "./assets/avatar/aiko/celebrating.webp" },
-        "perfect": { "image": "./assets/avatar/aiko/thrilled.webp" },
-        "explaining": { "image": "./assets/avatar/aiko/speaking.webp" }
-      }
+        "neutral": {
+          "image": "./assets/avatar/aiko/neutral.webp"
+        },
+        "speaking": {
+          "image": "./assets/avatar/aiko/speaking.webp"
+        },
+        "listening": {
+          "image": "./assets/avatar/aiko/listening.webp"
+        },
+        "thinking": {
+          "image": "./assets/avatar/aiko/listening.webp"
+        },
+        "encourage": {
+          "image": "./assets/avatar/aiko/encouraging.webp"
+        },
+        "good": {
+          "image": "./assets/avatar/aiko/pleased.webp"
+        },
+        "great": {
+          "image": "./assets/avatar/aiko/delighted.webp"
+        },
+        "excellent": {
+          "image": "./assets/avatar/aiko/celebrating.webp"
+        },
+        "perfect": {
+          "image": "./assets/avatar/aiko/thrilled.webp"
+        },
+        "explaining": {
+          "image": "./assets/avatar/aiko/speaking.webp"
+        }
+      },
+      "mask": "./assets/masks/aiko.webp"
     },
     {
       "id": "linnea",
@@ -42,17 +63,38 @@
         "pharmacy": "./assets/avatar/linnea/wardrobe/pharmacy.webp"
       },
       "assets": {
-        "neutral": { "image": "./assets/avatar/linnea/neutral.webp" },
-        "speaking": { "image": "./assets/avatar/linnea/speaking.webp" },
-        "listening": { "image": "./assets/avatar/linnea/listening.webp" },
-        "thinking": { "image": "./assets/avatar/linnea/listening.webp" },
-        "encourage": { "image": "./assets/avatar/linnea/encouraging.webp" },
-        "good": { "image": "./assets/avatar/linnea/pleased.webp" },
-        "great": { "image": "./assets/avatar/linnea/delighted.webp" },
-        "excellent": { "image": "./assets/avatar/linnea/celebrating.webp" },
-        "perfect": { "image": "./assets/avatar/linnea/thrilled.webp" },
-        "explaining": { "image": "./assets/avatar/linnea/speaking.webp" }
-      }
+        "neutral": {
+          "image": "./assets/avatar/linnea/neutral.webp"
+        },
+        "speaking": {
+          "image": "./assets/avatar/linnea/speaking.webp"
+        },
+        "listening": {
+          "image": "./assets/avatar/linnea/listening.webp"
+        },
+        "thinking": {
+          "image": "./assets/avatar/linnea/listening.webp"
+        },
+        "encourage": {
+          "image": "./assets/avatar/linnea/encouraging.webp"
+        },
+        "good": {
+          "image": "./assets/avatar/linnea/pleased.webp"
+        },
+        "great": {
+          "image": "./assets/avatar/linnea/delighted.webp"
+        },
+        "excellent": {
+          "image": "./assets/avatar/linnea/celebrating.webp"
+        },
+        "perfect": {
+          "image": "./assets/avatar/linnea/thrilled.webp"
+        },
+        "explaining": {
+          "image": "./assets/avatar/linnea/speaking.webp"
+        }
+      },
+      "mask": "./assets/masks/linnea.webp"
     },
     {
       "id": "koharu",
@@ -68,17 +110,38 @@
         "pharmacy": "./assets/avatar/koharu/wardrobe/pharmacy.webp"
       },
       "assets": {
-        "neutral": { "image": "./assets/avatar/koharu/neutral.jpg" },
-        "speaking": { "image": "./assets/avatar/koharu/speaking.webp" },
-        "listening": { "image": "./assets/avatar/koharu/listening.webp" },
-        "thinking": { "image": "./assets/avatar/koharu/listening.webp" },
-        "encourage": { "image": "./assets/avatar/koharu/encouraging.webp" },
-        "good": { "image": "./assets/avatar/koharu/pleased.webp" },
-        "great": { "image": "./assets/avatar/koharu/delighted.webp" },
-        "excellent": { "image": "./assets/avatar/koharu/celebrating.webp" },
-        "perfect": { "image": "./assets/avatar/koharu/thrilled.webp" },
-        "explaining": { "image": "./assets/avatar/koharu/speaking.webp" }
-      }
+        "neutral": {
+          "image": "./assets/avatar/koharu/neutral.jpg"
+        },
+        "speaking": {
+          "image": "./assets/avatar/koharu/speaking.webp"
+        },
+        "listening": {
+          "image": "./assets/avatar/koharu/listening.webp"
+        },
+        "thinking": {
+          "image": "./assets/avatar/koharu/listening.webp"
+        },
+        "encourage": {
+          "image": "./assets/avatar/koharu/encouraging.webp"
+        },
+        "good": {
+          "image": "./assets/avatar/koharu/pleased.webp"
+        },
+        "great": {
+          "image": "./assets/avatar/koharu/delighted.webp"
+        },
+        "excellent": {
+          "image": "./assets/avatar/koharu/celebrating.webp"
+        },
+        "perfect": {
+          "image": "./assets/avatar/koharu/thrilled.webp"
+        },
+        "explaining": {
+          "image": "./assets/avatar/koharu/speaking.webp"
+        }
+      },
+      "mask": "./assets/masks/koharu.webp"
     }
   ]
 }

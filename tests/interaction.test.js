@@ -48,6 +48,21 @@ test('nearby recognition alternatives can rescue a good answer; distant guesses 
   assert.equal(distant.grade, 'try-again');
 });
 
+test('minor recognition errors can earn grades without accepting a different fact', async () => {
+  const guide = (await scene('station-guide')).nodes;
+  assert.equal(evaluate(guide.n1, 'Take this train to Osaka Stations').grade, 'perfect');
+  assert.equal(evaluate(guide.n1, 'Take a train to Osaka').grade, 'perfect');
+  assert.equal(evaluate(guide.n1, 'Take the bus to Tokyo').grade, 'try-again');
+  assert.equal(evaluate(guide.n3, 'Platform four').grade, 'try-again');
+  assert.equal(evaluate(guide.n2, 'Yes you need to change trains').grade, 'try-again');
+  const alternative = evaluateAlternatives(guide.n1, [
+    { transcript: 'You can get to Osaka by train', confidence: .6 },
+    { transcript: 'Take this train to Osaka Station', confidence: .5 }
+  ]);
+  assert.equal(alternative.grade, 'perfect');
+  assert.equal(alternative.usedAlternative, true);
+});
+
 test('clear wrong answers and uncertain recognition are classified separately', () => {
   assert.equal(classifyAttempt({ grade: 'try-again', transcript: 'Turn right.', confidence: .9 }), 'wrong');
   assert.equal(classifyAttempt({ grade: 'try-again', transcript: 'Turn right.', confidence: .25 }, { issues: 0 }), 'retry');
@@ -91,6 +106,12 @@ test('speech recognition shows interim text, returns multiple final candidates, 
   ] });
   assert.equal(results[0].transcript, 'Take this train to Osaka');
   stopListening();
+  listen({ onStart() {}, onInterim: text => { interim = text; }, onResult: alternatives => { results = alternatives; }, onNoSpeech: () => { noSpeech++; }, onError: () => {} });
+  current.onresult({ results: [Object.assign([{ transcript: 'Take this train to Osaka' }], { isFinal: false })] });
+  current.onend();
+  assert.equal(results[0].transcript, 'Take this train to Osaka');
+  assert.equal(results[0].confidence, 0);
+  assert.equal(noSpeech, 0);
   delete globalThis.window; delete globalThis.speechSynthesis;
 });
 

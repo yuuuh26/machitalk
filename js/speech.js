@@ -83,7 +83,9 @@ export function listen({ onStart, onInterim, onResult, onNoSpeech, onError, node
   current.onend = () => {
     if (recognition !== current || finished) return;
     finished = true; recognition = null;
-    onNoSpeech(interim ? `途中まで「${interim}」と聞こえましたが、確定できませんでした。` : '声を聞き取れませんでした。', interim);
+    // Some devices end a recording without emitting isFinal even after transcribing speech.
+    if (interim.trim()) onResult([{ transcript: interim.trim(), confidence: 0 }]);
+    else onNoSpeech('声を聞き取れませんでした。');
   };
   try { current.start(); } catch { recognition = null; onError('マイクを起動できませんでした。もう一度お試しください。'); }
 }
