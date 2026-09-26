@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { evaluate, evaluateAlternatives } from '../js/evaluator.js';
-import { classifyAttempt } from '../js/attempts.js';
+import { classifyAttempt, wrongAttemptAction } from '../js/attempts.js';
 import { buildBiasPhrases, listen, stopListening } from '../js/speech.js';
 
 const scene = async name => JSON.parse(await readFile(new URL(`../data/scenes/${name}.json`, import.meta.url)));
@@ -48,13 +48,18 @@ test('nearby recognition alternatives can rescue a good answer; distant guesses 
   assert.equal(distant.grade, 'try-again');
 });
 
-test('clear wrong answer reveals immediately; uncertain recognition has three chances', () => {
+test('clear wrong answers and uncertain recognition are classified separately', () => {
   assert.equal(classifyAttempt({ grade: 'try-again', transcript: 'Turn right.', confidence: .9 }), 'wrong');
   assert.equal(classifyAttempt({ grade: 'try-again', transcript: 'Turn right.', confidence: .25 }, { issues: 0 }), 'retry');
   assert.equal(classifyAttempt({ grade: 'try-again', transcript: 'Turn right.', confidence: .25 }, { issues: 2 }), 'reveal');
   assert.equal(classifyAttempt({ grade: 'no-speech' }, { issues: 2 }), 'reveal');
   assert.equal(classifyAttempt({ grade: 'try-again', transcript: 'No.', confidence: .15 }, { typed: true }), 'wrong');
   assert.equal(classifyAttempt({ grade: 'good', transcript: 'Go straight.' }), 'success');
+});
+
+test('the third wrong answer reveals a model; the fifth moves on', () => {
+  assert.deepEqual([1, 2, 3, 4, 5, 6].map(wrongAttemptAction),
+    ['retry', 'retry', 'reveal', 'reveal', 'advance', 'advance']);
 });
 
 test('speech recognition shows interim text, returns multiple final candidates, and ends once', () => {
