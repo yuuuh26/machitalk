@@ -173,3 +173,22 @@
   -webkit-mask-image:linear-gradient(to bottom,transparent 0,transparent var(--costume-start),#000 var(--costume-end),#000 100%);
   mask-image:linear-gradient(to bottom,transparent 0,transparent var(--costume-start),#000 var(--costume-end),#000 100%);
 }
+
+/* Each conversation has its own photographed place. Keep the existing facial
+   expression and uniform image, but show only the person over that place. */
+.talk-main .scene-backdrop{
+  background-image:linear-gradient(180deg,#17375b24 0%,transparent 35%,#18355b16 100%),var(--scene-image);
+  background-position:center,center;
+  background-size:cover;
+}
+.talk-main .avatar{
+  background-color:transparent;
+  -webkit-mask-image:var(--portrait-mask);
+  mask-image:var(--portrait-mask);
+  -webkit-mask-size:cover;
+  mask-size:cover;
+  -webkit-mask-position:center top;
+  mask-position:center top;
+  -webkit-mask-repeat:no-repeat;
+  mask-repeat:no-repeat;
+}

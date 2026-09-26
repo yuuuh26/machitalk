@@ -15,6 +15,7 @@ test('registry and every scene remain data driven and playable', async () => {
   assert.deepEqual(avatars.avatars.map(avatar => avatar.id), ['aiko', 'linnea', 'koharu']);
   const uniforms = ['station', 'restaurant', 'service', 'bus', 'cafe', 'hotel', 'pharmacy'];
   for (const avatar of avatars.avatars) {
+    assert.ok((await readFile(new URL(`../${avatar.mask.slice(2)}`, import.meta.url))).length > 0, `${avatar.id}: missing portrait mask`);
     const portrait = avatar.assets;
     const reactions = ['good', 'great', 'excellent', 'perfect'].map(mood => portrait[mood].image);
     assert.equal(new Set(reactions).size, 4, `${avatar.id}: each grade needs a distinct expression`);
@@ -33,6 +34,7 @@ test('registry and every scene remain data driven and playable', async () => {
     }
   }
   for (const entry of registry.scenes) {
+    assert.ok((await readFile(new URL(`../${entry.background.slice(2)}`, import.meta.url))).length > 0, `${entry.id}: missing scene background`);
     if (entry.mode === 'guide' || entry.id === 'town-ask') assert.equal(entry.costume, undefined, `${entry.id}: visitor should wear casual clothes`);
     else assert.ok(uniforms.includes(entry.costume), `${entry.id}: missing staff costume`);
     const scene = await readJSON(`../${entry.file.slice(2)}`);
