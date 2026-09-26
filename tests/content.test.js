@@ -16,6 +16,10 @@ test('registry and every scene remain data driven and playable', async () => {
   const uniforms = ['station', 'restaurant', 'service', 'bus', 'cafe', 'hotel', 'pharmacy'];
   for (const avatar of avatars.avatars) {
     assert.ok((await readFile(new URL(`../${avatar.mask.slice(2)}`, import.meta.url))).length > 0, `${avatar.id}: missing portrait mask`);
+    for (const [mood, mask] of Object.entries(avatar.masks || {})) {
+      assert.ok((await readFile(new URL(`../${mask.slice(2)}`, import.meta.url))).length > 0, `${avatar.id}/${mood}: missing gesture mask`);
+      assert.ok(avatarStyle(avatar, mood).includes(mask.replace(/^\.\//, '../')));
+    }
     const portrait = avatar.assets;
     const reactions = ['good', 'great', 'excellent', 'perfect'].map(mood => portrait[mood].image);
     assert.equal(new Set(reactions).size, 4, `${avatar.id}: each grade needs a distinct expression`);

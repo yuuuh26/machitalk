@@ -47,7 +47,11 @@
           "image": "./assets/avatar/aiko/speaking.webp"
         }
       },
-      "mask": "./assets/masks/aiko.webp"
+      "mask": "./assets/masks/aiko.webp",
+      "masks": {
+        "excellent": "./assets/masks/aiko-excellent.webp",
+        "perfect": "./assets/masks/aiko-perfect.webp"
+      }
     },
     {
       "id": "linnea",
@@ -94,7 +98,11 @@
           "image": "./assets/avatar/linnea/speaking.webp"
         }
       },
-      "mask": "./assets/masks/linnea.webp"
+      "mask": "./assets/masks/linnea.webp",
+      "masks": {
+        "excellent": "./assets/masks/linnea-excellent.webp",
+        "perfect": "./assets/masks/linnea-perfect.webp"
+      }
     },
     {
       "id": "koharu",
