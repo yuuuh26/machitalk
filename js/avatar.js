@@ -3,7 +3,8 @@ export function avatarStyle(avatar, mood = 'neutral', costume = null) {
   if (!image) return '';
   if (image.image) {
     const clothing = costume && avatar.costumes?.[costume];
-    const overlay = clothing ? `--costume-image:url('${clothing}');--costume-start:${avatar.id === 'linnea' ? '41%' : '49%'};--costume-end:${avatar.id === 'linnea' ? '55%' : '64%'};` : '';
+    // The custom property is consumed by app.css, so its URL resolves relative to css/.
+    const overlay = clothing ? `--costume-image:url('${clothing.replace(/^\.\//, '../')}');--costume-start:${avatar.id === 'linnea' ? '41%' : '49%'};--costume-end:${avatar.id === 'linnea' ? '55%' : '64%'};` : '';
     return `background-image:url('${image.image}');background-size:cover;background-position:center top;${overlay}`;
   }
   const crop = avatar.crop;
